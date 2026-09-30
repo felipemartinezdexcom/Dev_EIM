@@ -1,0 +1,84 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 273,
+      "width": 408
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "props": {
+          "style": {
+            "classes": "Control/Control/Labels"
+          },
+          "text": "Tag Write",
+          "textStyle": {
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "basis": "56px"
+        },
+        "props": {
+          "style": {
+            "textAlign": "center"
+          },
+          "text": "All entered transactions were transfered to the tag."
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "TextArea"
+        },
+        "position": {
+          "basis": "160px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "direct",
+                "tagPath": "[default]FMC_Test/Json_Load"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          }
+        },
+        "type": "ia.input.text-area"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Control/Control/Comp_Padding"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

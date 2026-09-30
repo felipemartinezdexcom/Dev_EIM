@@ -1,0 +1,123 @@
+{
+  "custom": {
+    "Show_Equip_Manager": {
+      "t1": true,
+      "t2": true,
+      "t3": true,
+      "t4": true
+    },
+    "inputParams": [
+      {
+        "dataType": "",
+        "paramName": "",
+        "required": "YES"
+      }
+    ]
+  },
+  "propConfig": {
+    "custom.EIM_Config_DB": {
+      "binding": {
+        "config": {
+          "expression": "\"EIM_Config_DB\""
+        },
+        "type": "expr"
+      }
+    },
+    "custom.dbs": {
+      "binding": {
+        "config": {
+          "expression": "now(0)"
+        },
+        "transforms": [
+          {
+            "code": "\tdbs\u003dsystem.db.getConnections()\n\tdata\u003d[]\n\tfor index in range(dbs.getRowCount()):\n\t\toption\u003d{\"value\":dbs[index][0],\"label\":dbs[index][0]}\n\t\tdata.append(option)\n\treturn data",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      }
+    },
+    "custom.dbstatus": {
+      "binding": {
+        "config": {
+          "expression": "now(5000)"
+        },
+        "transforms": [
+          {
+            "code": "\tconfigDB\u003dself.custom.EIM_Config_DB\t\n\tdbstatus\u003dsystem.db.getConnectionInfo(configDB)\n\treturn dbstatus.getValueAt(0,3)",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      }
+    },
+    "props.auth": {
+      "access": "PRIVATE",
+      "persistent": false
+    },
+    "props.device.accelerometer": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.identifier": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.timezone": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.type": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.device.userAgent": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.gateway": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.geolocation.data": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.geolocation.permissionGranted": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.host": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.id": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.lastActivity": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.offline.capable": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.offline.enabled": {
+      "access": "SYSTEM",
+      "persistent": false
+    },
+    "props.offline.lastSynced": {
+      "access": "SYSTEM",
+      "persistent": false
+    }
+  },
+  "props": {
+    "address": "30.30.30.34",
+    "device": {},
+    "geolocation": {},
+    "locale": "en-US",
+    "offline": {},
+    "timeZoneId": "Etc/UTC"
+  }
+}

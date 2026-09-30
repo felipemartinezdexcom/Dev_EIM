@@ -1,0 +1,102 @@
+/* ----------------------------------------
+   Base Skeleton Elements
+   - Applies to any class name containing
+     "psc-StylesheetClasses/skeleton".
+   - Provides shared styling for all skeleton blocks.
+   ---------------------------------------- */
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton"] {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    animation: fadeInOut 2s infinite;
+}
+
+/* Staggered fade animation delays for the first 3 skeleton elements */
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton"]:nth-child(1) { animation-delay: 0s; }
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton"]:nth-child(2) { animation-delay: 0.3s; }
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton"]:nth-child(3) { animation-delay: 0.6s; }
+
+/* ----------------------------------------
+   PIE CHART Skeleton Shapes
+   ---------------------------------------- */
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton-pie"] {
+    fill: #e0e0e0;
+    overflow: hidden;
+    position: relative;
+    animation: fadeInOut 5s infinite;
+}
+
+/* Staggered pie animations for a more organic loading effect */
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton-pie"]:nth-child(1) { animation-delay: 0.5s; }
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton-pie"]:nth-child(2) { animation-delay: 1s; }
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton-pie"]:nth-child(3) { animation-delay: 1.75s; }
+
+
+/* ----------------------------------------
+   BAR CHART Skeleton Shapes
+   ---------------------------------------- */
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton-bar"] {
+    fill: #e0e0e0;
+    overflow: hidden;
+    position: relative;
+    animation: fadeInOut 5s infinite;
+}
+
+/* Stagger each bar so the chart appears to "breathe" while loading */
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton-bar"]:nth-child(1) { animation-delay: 0.5s; }
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton-bar"]:nth-child(2) { animation-delay: 1s; }
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton-bar"]:nth-child(3) { animation-delay: 1.75s; }
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton-bar"]:nth-child(4) { animation-delay: 2.5s; }
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton-bar"]:nth-child(5) { animation-delay: 2.75s; }
+
+
+/* ----------------------------------------
+   LINE CHART Skeleton (animated line drawing)
+   ---------------------------------------- */
+[class*="psc-exchange/skeleton-loading/stylesheet-classes/skeleton-line-chart"] {
+    stroke: gray;
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 300;      /* Dash pattern length used for the draw animation */
+    stroke-dashoffset: 0;
+    animation:
+        move 2s linear infinite,           /* Simulates the line being drawn */
+        fadeInOut 3s ease-in-out infinite; /* Keeps it consistent with other skeleton fades */
+}
+
+/* Animate the dash offset to create a "drawing" effect along the path */
+@keyframes move {
+    0%   { stroke-dashoffset: 300; }
+    100% { stroke-dashoffset: 0; }
+}
+
+/* ----------------------------------------
+   Horizontal loading motion (not currently applied here,
+   but available if needed for sliding shimmer effects)
+   ---------------------------------------- */
+@keyframes loading {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+
+/* ----------------------------------------
+   Pie rotation (available if applied to any pie element)
+   ---------------------------------------- */
+@keyframes rotatePie {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* ----------------------------------------
+   Global fade animation shared by skeleton elements
+   ---------------------------------------- */
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.4; }  /* Dimmed at start and end */
+    50%      { opacity: 1; }    /* Fully visible at midpoint */
+}
+@keyframes spinner {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg); }
+}

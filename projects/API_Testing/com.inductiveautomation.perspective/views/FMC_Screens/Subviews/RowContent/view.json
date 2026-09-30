@@ -1,0 +1,83 @@
+{
+  "custom": {},
+  "params": {
+    "rowIndex": "value"
+  },
+  "propConfig": {
+    "params.rowIndex": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 307,
+      "width": 457
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "SubviewHeader"
+        },
+        "position": {
+          "basis": "40px"
+        },
+        "props": {
+          "params": {
+            "icon": "material/format_list_bulleted",
+            "label": "Content List"
+          },
+          "path": "FMC_Screens/Templates/SubviewHeader"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "TextArea"
+        },
+        "position": {
+          "basis": "160px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "struct": {
+                  "data": "{session.custom.Records}",
+                  "rowIndex": "{view.params.rowIndex}"
+                },
+                "waitOnAll": true
+              },
+              "transforms": [
+                {
+                  "code": "\tindex\u003d value[\u0027rowIndex\u0027]\n\tdata\u003dvalue[\u0027data\u0027]\n\t\n\tstrData\u003d\"\"\n\t\n\tkey\u003ddata[index][\u0027PackageContents\u0027].keys()[0]\n\tcontent\u003ddata[index][\u0027PackageContents\u0027][key]\n\t\n\tlencontent\u003dlen(content)\n\tcounter\u003d0\n\tfor transaction in content:\n\t\tstrData+\u003dstr(counter+1)+\"--\"+transaction+\"\\n\"\n\t\tcounter+\u003d1\n\treturn strData\n\t\n\treturn content",
+                  "type": "script"
+                }
+              ],
+              "type": "expr-struct"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Edges/Boxes_Radious Fonts_Sizes/Subview_Trans Frames/Standard1"
+          }
+        },
+        "type": "ia.input.text-area"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Control/Control/Comp_Padding"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

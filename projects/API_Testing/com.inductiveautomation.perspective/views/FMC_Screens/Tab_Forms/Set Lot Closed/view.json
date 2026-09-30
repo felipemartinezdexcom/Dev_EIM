@@ -1,0 +1,352 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 1047,
+      "width": 2000
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"Username\").getChild(\"TextField\").props.text\u003d\"\"\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"Lot Number\").getChild(\"TextField\").props.text\u003d\"\"\n\t"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Clear Fields"
+            },
+            "position": {
+              "basis": "300px"
+            },
+            "props": {
+              "image": {
+                "icon": {
+                  "path": "material/delete"
+                }
+              },
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "Clear Fields"
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\timport time\n\t##Reset Warning Labels\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"Warning Labels\").getChild(\"Username\").position.display\u003dFalse\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"Warning Labels\").getChild(\"Lot Number\").position.display\u003dFalse\n\t\n\t\n\t##Gather Data\n\tUserName\u003dself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"Username\").getChild(\"TextField\").props.text\n\tLotNumber\u003dself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"Lot Number\").getChild(\"TextField\").props.text\n\t\n\t\n\t##Data Inspection\n\tInspectionResult\u003d[0,0]\n\t\n\tif UserName\u003d\u003dNone or UserName\u003d\u003d\"\":\n\t\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"Warning Labels\").getChild(\"Username\").position.display\u003dTrue\n\telse:\n\t\tInspectionResult[0]\u003d1\n\tif LotNumber\u003d\u003dNone or LotNumber\u003d\u003d\"\":\n\t\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"Warning Labels\").getChild(\"Lot Number\").position.display\u003dTrue\n\telse:\n\t\tInspectionResult[1]\u003d1\n\n\t\t\n\tif 0 not in InspectionResult:\n\t\t\n\t\t##load tags\n\t\tloadPaths\u003d[\"[FMC1]FMC/Functions/SetLotClosed/ToEIM/LotNumber\",\n\t\t\"[FMC1]FMC/Functions/SetLotClosed/ToEIM/UserID\"]\n\t\tloadValues\u003d[LotNumber,\n\t\tUserName]\n\t\tsystem.tag.writeBlocking(loadPaths, loadValues)\n\t\t\n\t\tfunction\u003d\"SetLotClosed\"\n\t\t##trigger  tag\n\t\ttriggerPaths\u003d[\"[FMC1]FMC/Functions/\"+function+\"//Handshaking/cStartCall\"]\n\t\t##reset\n\t\tsystem.tag.writeBlocking(triggerPaths, [0])\n\t\t#time.sleep(1)\n\t\t##trigger\n\t\tsystem.tag.writeBlocking(triggerPaths, [1])\n\t\t\t\n\t\t\n\t\t\n\t\t\n\t\tsystem.perspective.openPopup(\"Pop1\", \"FMC_Screens/Pop_Ups/Results Box\",showCloseIcon\u003dFalse,title\u003d\"\",\n\t\tresizable\u003dTrue,modal\u003dTrue,draggable\u003dFalse,overlayDismiss\u003dTrue,params\u003d{\"Type\":\"Set Lot Closed\",\"Result\":False,\"Function\":function})\n\t\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Save"
+            },
+            "position": {
+              "basis": "300px"
+            },
+            "props": {
+              "image": {
+                "icon": {
+                  "path": "material/save"
+                }
+              },
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "Set Lot Closed"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "Buttons"
+        },
+        "position": {
+          "basis": "60px",
+          "shrink": 0
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "classes": "Edges/Boxes_Radious Headers/Subview_Headers_Background",
+            "gap": 20,
+            "marginBottom": 20,
+            "padding": 10
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Spacer"
+                    },
+                    "position": {
+                      "basis": "270px"
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Mandatory_Signs"
+                      },
+                      "text": "****** All the fields are mandatory",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "Mandatory Label"
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "expression": "{parent.meta.name}+\u0027:\u0027"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "400px",
+                      "grow": 1,
+                      "shrink": 0
+                    },
+                    "props": {
+                      "placeholder": "Enter Username",
+                      "style": {
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "Username"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30,
+                    "marginTop": 20
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "Lot Number:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "400px",
+                      "grow": 1,
+                      "shrink": 0
+                    },
+                    "props": {
+                      "placeholder": "Enter Lot Number",
+                      "style": {
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "Lot Number"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Username"
+                    },
+                    "position": {
+                      "display": false
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "****The Username field can\u0027t be empty.",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Lot Number"
+                    },
+                    "position": {
+                      "display": false
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "****The Lot Number field can\u0027t be empty.",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "Warning Labels"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "classes": "Fonts_Sizes/Warning_Labels",
+                    "gap": 10,
+                    "paddingLeft": 85
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Col1"
+            },
+            "position": {
+              "basis": "600px",
+              "grow": 1,
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 20,
+                "max-width": "1000px",
+                "paddingRight": 20
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Wrapper"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "gap": 20
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Frames/Standard1"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

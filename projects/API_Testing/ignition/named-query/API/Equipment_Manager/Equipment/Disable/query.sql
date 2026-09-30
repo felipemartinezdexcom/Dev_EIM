@@ -1,0 +1,1 @@
+update [API].Equipment set removed=1 where equipment_id=:equipment_id

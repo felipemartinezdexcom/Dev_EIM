@@ -1,0 +1,152 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 624,
+      "width": 739
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/table_rows",
+              "level": "popup",
+              "message": "value",
+              "title": "Payload Result"
+            }
+          },
+          "path": "API_Screens/Templates/Views_header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "JSONViewer"
+            },
+            "position": {
+              "basis": "320px",
+              "grow": 1
+            },
+            "props": {
+              "params": {
+                "boolStyle": "color:var(--qual-9);font-size:1.1em",
+                "indent": 2,
+                "json": "",
+                "keyStyle": "font-weight:bold",
+                "nullStyle": "color:var(--error);font-size:1.1em;font-style:italic",
+                "numericStyle": "font-weight:bold;color:var(--qual-7);font-size:1.1em",
+                "stringStyle": "color:var(--qual-2);font-weight:bold",
+                "symbolStyle": "color:var(--qual-10);font-size:1.1em"
+              },
+              "path": "API_Screens/Templates/JSONViewer"
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {
+          "name": "Results:"
+        },
+        "position": {
+          "basis": "100px",
+          "grow": "01",
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": 10,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 10
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Close Dock"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "Clear"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "Buttons"
+        },
+        "position": {
+          "basis": "35px",
+          "shrink": 0
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "gap": 20,
+            "marginBottom": 20,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 20
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Popups/Background",
+        "min-height": "500px"
+      }
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "getResult",
+          "pageScope": true,
+          "script": "\t\n\t\n\t#result\u003d{\"result\":payload[\u0027result\u0027],\n\t#\t\t\"message\":payload[\u0027message\u0027],\n\t#\t\t\"data\":payload[\u0027data\u0027]\n\t#\t\t}\n\tself.getChild(\"Results:\").getChild(\"JSONViewer\").props.params.json\u003dsystem.util.jsonEncode(payload)",
+          "sessionScope": true,
+          "viewScope": true
+        }
+      ]
+    },
+    "type": "ia.container.flex"
+  }
+}

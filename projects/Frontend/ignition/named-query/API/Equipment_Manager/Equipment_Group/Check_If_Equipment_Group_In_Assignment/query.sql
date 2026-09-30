@@ -1,0 +1,1 @@
+SELECT * FROM [API].EquipmentFunctionAssignments where equipment_group_id=:equipment_group_id

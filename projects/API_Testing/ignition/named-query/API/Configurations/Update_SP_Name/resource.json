@@ -1,0 +1,55 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "API_Configurations",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "8de1865749a9f66a7dd8948b4d3a84bce8e29b191e9fc7ed59cee9f14f03ee72",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2026-06-24T13:13:16Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "new_sp_name",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "sp_id",
+        "sqlType": 3
+      },
+      {
+        "type": "Parameter",
+        "identifier": "username",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "update_insert",
+        "sqlType": 7
+      }
+    ]
+  }
+}

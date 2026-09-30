@@ -1,0 +1,36 @@
+{
+  "connectURL": "jdbc:sqlserver://mssql-server_1",
+  "connectionProps": "databaseName\u003dAverna_mfgdb",
+  "connectionResetParams": "",
+  "defaultTransactionLevel": "DEFAULT",
+  "driver": "Microsoft SQLServer",
+  "evictionRate": -1,
+  "evictionTests": 3,
+  "evictionTime": 1800000,
+  "failoverMode": "STANDARD",
+  "failoverProfile": "",
+  "includeSchemaInTableName": false,
+  "password": {
+    "data": {
+      "ciphertext": "a8amD8TA1DA6pOJ1cQ",
+      "encrypted_key": "M5KNgcxccO1axKsmmlOpdQaNtgOyWBOQ-cc4BeV_gGLNHvs5WsbQmA",
+      "iv": "oe9Vv58-BT-CEcJ4",
+      "protected": "eyJhbGciOiJBMjU2S1ciLCJlbmMiOiJBMjU2R0NNIiwiaWF0IjoxNzg4NTE2NjkwLCJ6aXAiOiJERUYifQ",
+      "tag": "VwJtQnyoamfJt7tGNHQKUQ"
+    },
+    "type": "Embedded"
+  },
+  "poolInitSize": 0,
+  "poolMaxActive": 8,
+  "poolMaxIdle": 8,
+  "poolMaxWait": 5000,
+  "poolMinIdle": 0,
+  "slowQueryLogThreshold": 60000,
+  "testOnBorrow": true,
+  "testOnReturn": false,
+  "testWhileIdle": false,
+  "translator": "MSSQL",
+  "username": "sa",
+  "validationQuery": "SELECT 1",
+  "validationSleepTime": 10000
+}

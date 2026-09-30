@@ -1,0 +1,175 @@
+{
+  "custom": {
+    "data": "value"
+  },
+  "params": {},
+  "propConfig": {
+    "custom.data": {
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 404,
+      "width": 489
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/delete",
+              "level": "error",
+              "message": "",
+              "title": "value"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Markdown"
+            },
+            "position": {
+              "basis": "200px",
+              "grow": 1
+            },
+            "props": {
+              "markdown": {
+                "escapeHtml": false
+              },
+              "source": "value",
+              "style": {
+                "lineHeight": "2",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.markdown"
+          }
+        ],
+        "meta": {
+          "name": "Content"
+        },
+        "position": {
+          "basis": "160px",
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "justify": "space-around"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tusername\u003dself.session.props.auth.user.userName\n\tid\u003dself.view.custom.data[\u0027ids\u0027]\n\tfunction_group_name\u003dself.view.custom.data[\u0027data\u0027][0][\u0027function_group_name\u0027]\n\tdata\u003dself.view.custom.data[\u0027data\u0027]\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\t##delete function group\n\tparams_group\u003d{\"function_group_id\":id[\u0027function_group_id\u0027],\n\t\t\t\t \"database\":database}\n\tsystem.db.execUpdate(\"API/Equipment_Manager/Function_Group/Delete\", params_group)\n\t\n\t##logEvent\n\tlogparams\u003d{\"username\":username,\n\t\t   \"event_type\":\"Delete\",\n\t\t   \"before_change\":str(data),\n\t\t   \"after_change\":None,\n\t\t   \"description\":\"Deleted Function Group {0}\".format(function_group_name)}\n\tAPI.Functions.log_activity(logparams)\n\t\t\n\t\n\t\n\t\n\tsystem.perspective.sendMessage(\"tablerefresh\")\n\tsystem.perspective.closePopup(\"\")\n\n\t\n\t\n\t\n\t\n\t\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "yes"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "YES"
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "no"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "No"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "Buttons"
+        },
+        "position": {
+          "basis": "35px",
+          "shrink": 0
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "gap": 20,
+            "marginBottom": 20,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 20
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Effects/Fade-In Frames/Standard1"
+      }
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "delete_function_group_data",
+          "pageScope": true,
+          "script": "\tself.getChild(\"Header\").props.params.data.title\u003dpayload[\u0027title\u0027]\n\tself.getChild(\"Content\").getChild(\"Markdown\").props.source\u003dpayload[\u0027message\u0027]\n\tself.view.custom.data\u003dpayload",
+          "sessionScope": true,
+          "viewScope": true
+        }
+      ]
+    },
+    "type": "ia.container.flex"
+  }
+}

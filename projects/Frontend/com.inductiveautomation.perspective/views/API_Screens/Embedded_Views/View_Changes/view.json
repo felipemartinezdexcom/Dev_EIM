@@ -1,0 +1,61 @@
+{
+  "custom": {},
+  "params": {
+    "rowData": "value"
+  },
+  "propConfig": {
+    "params.rowData": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 44,
+      "width": 86
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": false,
+                "id": "uCbeEkfP",
+                "modal": true,
+                "overlayDismiss": true,
+                "resizable": false,
+                "showCloseIcon": false,
+                "type": "open",
+                "viewParams": {
+                  "rowData": "{view.params.rowData}"
+                },
+                "viewPath": "API_Screens/Pop_Ups/Show_Changes",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "basis": "30px",
+          "grow": 1
+        },
+        "props": {
+          "path": "material/preview"
+        },
+        "type": "ia.display.icon"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 827,
+      "width": 1308
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "SP_Configuration"
+            },
+            "props": {
+              "path": "API_Screens/Tab_Forms/Function_Configuration"
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Event_Logger"
+            },
+            "position": {
+              "tabIndex": 1
+            },
+            "props": {
+              "path": "API_Screens/Tab_Forms/Events_Logger"
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Simulator"
+            },
+            "position": {
+              "tabIndex": 2
+            },
+            "props": {
+              "path": "API_Screens/Tab_Forms/Simulator"
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Start_Up_Configs"
+            },
+            "position": {
+              "tabIndex": 3
+            },
+            "props": {
+              "path": "API_Screens/Tab_Forms/Start_Up_Configs"
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Equipment_Configuration_IP"
+            },
+            "position": {
+              "tabIndex": 4
+            },
+            "props": {
+              "path": "API_Screens/Tab_Forms/Equipment_Configuration_IP"
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {
+          "name": "TabContainer"
+        },
+        "position": {
+          "basis": "300px",
+          "grow": 1
+        },
+        "props": {
+          "menuStyle": {
+            "backgroundColor": "#000000",
+            "color": "#FFFFFF",
+            "fontWeight": "700",
+            "textTransform": "uppercase"
+          },
+          "menuType": "modern",
+          "tabSize": {
+            "height": 50,
+            "width": 250
+          },
+          "tabs": [
+            {
+              "viewParams": {
+                "icon": "material/assignment",
+                "name": "Functions Config"
+              },
+              "viewPath": "API_Screens/Templates/Tab_Header"
+            },
+            {
+              "viewParams": {
+                "icon": "material/event_note",
+                "name": "Events Log"
+              },
+              "viewPath": "API_Screens/Templates/Tab_Header"
+            },
+            {
+              "viewParams": {
+                "icon": "material/support",
+                "name": "Simulator"
+              },
+              "viewPath": "API_Screens/Templates/Tab_Header"
+            },
+            {
+              "viewParams": {
+                "icon": "material/plumbing",
+                "name": "Start Up Config"
+              },
+              "viewPath": "API_Screens/Templates/Tab_Header"
+            },
+            {
+              "viewParams": {
+                "icon": "material/engineering",
+                "name": "Equipment Manager"
+              },
+              "viewPath": "API_Screens/Templates/Tab_Header"
+            }
+          ]
+        },
+        "type": "ia.container.tab"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

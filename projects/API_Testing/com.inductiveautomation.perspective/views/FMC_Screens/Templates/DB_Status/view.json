@@ -1,0 +1,39 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 55,
+      "width": 246
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "props": {
+          "text": "Label"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Image"
+        },
+        "position": {
+          "basis": "100px"
+        },
+        "type": "ia.display.image"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "type": "ia.container.flex"
+  }
+}

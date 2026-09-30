@@ -1,0 +1,1535 @@
+{
+  "custom": {},
+  "params": {
+    "data": {
+      "function_group_id": "",
+      "function_group_name": "value"
+    }
+  },
+  "propConfig": {
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 806,
+      "width": 1300
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/edit",
+              "level": "popup",
+              "message": "value",
+              "title": "Edit Function Group"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{parent.meta.name}+ \" :\""
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "textStyle": {
+                    "textAlign": "left"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "path": "view.params.data.function_group_name"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "type": "ia.input.text-field"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\tusername\u003dself.session.props.auth.user.userName\n\tnew_function_group_name\u003dself.getSibling(\"TextField\").props.text\n\tfunction_group_id\u003dself.view.params.data.function_group_id\n\tdata\u003dself.view.params.data\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\t\n\t##edit group name\n\tparams\u003d{\"function_group_name\":new_function_group_name,\n\t\t\t\"function_group_id\":function_group_id,\n\t\t\t\t \"database\":database}\n\tsystem.db.execUpdate(\"API/Equipment_Manager/Function_Group/Update_Group_Name\", params)\n\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\n\t##logEvent\n\tlogparams\u003d{\"username\":username,\n\t\t   \"event_type\":\"Edit\",\n\t\t   \"before_change\":str(data),\n\t\t   \"after_change\":str(params),\n\t\t   \"description\":\"Edit Function Group Name\"}\n\tAPI.Functions.log_activity(logparams)\n\t\t\t"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Add"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.enabled": {
+                        "binding": {
+                          "config": {
+                            "expression": "len({../TextField.props.text})\u003e5 \r\n"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "data": [
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203293,
+                          "equipment_id": 14,
+                          "equipment_name": "EQ-00012312-0002",
+                          "last_date_modified": 1783025203293
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203307,
+                          "equipment_id": 15,
+                          "equipment_name": "EQ-00012312-0003",
+                          "last_date_modified": 1783025203307
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203310,
+                          "equipment_id": 16,
+                          "equipment_name": "EQ-00012312-0004",
+                          "last_date_modified": 1783025203310
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203317,
+                          "equipment_id": 17,
+                          "equipment_name": "EQ-00012312-0005",
+                          "last_date_modified": 1783025203317
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203320,
+                          "equipment_id": 18,
+                          "equipment_name": "EQ-00012312-0006",
+                          "last_date_modified": 1783025203320
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203323,
+                          "equipment_id": 19,
+                          "equipment_name": "EQ-00012312-0007",
+                          "last_date_modified": 1783025203323
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203330,
+                          "equipment_id": 20,
+                          "equipment_name": "EQ-00012312-0008",
+                          "last_date_modified": 1783025203330
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203333,
+                          "equipment_id": 21,
+                          "equipment_name": "EQ-00012312-0009",
+                          "last_date_modified": 1783025203333
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203337,
+                          "equipment_id": 22,
+                          "equipment_name": "EQ-00012312-0010",
+                          "last_date_modified": 1783025203337
+                        }
+                      ],
+                      "style": {
+                        "classes": "Buttons/Classic"
+                      },
+                      "text": "Update Name"
+                    },
+                    "type": "ia.input.button"
+                  }
+                ],
+                "meta": {
+                  "name": "Entry"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Group Name"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "35px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "expression": "{parent.meta.name}+ \" :\""
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Table"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.data": {
+                        "binding": {
+                          "config": {
+                            "mode": "direct",
+                            "parameters": {
+                              "database": "{session.custom.EIM_Config_DB}"
+                            },
+                            "queryPath": "API/Equipment_Manager/Functions/Get_Functions",
+                            "returnFormat": "json"
+                          },
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "columns": [
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "function_id",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {},
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": 85
+                        },
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "function_name",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": 150
+                        },
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "sys_interface",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": ""
+                        },
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "database_name",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": 150
+                        },
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "database_schema",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": 150
+                        }
+                      ],
+                      "filter": {
+                        "enabled": true
+                      },
+                      "headerStyle": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "pager": {
+                        "bottom": false
+                      },
+                      "rows": {
+                        "height": 50,
+                        "subview": {
+                          "viewPath": "API_Screens/Subviews/Function_Input_Params"
+                        },
+                        "subviewExpansionMode": "single"
+                      },
+                      "selection": {
+                        "mode": "multiple interval"
+                      }
+                    },
+                    "scripts": {
+                      "customMethods": [],
+                      "extensionFunctions": null,
+                      "messageHandlers": [
+                        {
+                          "messageType": "tablerefresh",
+                          "pageScope": true,
+                          "script": "\tself.refreshBinding(\u0027props.data\u0027)",
+                          "sessionScope": true,
+                          "viewScope": true
+                        }
+                      ]
+                    },
+                    "type": "ia.display.table"
+                  }
+                ],
+                "meta": {
+                  "name": "Functions List"
+                },
+                "position": {
+                  "basis": "50%"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10,
+                    "marginTop": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\timport time\n\tusername\u003dself.session.props.auth.user.userName\n\tdata_selection\u003dself.parent.parent.getChild(\"Functions List\").getChild(\"Table\").props.selection.data\n\tfunction_group_id\u003dself.view.params.data.function_group_id\n\tcurrent_functions\u003dself.parent.parent.getChild(\"Group Function List\").getChild(\"Table\").props.data\n\tfunction_group_name\u003dself.parent.parent.parent.getChild(\"Group Name\").getChild(\"Entry\").getChild(\"TextField\").props.text\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\tif len(data_selection)!\u003d0:\n\t\t\n\t\tfor function in data_selection:\n\t\t\tparams\u003d{\"function_group_id\":function_group_id,\n\t\t\t\t\t\"function_id\":function[\u0027function_id\u0027],\n\t\t\t\t    \"database\":database}\n\t\t\tsystem.db.execUpdate(\"API/Equipment_Manager/Function_Group/Insert_Function_Relationship\", params)\n\t\t\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\t\n\t\ttime.sleep(.1)\n\t\tupdated_functions\u003dself.parent.parent.getChild(\"Group Function List\").getChild(\"Table\").props.data\n\t\t##logEvent\n\t\tlogparams\u003d{\"username\":username,\n\t\t\t   \"event_type\":\"Edit\",\n\t\t\t   \"before_change\":str(current_functions)[16:],\n\t\t\t   \"after_change\":str(updated_functions)[16:],\n\t\t\t   \"description\":\"Edit: Added function(s) to Function Group {0}\".format(function_group_name)}\n\t\tAPI.Functions.log_activity(logparams)"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "add"
+                    },
+                    "position": {
+                      "basis": "60px"
+                    },
+                    "props": {
+                      "path": "material/arrow_right",
+                      "style": {
+                        "backgroundColor": "#C3C3C3",
+                        "borderStyle": "solid"
+                      }
+                    },
+                    "type": "ia.display.icon"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\timport time\n\tfunction_group_name\u003dself.parent.parent.parent.getChild(\"Group Name\").getChild(\"Entry\").getChild(\"TextField\").props.text\n\tusername\u003dself.session.props.auth.user.userName\n\tdata_selection\u003dself.parent.parent.getChild(\"Group Function List\").getChild(\"Table\").props.selection.data\n\tfunction_group_id\u003dself.view.params.data.function_group_id\n\tcurrent_functions\u003dself.parent.parent.getChild(\"Group Function List\").getChild(\"Table\").props.data\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\tif len(data_selection)!\u003d0:\n\t\t\n\t\tfor function in data_selection:\n\t\t\tparams\u003d{\"function_group_id\":function_group_id,\n\t\t\t\t\t\"function_id\":function[\u0027function_id\u0027],\n\t\t\t\t    \"database\":database}\n\t\t\tsystem.db.execUpdate(\"API/Equipment_Manager/Function_Group/Delete_Function_From_Function_Group\", params)\n\t\t\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\t\n\t\ttime.sleep(.1)\n\t\tupdated_functions\u003dself.parent.parent.getChild(\"Group Function List\").getChild(\"Table\").props.data\n\t\t##logEvent\n\t\tlogparams\u003d{\"username\":username,\n\t\t\t   \"event_type\":\"Edit\",\n\t\t\t   \"before_change\":str(current_functions)[16:],\n\t\t\t   \"after_change\":str(updated_functions)[16:],\n\t\t\t   \"description\":\"Edit: Removed function(s) from Function Group {0}\".format(function_group_name)}\n\t\tAPI.Functions.log_activity(logparams)\n\t\t\t"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "remove"
+                    },
+                    "position": {
+                      "basis": "60px"
+                    },
+                    "props": {
+                      "path": "material/arrow_left",
+                      "style": {
+                        "backgroundColor": "#C3C3C3",
+                        "borderStyle": "solid"
+                      }
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "meta": {
+                  "name": "Controls"
+                },
+                "position": {
+                  "basis": "80px",
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "gap": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "35px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "expression": "{parent.meta.name}+ \" :\""
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Table"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.data": {
+                        "binding": {
+                          "config": {
+                            "mode": "direct",
+                            "parameters": {
+                              "database": "{session.custom.EIM_Config_DB}",
+                              "function_group_id": "{view.params.data.function_group_id}"
+                            },
+                            "queryPath": "API/Equipment_Manager/Function_Group/Get_Related_Functions",
+                            "returnFormat": "json"
+                          },
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "columns": [
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "function_id",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {},
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": 85
+                        },
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "function_name",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": 150
+                        },
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "sys_interface",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": ""
+                        },
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "database_name",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": 150
+                        },
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "database_schema",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": 150
+                        }
+                      ],
+                      "filter": {
+                        "enabled": true
+                      },
+                      "footerGroups": [
+                        []
+                      ],
+                      "headerStyle": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "pager": {
+                        "bottom": false
+                      },
+                      "rows": {
+                        "height": 50,
+                        "subview": {
+                          "viewPath": "API_Screens/Subviews/Function_Input_Params"
+                        },
+                        "subviewExpansionMode": "single"
+                      },
+                      "selection": {
+                        "mode": "multiple interval"
+                      }
+                    },
+                    "scripts": {
+                      "customMethods": [],
+                      "extensionFunctions": null,
+                      "messageHandlers": [
+                        {
+                          "messageType": "tablerefresh",
+                          "pageScope": true,
+                          "script": "\tself.refreshBinding(\u0027props.data\u0027)",
+                          "sessionScope": true,
+                          "viewScope": true
+                        }
+                      ]
+                    },
+                    "type": "ia.display.table"
+                  }
+                ],
+                "meta": {
+                  "name": "Group Function List"
+                },
+                "position": {
+                  "basis": "50%"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10,
+                    "marginTop": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Details"
+            },
+            "position": {
+              "basis": "50%",
+              "grow": 1
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Close"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Close"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "Buttons"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "justify": "center",
+              "style": {
+                "gap": 20,
+                "marginBottom": 10,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 10
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Wrapper"
+        },
+        "position": {
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "justify": "space-between"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Frames/Standard1"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

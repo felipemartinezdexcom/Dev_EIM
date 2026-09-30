@@ -1,0 +1,211 @@
+{
+  "custom": {},
+  "params": {
+    "sp_id": "value"
+  },
+  "propConfig": {
+    "params.sp_id": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 244,
+      "width": 889
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/add_circle",
+              "level": "popup",
+              "message": "value",
+              "title": "Add  Input Parameter"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "L2"
+        },
+        "position": {
+          "basis": "32px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.params.label": {
+            "binding": {
+              "config": {
+                "expression": "\"Input Parameters\""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "icon": "material/format_list_bulleted"
+          },
+          "path": "API_Screens/Templates/SubviewHeader"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "String_Entry"
+        },
+        "props": {
+          "params": {
+            "dataType": "",
+            "paramName": "",
+            "required": "YES"
+          },
+          "path": "API_Screens/Templates/String_Entry",
+          "style": {
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 20
+          },
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tparam_name\u003dself.parent.parent.parent.getChild(\"String_Entry\").props.params.paramName\n\tdata_type\u003dself.parent.parent.parent.getChild(\"String_Entry\").props.params.dataType\n\trequired_param\u003dself.parent.parent.parent.getChild(\"String_Entry\").props.params.required\n\tusername\u003dself.session.props.auth.user.userName\n\tsp_id\u003dself.view.params.sp_id\n\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"material/info\",\n\t\t  \"title\": \"\",\n\t\t  \"level\": \"\",\n\t\t  \"message\": \"\"}}\n\t\n\tif param_name\u003d\u003dNone or param_name\u003d\u003d\"\":\n\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"All the field must be completed.\"\n\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Notification\"\n\t\tmessageboxparams[\u0027data\u0027][\"level\"]\u003d \"info\"\n\t\n\t\tsystem.perspective.openPopup(\"msg1\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\t\n\telse:\n\t\tparams\u003d{\u0027data_type\u0027: data_type, \u0027sp_id\u0027: sp_id, \u0027param_name\u0027: param_name, \u0027username\u0027: username, \u0027required_param\u0027: required_param}\n\t\tsystem.db.execUpdate(\"API/Configurations/Insert_SP_Params\", params)\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\tsystem.perspective.closePopup(\"\")\n\t\n\t\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Add Record"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Add"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Close Dock"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Close"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "Buttons"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "justify": "center",
+              "style": {
+                "gap": 20,
+                "marginBottom": 20,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 20
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "80px",
+              "display": false
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "../FlexRepeater.props.instances"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "Wrapper"
+        },
+        "position": {
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": 20
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "justify": "center",
+      "style": {
+        "classes": "Edges/Boxes_Radious Frames/Standard1 Margins/Box_Separation"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

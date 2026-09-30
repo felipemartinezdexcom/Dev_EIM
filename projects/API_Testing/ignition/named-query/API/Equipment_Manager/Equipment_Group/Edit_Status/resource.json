@@ -1,0 +1,45 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "API_Configurations",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "c2865100a3bcbfde856d4f1df150dda0efa183b9a43655b962b65604e4785b11",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2026-07-28T16:11:26Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "status",
+        "sqlType": 6
+      },
+      {
+        "type": "Parameter",
+        "identifier": "equipment_group_id",
+        "sqlType": 2
+      }
+    ]
+  }
+}

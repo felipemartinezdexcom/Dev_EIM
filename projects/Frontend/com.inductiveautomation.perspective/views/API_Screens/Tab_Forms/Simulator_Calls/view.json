@@ -1,0 +1,235 @@
+{
+  "custom": {
+    "loader": true
+  },
+  "params": {
+    "data": {
+      "function_id": "value",
+      "function_name": "value"
+    }
+  },
+  "propConfig": {
+    "custom.loader": {
+      "persistent": true
+    },
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 682,
+      "width": 1096
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/track_changes",
+              "level": "popup",
+              "message": "value",
+              "title": "Input Parameters"
+            }
+          },
+          "path": "API_Screens/Templates/Views_header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "text": "Machine Name (EQ-Number):",
+                  "textStyle": {
+                    "textAlign": "left"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "TextField"
+                },
+                "position": {
+                  "basis": "150px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "classes": "Effects/input_radious"
+                  }
+                },
+                "type": "ia.input.text-field"
+              }
+            ],
+            "meta": {
+              "name": "EQ-Number"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "FlexRepeater"
+            },
+            "position": {
+              "basis": "320px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.instances": {
+                "binding": {
+                  "config": {
+                    "mode": "direct",
+                    "parameters": {
+                      "database": "{session.custom.EIM_Config_DB}",
+                      "function_id": "{view.params.data.function_id}"
+                    },
+                    "queryPath": "API/Configurations/Get_Function_Params",
+                    "returnFormat": "json"
+                  },
+                  "overlayOptOut": true,
+                  "transforms": [
+                    {
+                      "code": "\tdata\u003d[]\n\tself.props.instances\u003d[]\n\tfor row in value:\n\t\tnewrow\u003d{\"param_name\":row[\"param_name\"],\"data_type\":row[\"data_type\"],\n\t\t\t\t\"param_required\":row[\u0027required_param\u0027],\"data\":{\"param_value\":\"\"}}\n\t\tdata.append(newrow)\n\t\t\t\n\treturn data",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "query"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "path": "API_Screens/Templates/Sim_Param_Entry",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 20
+              },
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false
+            },
+            "type": "ia.display.flex-repeater"
+          },
+          {
+            "children": [
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tfunction_name\u003dself.view.params.data.function_name\n\tmachine_name\u003dself.parent.parent.getChild(\"EQ-Number\").getChild(\"TextField\").props.text\n\tfunction_id\u003dself.view.params.data.function_id\n\tinput_params_instances\u003dself.parent.parent.getChild(\"FlexRepeater\").props.instances\n\tusername\u003d\u0027User-Interface\u0027\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\t\n\t##get sys interface\n\tparameters\u003d{\"function_id\":function_id,\n\t\t\t\t \"database\":database}\n\tsys_interface\u003dsystem.db.execScalar(\"API/Configurations/Get_Sys_Interface_Function_Call\",parameters)\n\t\n\tpayload\u003d{\"machine_name\":machine_name,\n\t\t\t \"function_name\":function_name,\n\t\t\t \"input_parameters\":{}}\t\n\t#system.perspective.print(input_params_instances)\t\n\tfor param in input_params_instances:\n\t\n\t\tpayload[\u0027input_parameters\u0027][param[\u0027data\u0027][\u0027param_name\u0027]]\u003dparam[\u0027data\u0027][\u0027param_value\u0027]\n\t\t\n\t\n\n\tsystem.perspective.print(payload)\t\n\texecution_call\u003dAPI.Functions.execution(payload,simulator_call\u003d\"YES\")\n\t\n\tresponse\u003dexecution_call\n\t#system.perspective.print(response)\n\t\n\tsystem.perspective.sendMessage(\"getResult\", response)\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\"\"\"\t\n\t\n\t\n\t\n\t\n\tusername\u003dself.session.props.auth.user.userName\n\tstoreProcID\u003dself.parent.parent.getChild(\"Store Proc Dropdown\").getChild(\"Dropdown\").props.value\n\tinputParams\u003dself.parent.parent.getChild(\"FlexRepeater\").props.instances\n\tall_fields_completed\u003dTrue\n\tstoreProcSelected\u003dTrue\n\t\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"material/info\",\n\t\t\t\t\t  \"title\": \"\",\n\t\t\t\t\t  \"level\": \"warning\",\n\t\t\t\t\t  \"message\": \"\"\n\t\t\t\t\t  }\n\t\t\t\t\t  }\n\t\n\t##check if all fields are completed\n\tfor item in inputParams:\n\t\tdataType,paramName,required\u003ditem.values()\n\t\t\n\t\tif paramName\u003d\u003d\"\" or paramName\u003d\u003dNone or dataType\u003d\u003d\"\" or dataType\u003d\u003dNone or required\u003d\u003d\"\" or required\u003d\u003dNone:\n\t\t\tall_fields_completed\u003dFalse\n\t\t\tbreak\n\t\telse:\n\t\t\tpass\n\t\n\tif storeProcID\u003d\u003d\"\" or storeProcID\u003d\u003dNone:\n\t\tstoreProcSelected\u003dFalse\n\t\n\tif all_fields_completed\u003d\u003dFalse or storeProcSelected\u003d\u003dFalse:\n\t\tif all_fields_completed\u003d\u003dFalse:\n\t\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"You have one or more empty fields. Please make sure all parameter names and data types are provided.\"\n\t\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Missing Fields\"\n\t\telif storeProcSelected\u003d\u003dFalse:\n\t\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"You must select a store procedure.\"\n\t\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Missing Store Procedure\"\n\t\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"MissingReqs\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\telse: \n\t\t\n\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"All the entry parameters were successfully added to the configuration file.\"\n\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Successful Configuration\"\n\t\tmessageboxparams[\u0027data\u0027][\"level\"]\u003d \"success\"\n\t\tmessageboxparams[\u0027data\u0027][\"icon\"]\u003d \"material/add_circle\"\n\t\t\n\t\n\t\tfor item in inputParams:\n\t\t\tdataType,paramName,required\u003ditem.values()\n\t\t\t\n\t\t\tparams\u003d{\"param_name\": paramName ,\n\t\t\t\t\t\"sp_id\": storeProcID,\n\t\t\t\t\t\"data_type\": dataType,\n\t\t\t\t\t\"required_param\": required,\n\t\t\t\t\t\"username\":username\n\t\t\t\t\t}\n\t\t\t\n\t\t\tsystem.db.execUpdate(\"API/Configurations/Insert_SP_Params\",params)\n\t\t\t\n\t\tsystem.perspective.closePopup(\"\")\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"MissingReqs\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\t\t\"\"\""
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Add Record"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Submit"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "Buttons"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "justify": "center",
+              "style": {
+                "gap": 20,
+                "marginBottom": 20,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 20
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Wrapper"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": 20
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "refreshValidation",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tself.getChild(\"SP_Validation\").refreshBinding(\u0027position.display\u0027)",
+          "sessionScope": true,
+          "viewScope": true
+        }
+      ]
+    },
+    "type": "ia.container.flex"
+  }
+}

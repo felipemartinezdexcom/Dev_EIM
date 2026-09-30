@@ -1,0 +1,17 @@
+{
+  "scope": "G",
+  "documentation": "###Documentation Only###\nThis folder contains empty style classes to allow for classes that are defined in the stylesheet.css and marked with psc-className to be selected inside of the designed.\n\nThis is not required, but may help speed up development efforts.\n",
+  "version": 1,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "data.bin"
+  ],
+  "attributes": {
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2026-05-22T04:37:38Z"
+    },
+    "lastModificationSignature": "e54c0d7930fce809c5b5648f33dd259a21610fa0385a8e8373a742ecbc15effb"
+  }
+}

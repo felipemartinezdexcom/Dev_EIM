@@ -1,0 +1,1 @@
+update storeProcsList set prod_validated="YES" where sp_id=:sp_id

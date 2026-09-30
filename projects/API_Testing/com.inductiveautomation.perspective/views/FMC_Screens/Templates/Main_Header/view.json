@@ -1,0 +1,146 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 88,
+      "width": 1202
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "dexcom logo"
+            },
+            "position": {
+              "basis": "211px"
+            },
+            "props": {
+              "fit": {
+                "mode": "fill"
+              },
+              "source": "/system/images/dexcom logo.png"
+            },
+            "type": "ia.display.image"
+          },
+          {
+            "meta": {
+              "name": "Spacer"
+            },
+            "position": {
+              "basis": "50px",
+              "grow": 1
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Dropdown"
+                    },
+                    "position": {
+                      "basis": "36px"
+                    },
+                    "propConfig": {
+                      "props.value": {
+                        "onChange": {
+                          "enabled": null,
+                          "script": "\tself.session.props.theme\u003dcurrentValue.value"
+                        }
+                      }
+                    },
+                    "props": {
+                      "options": [
+                        {
+                          "label": "light",
+                          "value": "light"
+                        },
+                        {
+                          "label": "light-warm",
+                          "value": "light-warm"
+                        },
+                        {
+                          "label": "light-cool",
+                          "value": "light-cool"
+                        },
+                        {
+                          "label": "dark",
+                          "value": "dark"
+                        },
+                        {
+                          "label": "dark-warm",
+                          "value": "dark-warm"
+                        },
+                        {
+                          "label": "dark-cool",
+                          "value": "dark-cool"
+                        }
+                      ],
+                      "placeholder": {
+                        "text": "Select Theme"
+                      },
+                      "value": "light"
+                    },
+                    "type": "ia.input.dropdown"
+                  }
+                ],
+                "meta": {
+                  "name": "ViewMode"
+                },
+                "position": {
+                  "basis": "200px"
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Options"
+            },
+            "position": {
+              "basis": "200px"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "basis": "70px",
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#000000",
+            "classes": "Edges/Boxes_Radious Frames/Standard1 Margins/Box_Separation"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

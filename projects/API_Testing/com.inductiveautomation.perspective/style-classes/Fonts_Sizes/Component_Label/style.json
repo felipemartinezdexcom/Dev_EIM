@@ -1,0 +1,21 @@
+{
+  "base": {
+    "style": {
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "textTransform": "uppercase"
+    }
+  },
+  "variants": [
+    {
+      "media": {
+        "feature": "maxWidth",
+        "value": "1000px"
+      },
+      "style": {
+        "fontSize": "12px",
+        "fontWeight": "200"
+      }
+    }
+  ]
+}

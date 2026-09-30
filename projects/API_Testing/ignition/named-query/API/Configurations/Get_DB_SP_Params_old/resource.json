@@ -1,0 +1,40 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "Averna_Dev",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "022b4406dffdfa789300793b49503493ae1875926cbb8de2a363f00e4a7ca67d",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2026-06-22T10:03:02Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "function_name",
+        "sqlType": 7
+      }
+    ]
+  }
+}

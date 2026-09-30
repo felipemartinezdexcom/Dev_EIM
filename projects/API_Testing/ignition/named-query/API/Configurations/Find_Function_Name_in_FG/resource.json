@@ -1,0 +1,45 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "API_Configurations",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "b729d669398f5959537ed2c0019739d948ce57b8bf9911d21d421b8cea8823b9",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "felipe",
+      "timestamp": "2026-08-13T14:40:23Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "function_name",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "function_group_id",
+        "sqlType": 3
+      }
+    ]
+  }
+}

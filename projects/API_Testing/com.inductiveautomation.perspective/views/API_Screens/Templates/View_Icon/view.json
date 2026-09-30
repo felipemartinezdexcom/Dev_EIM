@@ -1,0 +1,53 @@
+{
+  "custom": {},
+  "params": {
+    "rowData": "value"
+  },
+  "propConfig": {
+    "params.rowData": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 50,
+      "width": 78
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tdbstatus\u003dself.session.custom.dbstatus\n\t\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"material/info\",\n\t\t\t  \"title\": \"\",\n\t\t\t  \"level\": \"\",\n\t\t\t  \"message\": \"\"\n\t\t\t  }\n\t\t\t  }\n\t\n\t\n\tif dbstatus\u003d\u003d\"Valid\":\n\n\t\trowData\u003dself.view.params.rowData\n\t\tparams\u003d{\"sp_name\":rowData[\u0027sp_name\u0027],\"sp_id\":rowData[\"sp_id\"]}\t\t\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"QueryScript\", \"API_Screens/Pop_Ups/SP_Details\",params, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\n\telse:\n\t\t\n\t\tmessageboxparams[\"data\"][\"title\"]\u003d \"Data-Base Connection Error\"\n\t\tmessageboxparams[\"data\"][\"level\"]\u003d \"error\"\n\t\tmessageboxparams[\"data\"][\"message\"]\u003d \"The database connection is not valid.\"\n\t\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"dbError\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\t\t\t\t\t  \n\t\n\t\n\t\n\t\n\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "basis": "30px",
+          "grow": 1
+        },
+        "props": {
+          "path": "material/preview"
+        },
+        "type": "ia.display.icon"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

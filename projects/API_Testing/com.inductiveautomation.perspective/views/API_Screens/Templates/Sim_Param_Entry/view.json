@@ -1,0 +1,248 @@
+{
+  "custom": {
+    "data": {}
+  },
+  "params": {
+    "data": {
+      "param_name": null,
+      "param_value": ""
+    },
+    "data_type": null,
+    "param_name": null,
+    "param_required": null
+  },
+  "propConfig": {
+    "custom.data": {
+      "persistent": true
+    },
+    "custom.data.param_name": {
+      "binding": {
+        "config": {
+          "path": "view.params.param_name"
+        },
+        "type": "property"
+      }
+    },
+    "custom.data.param_value": {
+      "binding": {
+        "config": {
+          "path": "/root/param value.props.text"
+        },
+        "type": "property"
+      }
+    },
+    "params.data": {
+      "binding": {
+        "config": {
+          "path": "view.custom.data"
+        },
+        "type": "property"
+      },
+      "paramDirection": "output",
+      "persistent": true
+    },
+    "params.data_type": {
+      "binding": {
+        "config": {
+          "path": "/root/Dropdown.props.value"
+        },
+        "type": "property"
+      },
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.param_name": {
+      "binding": {
+        "config": {
+          "path": "/root/param name.props.text"
+        },
+        "type": "property"
+      },
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.param_required": {
+      "binding": {
+        "config": {
+          "path": "/root/Required.props.value"
+        },
+        "type": "property"
+      },
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 40,
+      "width": 1012
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "param_name"
+        },
+        "position": {
+          "basis": "250px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.param_name"
+              },
+              "transforms": [
+                {
+                  "code": "\ttry:\n\t\treturn value+\" :\"\n\texcept:\n\t\t\n\t\treturn \"\"",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Tables/Col_Headers"
+          },
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "param value"
+        },
+        "position": {
+          "basis": "300px",
+          "grow": 1
+        },
+        "props": {
+          "style": {
+            "classes": "Effects/input_radious",
+            "min-width": "180px"
+          }
+        },
+        "type": "ia.input.text-field"
+      },
+      {
+        "meta": {
+          "name": "label2"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "Tables/Col_Headers"
+          },
+          "text": "Data Type: ",
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "data type"
+        },
+        "position": {
+          "basis": "110px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.data_type"
+              },
+              "overlayOptOut": true,
+              "transforms": [
+                {
+                  "code": "\ttry:\n\n\t\treturn value\n\texcept:\n\t\treturn \"\"",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "enabled": false,
+          "style": {
+            "classes": "Effects/input_radious"
+          }
+        },
+        "type": "ia.input.text-field"
+      },
+      {
+        "meta": {
+          "name": "label3"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "Tables/Col_Headers"
+          },
+          "text": "Required: ",
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "required"
+        },
+        "position": {
+          "basis": "110px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.param_required"
+              },
+              "overlayOptOut": true,
+              "transforms": [
+                {
+                  "code": "\n\ttry:\n\n\t\treturn value\n\texcept:\n\t\treturn \"\"",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "enabled": false,
+          "style": {
+            "classes": "Effects/input_radious"
+          }
+        },
+        "type": "ia.input.text-field"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "justify": "space-between",
+      "style": {
+        "gap": 10,
+        "max-height": "35px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

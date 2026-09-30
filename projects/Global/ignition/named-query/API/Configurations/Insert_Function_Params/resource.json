@@ -1,0 +1,65 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "{}",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "535f53e549a2654dc106db051e082428d1f29f40728a1279436155432542e7e3",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2026-06-22T10:03:02Z"
+    },
+    "parameters": [
+      {
+        "type": "Database",
+        "identifier": "database",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "data_type",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "function_id",
+        "sqlType": 2
+      },
+      {
+        "type": "Parameter",
+        "identifier": "username",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "required_param",
+        "sqlType": 6
+      },
+      {
+        "type": "Parameter",
+        "identifier": "param_name",
+        "sqlType": 7
+      }
+    ]
+  }
+}

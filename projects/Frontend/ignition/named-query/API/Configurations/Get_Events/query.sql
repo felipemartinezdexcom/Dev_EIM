@@ -1,0 +1,1 @@
+SELECT * FROM [API].TransactionsLog  WHERE [timestamp] BETWEEN :starttime AND :endtime order by [timestamp] desc

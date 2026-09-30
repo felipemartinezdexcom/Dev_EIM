@@ -1,0 +1,95 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "API_Configurations",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "f80849520db21d0880b5afd6c758f42088801016f0a28474fad2d487da2ce39a",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2026-06-24T13:13:16Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "result",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "data",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "message",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "sqltiming",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "exectiming",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "simulatorcall",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "simulatoruser",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "sys_interface",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "input_params",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "valid_for_prod",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "function_name",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "gateway_name",
+        "sqlType": 7
+      }
+    ]
+  }
+}

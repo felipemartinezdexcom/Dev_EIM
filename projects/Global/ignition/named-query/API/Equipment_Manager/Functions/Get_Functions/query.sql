@@ -1,0 +1,1 @@
+SELECT * FROM [API].FunctionsList where removed=0

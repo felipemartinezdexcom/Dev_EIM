@@ -1,0 +1,131 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 600
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Main_Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "path": "FMC_Screens/Templates/Main_Header"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Create Packaging Record"
+                },
+                "position": {
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "props": {
+                  "path": "FMC_Screens/Tab_Forms/Get Next Batch"
+                },
+                "type": "ia.display.view"
+              }
+            ],
+            "meta": {
+              "name": "Get Next Packaging Lot"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 20
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Get Next Batch"
+                },
+                "position": {
+                  "basis": "800px",
+                  "grow": 1
+                },
+                "props": {
+                  "path": "FMC_Screens/Tab_Forms/Create Packaging Record"
+                },
+                "type": "ia.display.view"
+              }
+            ],
+            "meta": {
+              "name": "Create Packaging Record"
+            },
+            "position": {
+              "tabIndex": 1
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "Set Lot Closed"
+            },
+            "position": {
+              "tabIndex": 2
+            },
+            "props": {
+              "path": "FMC_Screens/Tab_Forms/Set Lot Closed"
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {
+          "name": "TabContainer"
+        },
+        "position": {
+          "grow": 1
+        },
+        "propConfig": {
+          "props.currentTabIndex": {
+            "onChange": {
+              "enabled": null,
+              "script": "\t##close docks\n\tsystem.perspective.closeDock(\"BuildRecords\")\n\tsystem.perspective.closeDock(\"EditRecords\")"
+            }
+          }
+        },
+        "props": {
+          "menuStyle": {
+            "fontWeight": "700"
+          },
+          "menuType": "modern",
+          "tabSize": {
+            "width": 250
+          },
+          "tabs": [
+            "Get Next Packaging Lot",
+            "Create Packaging Record",
+            "Set Lot Closed"
+          ]
+        },
+        "type": "ia.container.tab"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "textTransform": "uppercase"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

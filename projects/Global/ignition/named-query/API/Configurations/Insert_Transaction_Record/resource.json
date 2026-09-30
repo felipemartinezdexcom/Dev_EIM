@@ -1,0 +1,100 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "{}",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "11ca992a94c287427e0b6be1d0101d3d72c009dfd9b6c87008f937549f91820b",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2026-09-14T12:45:57Z"
+    },
+    "parameters": [
+      {
+        "type": "Database",
+        "identifier": "database",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "result",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "data",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "message",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "sqltiming",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "exectiming",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "simulatorcall",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "simulatoruser",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "sys_interface",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "input_params",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "valid_for_prod",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "function_name",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "gateway_name",
+        "sqlType": 7
+      }
+    ]
+  }
+}

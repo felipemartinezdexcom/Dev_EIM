@@ -1,0 +1,1 @@
+SELECT * FROM [API].EquipmentFunctionAssignments where assignment_name=:assignment_name

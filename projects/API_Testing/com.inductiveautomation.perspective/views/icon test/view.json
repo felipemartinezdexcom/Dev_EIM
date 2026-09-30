@@ -1,0 +1,119 @@
+{
+  "custom": {},
+  "params": {
+    "data": {
+      "icon": "material/info",
+      "level": "info",
+      "message": "value",
+      "title": "value"
+    },
+    "value1": "14"
+  },
+  "propConfig": {
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.value1": {
+      "binding": {
+        "config": {
+          "path": "/root/Label.props.text"
+        },
+        "type": "property"
+      },
+      "paramDirection": "output",
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "basis": "253px"
+        },
+        "props": {
+          "path": "material/plumbing"
+        },
+        "type": "ia.display.icon"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "props": {
+          "text": "14"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Image"
+        },
+        "position": {
+          "basis": "82px"
+        },
+        "props": {
+          "fit": {
+            "mode": "fill"
+          },
+          "source": "/system/images/icons/database-ui-web-2-svgrepo-com.svg"
+        },
+        "type": "ia.display.image"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\timport random\n\t\n\trandom_val \u003d random.randint(1, 100)\n\tpayload\u003d{\"message\":str(random_val)}\n\tsystem.perspective.sendMessage(\"test1\", payload)"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "basis": "60px"
+        },
+        "props": {
+          "image": {
+            "height": 50,
+            "source": "/system/images/icons/database-ui-web-2-svgrepo-com.svg",
+            "width": 50
+          }
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "test1",
+          "pageScope": true,
+          "script": "\tself.getChild(\"Label\").props.text\u003dpayload[\u0027message\u0027]",
+          "sessionScope": true,
+          "viewScope": true
+        }
+      ]
+    },
+    "type": "ia.container.flex"
+  }
+}

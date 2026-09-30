@@ -1,0 +1,28 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "height": 102,
+          "width": 161,
+          "x": 317,
+          "y": 172
+        },
+        "props": {
+          "path": "material/error_outline"
+        },
+        "type": "ia.display.icon"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "type": "ia.container.coord"
+  }
+}

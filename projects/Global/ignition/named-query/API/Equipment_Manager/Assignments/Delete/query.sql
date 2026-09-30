@@ -1,0 +1,1 @@
+delete from [API].EquipmentFunctionAssignments where assignment_id=:assignment_id

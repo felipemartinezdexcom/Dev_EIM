@@ -1,0 +1,60 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "{}",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "ff0fa8ababe3cdf1ac17d7b61401adccd446f6440d0017c4c7823690a67873dd",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "admin",
+      "timestamp": "2026-09-14T12:47:12Z"
+    },
+    "parameters": [
+      {
+        "type": "Database",
+        "identifier": "database",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "created_by",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "equipment_group_id",
+        "sqlType": 3
+      },
+      {
+        "type": "Parameter",
+        "identifier": "function_group_id",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "assignment_name",
+        "sqlType": 7
+      }
+    ]
+  }
+}

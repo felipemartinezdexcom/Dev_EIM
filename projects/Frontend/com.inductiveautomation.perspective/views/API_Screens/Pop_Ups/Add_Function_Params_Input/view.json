@@ -1,0 +1,412 @@
+{
+  "custom": {},
+  "params": {
+    "function_id": "",
+    "function_name": "value"
+  },
+  "propConfig": {
+    "params.function_id": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.function_name": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 558,
+      "width": 897
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.params.data.title": {
+            "binding": {
+              "config": {
+                "expression": "\"Add Input Parameters\""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/add_circle",
+              "level": "popup",
+              "message": "value"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "text": "Select Function:",
+                  "textStyle": {
+                    "textAlign": "left"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Dropdown"
+                },
+                "position": {
+                  "basis": "36px"
+                },
+                "propConfig": {
+                  "props.options": {
+                    "binding": {
+                      "config": {
+                        "mode": "direct",
+                        "parameters": {
+                          "database": "{session.custom.EIM_Config_DB}"
+                        },
+                        "queryPath": "API/Configurations/Get_Functions_Dropdown",
+                        "returnFormat": "json"
+                      },
+                      "type": "query"
+                    }
+                  },
+                  "props.value": {
+                    "binding": {
+                      "config": {
+                        "path": "view.params.function_id"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "Effects/input_radious"
+                  }
+                },
+                "type": "ia.input.dropdown"
+              }
+            ],
+            "meta": {
+              "name": "Store Proc Dropdown"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "text": "Add Input Params:",
+                  "textStyle": {
+                    "textAlign": "left"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "children": [
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\t\n\t\n\tself.parent.parent.parent.getChild(\"FlexRepeater\").props.instances.append({\"dataType\":\"\",\"paramName\":\"\",\"required\":\"\"})"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "add",
+                      "tooltip": {
+                        "enabled": true,
+                        "text": "Add New Record"
+                      }
+                    },
+                    "position": {
+                      "basis": "40px"
+                    },
+                    "props": {
+                      "path": "material/add_box"
+                    },
+                    "type": "ia.display.icon"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\t\n\t\n\tself.parent.parent.parent.getChild(\"FlexRepeater\").props.instances.pop()"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "delete",
+                      "tooltip": {
+                        "text": "Delete Selected Row"
+                      }
+                    },
+                    "position": {
+                      "basis": "40px"
+                    },
+                    "propConfig": {
+                      "position.display": {
+                        "binding": {
+                          "config": {
+                            "path": ".../Table.props.selection.data"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\tselectedRow\u003dlen(self.parent.parent.getChild(\"Table\").props.selection.data)\n\tif selectedRow\u003d\u003d0:\n\t\treturn False\n\telse:\n\t\treturn True\n\n\t\t",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "path": "material/indeterminate_check_box"
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "meta": {
+                  "name": "Input Control"
+                },
+                "position": {
+                  "basis": "45px",
+                  "shrink": 0
+                },
+                "props": {
+                  "alignItems": "flex-start",
+                  "style": {
+                    "gap": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Input Params"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "FlexRepeater"
+            },
+            "position": {
+              "basis": "320px"
+            },
+            "propConfig": {
+              "props.instances": {
+                "onChange": {
+                  "enabled": null,
+                  "script": "\tself.session.custom.inputParams\u003dself.props.instances"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "instances": [
+                {
+                  "dataType": "",
+                  "paramName": "",
+                  "required": "YES"
+                }
+              ],
+              "path": "API_Screens/Templates/String_Entry",
+              "style": {
+                "gap": 3,
+                "marginLeft": 10,
+                "marginRight": 10
+              },
+              "useDefaultViewWidth": false
+            },
+            "type": "ia.display.flex-repeater"
+          },
+          {
+            "children": [
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tAPIConfigDB\u003dAPI.Variables.API_CONFIG_DB\n\tusername\u003dself.session.props.auth.user.userName\n\tfunction_id\u003dself.parent.parent.getChild(\"Store Proc Dropdown\").getChild(\"Dropdown\").props.value\n\tinputParams\u003dself.parent.parent.getChild(\"FlexRepeater\").props.instances\n\tall_fields_completed\u003dTrue\n\tfunction_selected\u003dTrue\n\tfunction_name\u003dself.view.params.function_name\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\t\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"material/info\",\n\t\t\t\t\t  \"title\": \"\",\n\t\t\t\t\t  \"level\": \"warning\",\n\t\t\t\t\t  \"message\": \"\"\n\t\t\t\t\t  }\n\t\t\t\t\t  }\n\t\n\t##check if all fields are completed\n\tfor item in inputParams:\n\t\tdataType,paramName,required\u003ditem.values()\n\t\t\n\t\tif paramName\u003d\u003d\"\" or paramName\u003d\u003dNone or dataType\u003d\u003d\"\" or dataType\u003d\u003dNone or required\u003d\u003d\"\" or required\u003d\u003dNone:\n\t\t\tall_fields_completed\u003dFalse\n\t\t\tbreak\n\t\telse:\n\t\t\tpass\n\t\n\tif function_id\u003d\u003d\"\" or function_id\u003d\u003dNone:\n\t\tfunction_selected\u003dFalse\n\t\n\tif all_fields_completed\u003d\u003dFalse or function_selected\u003d\u003dFalse:\n\t\tif all_fields_completed\u003d\u003dFalse:\n\t\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"You have one or more empty fields. Please make sure all parameter names and data types are provided.\"\n\t\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Missing Fields\"\n\t\telif function_selected\u003d\u003dFalse:\n\t\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"You must select a store procedure.\"\n\t\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Missing Store Procedure\"\n\t\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"MissingReqs\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\telse: \n\t\t\n\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"All the entry parameters were successfully added to the configuration file.\"\n\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Successful Configuration\"\n\t\tmessageboxparams[\u0027data\u0027][\"level\"]\u003d \"success\"\n\t\tmessageboxparams[\u0027data\u0027][\"icon\"]\u003d \"material/add_circle\"\n\t\t\n\t\tadded_params\u003d[]\n\t\t\n\t\tfor item in inputParams:\n\t\t\tdataType,paramName,required\u003ditem.values()\n\t\t\t\n\t\t\tparams\u003d{\"database\":APIConfigDB,\n\t\t\t\t\t\"param_name\": paramName ,\n\t\t\t\t\t\"function_id\": function_id,\n\t\t\t\t\t\"data_type\": dataType,\n\t\t\t\t\t\"required_param\": required,\n\t\t\t\t\t\"username\":username,\n\t\t\t\t \t\"database\":database\n\t\t\t\t\t}\n\t\t\tadded_params.append(params)\n\t\t\tsystem.db.execUpdate(\"API/Configurations/Insert_Function_Params\",params)\n\t\t\t\n\t\t\t\t##logEvent\n\t\tlogparams\u003d{\"username\":username,\n\t\t\t\t   \"event_type\":\"Add\",\n\t\t\t\t   \"before_change\":None,\n\t\t\t\t   \"after_change\":str(added_params),\n\t\t\t\t   \"description\":\"Added input parameters to function {0}\".format(function_name)}\n\t\tAPI.Functions.log_activity(logparams)\t\n\t\t\t\n\t\t\t\n\t\tsystem.perspective.closePopup(\"\")\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\tsystem.perspective.openPopup(\"MissingReqs\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\t\t"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Add Record"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Submit"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Close Dock"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Close"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "Buttons"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "justify": "center",
+              "style": {
+                "gap": 20,
+                "marginBottom": 20,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 20
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "Notifier"
+            },
+            "position": {
+              "basis": "320px",
+              "display": false
+            },
+            "props": {
+              "params": {
+                "data": {
+                  "icon": "material/info",
+                  "level": "warning",
+                  "message": "The selected stored procedure was already validated for production. No more changes allowed.",
+                  "title": "Unable to Modify"
+                }
+              },
+              "path": "API_Screens/Templates/Notifier"
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {
+          "name": "Wrapper"
+        },
+        "position": {
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": 20
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Effects/Fade-In Frames/Standard1 Margins/Box_Separation"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

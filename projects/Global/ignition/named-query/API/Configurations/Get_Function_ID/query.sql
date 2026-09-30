@@ -1,0 +1,1 @@
+select function_id from [API].FunctionsList where function_name=:function_name and database_name=:server_db_name and database_schema=:schema

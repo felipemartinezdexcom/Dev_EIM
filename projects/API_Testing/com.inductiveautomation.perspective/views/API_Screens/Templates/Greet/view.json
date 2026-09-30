@@ -1,0 +1,60 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 55,
+      "width": 184
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "50px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\"Hi \"+{session.props.auth.user.userName}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Tables/Col_Headers",
+            "marginRight": 5
+          },
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "basis": "70px"
+        },
+        "props": {
+          "color": "#ECEE3A",
+          "path": "material/supervised_user_circle"
+        },
+        "type": "ia.display.icon"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "type": "ia.container.flex"
+  }
+}

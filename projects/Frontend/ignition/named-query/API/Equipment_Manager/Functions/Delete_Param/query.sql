@@ -1,0 +1,1 @@
+delete from [API].FunctionParameters where param_id=:param_id

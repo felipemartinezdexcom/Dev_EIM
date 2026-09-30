@@ -1,0 +1,1 @@
+update [API].Equipment set assigned=:assigned where equipment_id=:equipment_id

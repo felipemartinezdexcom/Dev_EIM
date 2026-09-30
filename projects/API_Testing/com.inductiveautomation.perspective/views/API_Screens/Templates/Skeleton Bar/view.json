@@ -1,0 +1,21 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 36
+    }
+  },
+  "root": {
+    "meta": {
+      "name": "SkeletonBarRec"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "exchange/skeleton-loading/stylesheet-classes/skeleton-bar"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

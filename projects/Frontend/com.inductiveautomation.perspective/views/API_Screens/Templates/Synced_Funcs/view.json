@@ -1,0 +1,92 @@
+{
+  "custom": {},
+  "params": {
+    "funcname": "value",
+    "num": "value"
+  },
+  "propConfig": {
+    "params.funcname": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.num": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 35,
+      "width": 388
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "50px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.num"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Tables/Col_Headers"
+          },
+          "textStyle": {
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "FuncName"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.funcname"
+              },
+              "overlayOptOut": true,
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "enabled": false,
+          "style": {
+            "classes": "Effects/input_radious"
+          }
+        },
+        "type": "ia.input.text-field"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "style": {
+        "gap": 5,
+        "max-height": "35px"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

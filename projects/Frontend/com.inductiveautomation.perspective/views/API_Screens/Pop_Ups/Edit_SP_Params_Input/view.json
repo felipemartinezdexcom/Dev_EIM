@@ -1,0 +1,914 @@
+{
+  "custom": {},
+  "params": {
+    "sp_id": 1,
+    "sp_name": "value",
+    "update_insert": ""
+  },
+  "propConfig": {
+    "params.sp_id": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.sp_name": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.update_insert": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 595,
+      "width": 893
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.params.data.title": {
+            "binding": {
+              "config": {
+                "expression": "\"Edit Store Procedure: \"+{view.params.sp_name}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/settings",
+              "level": "popup",
+              "message": "value"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "L1"
+            },
+            "position": {
+              "basis": "32px"
+            },
+            "propConfig": {
+              "props.params.label": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Input Parameters\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "icon": "material/format_list_bulleted"
+              },
+              "path": "API_Screens/Templates/SubviewHeader"
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "label1"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "text": "Stored Procedure Name:",
+                  "textStyle": {
+                    "textAlign": "left"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Name"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.placeholder": {
+                    "binding": {
+                      "config": {
+                        "expression": "\"Enter \"+{parent.meta.name}"
+                      },
+                      "type": "expr"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "path": "view.params.sp_name"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "type": "ia.input.text-field"
+              },
+              {
+                "meta": {
+                  "name": "label2"
+                },
+                "position": {
+                  "display": false,
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "text": "Is Update/Insert:",
+                  "textStyle": {
+                    "textAlign": "left"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Dropdown"
+                },
+                "position": {
+                  "basis": "256px",
+                  "display": false
+                },
+                "propConfig": {
+                  "props.value": {
+                    "binding": {
+                      "config": {
+                        "path": "view.params.update_insert"
+                      },
+                      "transforms": [
+                        {
+                          "fallback": null,
+                          "inputType": "scalar",
+                          "mappings": [
+                            {
+                              "input": "YES",
+                              "output": 1
+                            },
+                            {
+                              "input": "NO",
+                              "output": 0
+                            }
+                          ],
+                          "outputType": "scalar",
+                          "type": "map"
+                        }
+                      ],
+                      "type": "property"
+                    },
+                    "onChange": {
+                      "enabled": null,
+                      "script": "\tnew_sp_name\u003dself.getSibling(\"Name\").props.text\n\tusername\u003dself.session.props.auth.user.userName\n\tsp_id\u003dself.view.params.sp_id\n\t\n\t\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"material/info\",\n\t\t  \"title\": \"\",\n\t\t  \"level\": \"\",\n\t\t  \"message\": \"\"}}\n\t\n\tif new_sp_name\u003d\u003dNone or new_sp_name\u003d\u003d\"\":\n\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"The Store Procedure Name field can not be empty.\"\n\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Notification\"\n\t\tmessageboxparams[\u0027data\u0027][\"level\"]\u003d \"info\"\n\t\n\t\tsystem.perspective.openPopup(\"msg1\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\t\n\telse:\n\t\tif currentValue.value\u003d\u003d1:\n\t\t\tupdate_insert\u003d\"YES\"\n\t\telse:\n\t\t\tupdate_insert\u003d\"NO\"\n\t\t\n\t\tparams\u003d{\u0027new_sp_name\u0027: new_sp_name, \u0027username\u0027: username, \"sp_id\":sp_id,\"update_insert\":update_insert}\n\t\tsystem.db.execUpdate(\"API/Configurations/Update_SP_Name\", params)\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\t\n\t\n\t"
+                    }
+                  }
+                },
+                "props": {
+                  "options": [
+                    {
+                      "label": "YES",
+                      "value": 1
+                    },
+                    {
+                      "label": "NO",
+                      "value": 0
+                    }
+                  ]
+                },
+                "type": "ia.input.dropdown"
+              }
+            ],
+            "meta": {
+              "name": "Name_Is_Upadate_Insert"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tnew_sp_name\u003dself.parent.parent.getChild(\"Name_Is_Upadate_Insert\").getChild(\"Name\").props.text\n\tusername\u003dself.session.props.auth.user.userName\n\tsp_id\u003dself.view.params.sp_id\n\tis_update_insert\u003dself.parent.parent.getChild(\"Name_Is_Upadate_Insert\").getChild(\"Dropdown\").props.value\n\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"material/info\",\n\t\t  \"title\": \"\",\n\t\t  \"level\": \"\",\n\t\t  \"message\": \"\"}}\n\t\n\tif new_sp_name\u003d\u003dNone or new_sp_name\u003d\u003d\"\":\n\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"The Store Procedure Name field can not be empty.\"\n\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Notification\"\n\t\tmessageboxparams[\u0027data\u0027][\"level\"]\u003d \"info\"\n\t\n\t\tsystem.perspective.openPopup(\"msg1\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\t\n\telse:\n\t\tif is_update_insert\u003d\u003d1:\n\t\t\tupdate_insert\u003d\"YES\"\n\t\telse:\n\t\t\tupdate_insert\u003d\"NO\"\n\t\t\t\n\t\tparams\u003d{\u0027new_sp_name\u0027: new_sp_name, \u0027username\u0027: username, \"sp_id\":sp_id,\"update_insert\":update_insert}\n\t\tsystem.db.execUpdate(\"API/Configurations/Update_SP_Name\", params)\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\t\n\t\n\t"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Update"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Update Name"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "Name Update"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "justify": "center",
+              "style": {
+                "gap": 20,
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "L2"
+            },
+            "position": {
+              "basis": "32px"
+            },
+            "propConfig": {
+              "props.params.label": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Input Parameters\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "params": {
+                "icon": "material/format_list_bulleted"
+              },
+              "path": "API_Screens/Templates/SubviewHeader"
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Table"
+                },
+                "position": {
+                  "basis": "50%",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.data": {
+                    "binding": {
+                      "config": {
+                        "parameters": {
+                          "sp_id": "{view.params.sp_id}"
+                        },
+                        "queryPath": "API/Configurations/Get_Params_SP",
+                        "returnFormat": "json"
+                      },
+                      "type": "query"
+                    }
+                  }
+                },
+                "props": {
+                  "columns": [
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "param_id",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {},
+                        "title": ""
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": 150
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "param_name",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "ascending",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": 150
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "data_type",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": 150
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "required_param",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": 150
+                    }
+                  ],
+                  "headerStyle": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "pager": {
+                    "bottom": false
+                  },
+                  "rows": {
+                    "height": 50,
+                    "subview": {
+                      "viewPath": "API_Screens/Subviews/SP_Input_Params"
+                    },
+                    "subviewExpansionMode": "single"
+                  },
+                  "sortOrder": [
+                    "param_name"
+                  ],
+                  "style": {
+                    "marginBottom": 10
+                  }
+                },
+                "scripts": {
+                  "customMethods": [],
+                  "extensionFunctions": null,
+                  "messageHandlers": [
+                    {
+                      "messageType": "tablerefresh",
+                      "pageScope": true,
+                      "script": "\tself.refreshBinding(\u0027props.data\u0027)",
+                      "sessionScope": true,
+                      "viewScope": true
+                    }
+                  ]
+                },
+                "type": "ia.display.table"
+              },
+              {
+                "children": [
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\tsp_id\u003dself.view.params.sp_id\n\n\n\tparams\u003d{\"sp_id\":sp_id}\n\tsystem.perspective.openPopup(\"addSingleParam\", \"API_Screens/Pop_Ups/Add_single_SP_Params_Input\", params,  showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Add",
+                      "tooltip": {
+                        "enabled": true,
+                        "text": "Refresh Table Data"
+                      }
+                    },
+                    "position": {
+                      "basis": "40px"
+                    },
+                    "props": {
+                      "path": "material/add_box"
+                    },
+                    "type": "ia.display.icon"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\tdata\u003dself.parent.parent.getChild(\"Table\").props.selection.data\n\n\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"material/info\",\n\t\t\t  \"title\": \"\",\n\t\t\t  \"level\": \"\",\n\t\t\t  \"message\": \"\"}}\n\n\tif len(data)\u003d\u003d0:\n\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"You must select a row to delete.\"\n\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Notification\"\n\t\tmessageboxparams[\u0027data\u0027][\"level\"]\u003d \"warning\"\n\n\t\tsystem.perspective.openPopup(\"msg1\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\n\telse:\t\n\t\n\t\tparams\u003d{\"param_id\":data[0].param_id}\n\t\tsystem.db.execUpdate(\"API/Configurations/Delete_Param_From_SP\", params)\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Delete",
+                      "tooltip": {
+                        "enabled": true,
+                        "text": "Delete Selected SP"
+                      }
+                    },
+                    "position": {
+                      "basis": "40px"
+                    },
+                    "props": {
+                      "path": "material/indeterminate_check_box"
+                    },
+                    "type": "ia.display.icon"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\timport time\n\tdata\u003dself.parent.parent.getChild(\"Table\").props.selection.data\n\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"material/info\",\n\t\t\t  \"title\": \"\",\n\t\t\t  \"level\": \"\",\n\t\t\t  \"message\": \"\"}}\n\n\tif len(data)\u003d\u003d0:\n\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"You must select a row to open the edit pop up.\"\n\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Notification\"\n\t\tmessageboxparams[\u0027data\u0027][\"level\"]\u003d \"info\"\n\n\t\tsystem.perspective.openPopup(\"msg1\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\n\telse:\t\n\t\n\t\tparams\u003d{\"param_id\":data[0].param_id}\n\t\tsystem.perspective.openPopup(\"addSingleParam\", \"API_Screens/Pop_Ups/Edit_single_SP_Params_Input\", params,  showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\tpayload\u003d{\"param_name\":data[0].param_name,\n\t\t\t\t \"data_type\":data[0].data_type,\n\t\t\t\t \"required_param\": data[0].required_param}\n\t\ttime.sleep(.1)\n\t\tsystem.perspective.sendMessage(\"editParam\", payload,scope\u003d\u0027session\u0027)\n\t\t"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "edit selected row",
+                      "tooltip": {
+                        "enabled": true,
+                        "text": "Edit Selected Row"
+                      }
+                    },
+                    "position": {
+                      "basis": "40px"
+                    },
+                    "props": {
+                      "path": "material/settings"
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "meta": {
+                  "name": "Records Control"
+                },
+                "position": {
+                  "basis": "45px",
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Table"
+            },
+            "position": {
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Close"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Close"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "Buttons"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "justify": "center",
+              "style": {
+                "gap": 20,
+                "marginBottom": 20,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 20
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Wrapper"
+        },
+        "position": {
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": 20
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Effects/Fade-In Frames/Standard1 Margins/Box_Separation"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

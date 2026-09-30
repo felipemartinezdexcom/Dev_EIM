@@ -1,0 +1,110 @@
+{
+  "custom": {
+    "dbstatus": "Valid"
+  },
+  "params": {
+    "sp_id": "value"
+  },
+  "propConfig": {
+    "custom.dbstatus": {
+      "binding": {
+        "config": {
+          "path": "session.custom.dbstatus"
+        },
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "params.sp_id": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 55,
+      "width": 672
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "basis": "60px"
+        },
+        "props": {
+          "color": "#FF0000",
+          "path": "material/mood_bad"
+        },
+        "type": "ia.display.icon"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "50px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\"The Selected Stored Procedure is not Valid For Production.\""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "marginLeft": 10
+          },
+          "textStyle": {
+            "fontWeight": "900",
+            "textAlign": "left"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\t\n\t\n\tsp_id\u003dself.view.params.sp_id\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"material/info\",\n\t\t\t\t\t\t  \"title\": \"\",\n\t\t\t\t\t\t  \"level\": \"\",\n\t\t\t\t\t\t  \"message\": \"\"}}\n\n\n\t\t\n\tparameters\u003d{\"sp_id\":sp_id}\n\tresponse\u003dsystem.db.execUpdate(\"API/Configurations/Validate_SP\", parameters)\n\t\n\n\t\t\t\n\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"This Store Procedure is now ready for production calls.\"\n\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Validate Stored Procedure\"\n\tmessageboxparams[\u0027data\u0027][\"level\"]\u003d \"success\"\n\n\tsystem.perspective.sendMessage(\"refreshValidation\")\n\t\t\t\t\t\t\t  \n\tsystem.perspective.openPopup(\"msg1\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "basis": "80px"
+        },
+        "props": {
+          "style": {
+            "classes": "Buttons/Classic"
+          },
+          "text": "Validate Now"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "style": {
+        "classes": "Edges/Boxes_Radious Frames/Standard1"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

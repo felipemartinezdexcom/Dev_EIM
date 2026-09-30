@@ -1,0 +1,1 @@
+select sys_interface from [API].FunctionsList where function_id=:function_id

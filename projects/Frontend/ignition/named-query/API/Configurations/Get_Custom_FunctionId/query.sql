@@ -1,0 +1,1 @@
+select function_id from [API].FunctionsList where sys_interface='Custom Function' and function_name=:function_name 

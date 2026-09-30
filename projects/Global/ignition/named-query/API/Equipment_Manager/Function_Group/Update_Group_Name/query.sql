@@ -1,0 +1,1 @@
+update [API].FunctionGroups set function_group_name=:function_group_name where function_group_id=:function_group_id

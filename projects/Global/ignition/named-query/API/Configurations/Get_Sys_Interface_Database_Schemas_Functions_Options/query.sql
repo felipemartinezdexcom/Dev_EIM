@@ -1,0 +1,1 @@
+select distinct (function_name) as label from [API].FunctionsList where database_name=:database_name and database_schema=:database_schema

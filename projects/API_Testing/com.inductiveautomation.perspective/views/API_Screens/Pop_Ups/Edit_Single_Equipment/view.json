@@ -1,0 +1,260 @@
+{
+  "custom": {},
+  "params": {
+    "row_data": "value"
+  },
+  "propConfig": {
+    "params.row_data": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 262,
+      "width": 703
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/settings",
+              "level": "popup",
+              "message": "value",
+              "title": "Edit  Equipment"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "label1"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\u0027Equipment Name: \u0027"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "classes": "Fonts_Sizes/Component_Label"
+              },
+              "textStyle": {
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "eq_name"
+            },
+            "position": {
+              "basis": "300px",
+              "grow": 2
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.params.row_data[0].equipment_name"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "classes": "Fonts_Sizes/Component_Label",
+                "min-width": "180px"
+              }
+            },
+            "type": "ia.input.text-field"
+          },
+          {
+            "meta": {
+              "name": "label2"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "Fonts_Sizes/Component_Label"
+              },
+              "text": "Status:",
+              "textStyle": {
+                "textAlign": "right"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Dropdown"
+            },
+            "propConfig": {
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "path": "view.params.row_data[0].active"
+                  },
+                  "transforms": [
+                    {
+                      "fallback": 0,
+                      "inputType": "scalar",
+                      "mappings": [
+                        {
+                          "input": true,
+                          "output": 1
+                        }
+                      ],
+                      "outputType": "scalar",
+                      "type": "map"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Active",
+                  "value": 1
+                },
+                {
+                  "label": "Inactive",
+                  "value": 0
+                }
+              ]
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "Control"
+        },
+        "position": {
+          "basis": "35px",
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "gap": 10,
+            "marginLeft": 10,
+            "marginRight": 10
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tusername\u003dself.session.props.auth.user.userName\t\n\tequipment_id\u003dself.view.params.row_data[0].equipment_id\n\tequipment_name\u003dself.parent.parent.getChild(\"Control\").getChild(\"eq_name\").props.text\n\tactive\u003dself.parent.parent.getChild(\"Control\").getChild(\"Dropdown\").props.value\n\trow_data\u003dself.view.params.row_data\n\t\n\t\n\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"material/info\",\n\t\t  \"title\": \"\",\n\t\t  \"level\": \"\",\n\t\t  \"message\": \"\"}}\n\t\n\tif equipment_name\u003d\u003dNone or equipment_name\u003d\u003d\"\":\n\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"The equipment name cannot be an empty string. Please enter a proper equipment name.\"\n\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Notification\"\n\t\tmessageboxparams[\u0027data\u0027][\"level\"]\u003d \"info\"\n\t\n\t\tsystem.perspective.openPopup(\"msg1\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\t\n\telse:\n\t\tparams\u003d{\u0027equipment_id\u0027: equipment_id,\n\t\t\t\t\u0027equipment_name\u0027: equipment_name,\n\t\t\t\t\u0027active\u0027: active}\n\t\tsystem.db.execUpdate(\"API/Equipment_Manager/Equipment/Update_Equipment\", params)\n\t\t\n\t\t##logEvent\n\t\tlogparams\u003d{\"username\":username,\n\t\t\t   \"event_type\":\"Edit\",\n\t\t\t   \"before_change\":str(row_data)[17:],\n\t\t\t   \"after_change\":str(params),\n\t\t\t   \"description\":\"Edit single equipment\"}\n\t\tAPI.Functions.log_activity(logparams)\n\t\t\n\t\t\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\tsystem.perspective.closePopup(\"\")"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Add Record"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "Update"
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Close Dock"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "Close"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "Buttons"
+        },
+        "position": {
+          "basis": "35px",
+          "shrink": 0
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "gap": 20,
+            "marginBottom": 20,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 20
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "justify": "space-between",
+      "style": {
+        "classes": "Edges/Boxes_Radious Frames/Standard1 Margins/Box_Separation"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

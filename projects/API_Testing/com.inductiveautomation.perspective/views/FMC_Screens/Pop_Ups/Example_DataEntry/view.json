@@ -1,0 +1,105 @@
+{
+  "custom": {
+    "TransactionCount": 20
+  },
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 268,
+      "width": 563
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "props": {
+          "text": "Sample Data Entry"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "TextArea"
+        },
+        "position": {
+          "basis": "160px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\u0027\"0011311\", \"0011312\", \"0011313\", \"0011314\", \"0011315\", \"0011316\", \"0011317\", \"0011318\", \"0011319\", \"0011320\", \"0011321\", \"0011322\", \"0011323\", \"0011324\", \"0011325\", \"0011326\", \"0011327\", \"0011328\", \"0011329\", \"0011330\"\u0027\r\n"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "type": "ia.input.text-area"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "basis": "31px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\"****Do not include [,(,{\""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Control/Control/Info_Message Control/Control/Labels"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "basis": "31px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\u0027****Each transaction Id must be enclosed in quotes EX: \"0011329\"\u0027"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Control/Control/Info_Message Control/Control/Labels"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Control/Control/Comp_Padding"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

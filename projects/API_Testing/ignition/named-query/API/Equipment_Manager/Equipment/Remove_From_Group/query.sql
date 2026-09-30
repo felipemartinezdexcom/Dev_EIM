@@ -1,0 +1,1 @@
+delete from [API].EquipmentGroupList where equipment_id=:equipment_id

@@ -1,0 +1,1 @@
+update [API].EquipmentGroups set equipment_group_name=:equipment_group_name where equipment_group_id=:equipment_group_id

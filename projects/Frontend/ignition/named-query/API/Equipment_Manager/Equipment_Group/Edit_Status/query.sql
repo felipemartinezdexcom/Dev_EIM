@@ -1,0 +1,1 @@
+update [API].EquipmentGroups set  active=:status where equipment_group_id=:equipment_group_id

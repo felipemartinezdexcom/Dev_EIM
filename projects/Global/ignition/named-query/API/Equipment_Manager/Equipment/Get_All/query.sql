@@ -1,0 +1,1 @@
+SELECT * FROM [API].Equipment where removed=0 

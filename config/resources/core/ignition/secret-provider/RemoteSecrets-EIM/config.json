@@ -1,0 +1,9 @@
+{
+  "profile": {
+    "type": "remote"
+  },
+  "settings": {
+    "targetProvider": "EIM-Secrets",
+    "targetServer": "guw22dscadea001"
+  }
+}

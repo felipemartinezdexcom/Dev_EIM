@@ -1,0 +1,158 @@
+{
+  "custom": {},
+  "params": {
+    "data": {
+      "icon": "material/info",
+      "level": "info",
+      "message": "value",
+      "title": "value"
+    }
+  },
+  "propConfig": {
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 265,
+      "width": 399
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.params.data.icon": {
+            "binding": {
+              "config": {
+                "path": "view.params.data.icon"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.data.level": {
+            "binding": {
+              "config": {
+                "path": "view.params.data.level"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.data.title": {
+            "binding": {
+              "config": {
+                "path": "view.params.data.title"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "data": {
+              "message": "value"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Icon"
+            },
+            "position": {
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "animation": "1.5s linear infinite spinner",
+                "border": "solid 10px #cfd0d1",
+                "borderBottomColor": "#1c87c9",
+                "borderRadius": "20%",
+                "height": "25px",
+                "marginBottom": 10,
+                "marginTop": 10,
+                "width": "25px"
+              }
+            },
+            "type": "ia.display.icon"
+          }
+        ],
+        "meta": {
+          "name": "Loader"
+        },
+        "position": {
+          "basis": "70px",
+          "shrink": 0
+        },
+        "props": {
+          "alignItems": "center",
+          "direction": "column"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "TextArea"
+            },
+            "position": {
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.params.data.message"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.input.text-area"
+          }
+        ],
+        "meta": {
+          "name": "Content"
+        },
+        "position": {
+          "basis": "160px",
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "justify": "space-around"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Effects/Fade-In Frames/Standard1"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

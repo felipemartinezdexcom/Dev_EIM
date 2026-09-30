@@ -1,0 +1,1 @@
+insert into [API].FunctionGroupList (function_group_id, function_id) values (:function_group_id,:function_id)

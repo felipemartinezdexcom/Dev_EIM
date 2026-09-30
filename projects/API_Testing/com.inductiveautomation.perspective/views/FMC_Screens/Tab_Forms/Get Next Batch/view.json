@@ -1,0 +1,1102 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 1047,
+      "width": 2000
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"Username\").getChild(\"TextField\").props.text\u003d\"\"\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"SWName1\").getChild(\"TextField\").props.text\u003d\"\"\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"SWRev1\").getChild(\"TextField\").props.text\u003d\"\"\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"SWName2\").getChild(\"TextField\").props.text\u003d\"\"\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"SWRev2\").getChild(\"TextField\").props.text\u003d\"\"\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"OPCRouterSWName\").getChild(\"TextField\").props.text\u003d\"\"\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"OPCRouterSWRev\").getChild(\"TextField\").props.text\u003d\"\"\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"CasePackerVMSProgramSWName\").getChild(\"TextField\").props.text\u003d\"\"\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"CasePackerVMSProgramSWRev\").getChild(\"TextField\").props.text\u003d\"\"\n\t"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Clear Fields"
+            },
+            "position": {
+              "basis": "300px"
+            },
+            "props": {
+              "image": {
+                "icon": {
+                  "path": "material/delete"
+                }
+              },
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "Clear Fields"
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\timport time\n\t##Reset Warning Labels\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"UserName\").position.display\u003dFalse\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"Cartoner SWName\").position.display\u003dFalse\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"Cartoner SWRev\").position.display\u003dFalse\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"DB SWName\").position.display\u003dFalse\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"DB SWRev\").position.display\u003dFalse\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"OPC SWName\").position.display\u003dFalse\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"OPC SWRev\").position.display\u003dFalse\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"Case SWName\").position.display\u003dFalse\n\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"Case SWRev\").position.display\u003dFalse\n\t\n\t\n\t##Gather Data\n\tUserName\u003dself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"Username\").getChild(\"TextField\").props.text\n\tCartonerSWName\u003dself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"SWName1\").getChild(\"TextField\").props.text\n\tCartonerSWRev\u003dself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"SWRev1\").getChild(\"TextField\").props.text\n\tDBSWName\u003dself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"SWName2\").getChild(\"TextField\").props.text\n\tDBSWRev\u003dself.parent.parent.getChild(\"Wrapper\").getChild(\"Col1\").getChild(\"SWRev2\").getChild(\"TextField\").props.text\n\tOPCSWName\u003dself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"OPCRouterSWName\").getChild(\"TextField\").props.text\n\tOPCSWRev\u003dself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"OPCRouterSWRev\").getChild(\"TextField\").props.text\n\tCaseSWName\u003dself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"CasePackerVMSProgramSWName\").getChild(\"TextField\").props.text\n\tCaseSWRev\u003dself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"CasePackerVMSProgramSWRev\").getChild(\"TextField\").props.text\n\t\n\t##Data Inspection\n\tInspectionResult\u003d[0,0,0,0,0,0,0,0,0]\n\t\n\tif UserName\u003d\u003dNone or UserName\u003d\u003d\"\":\n\t\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"UserName\").position.display\u003dTrue\n\telse:\n\t\tInspectionResult[0]\u003d1\n\tif CartonerSWName\u003d\u003dNone or CartonerSWName\u003d\u003d\"\":\n\t\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"Cartoner SWName\").position.display\u003dTrue\n\telse:\n\t\tInspectionResult[1]\u003d1\n\tif CartonerSWRev\u003d\u003dNone or CartonerSWRev\u003d\u003d\"\":\n\t\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"Cartoner SWRev\").position.display\u003dTrue\n\telse:\n\t\tInspectionResult[2]\u003d1\n\tif DBSWName\u003d\u003dNone or DBSWName\u003d\u003d\"\":\n\t\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"DB SWName\").position.display\u003dTrue\n\telse:\n\t\tInspectionResult[3]\u003d1\n\tif DBSWRev\u003d\u003dNone or DBSWRev\u003d\u003d\"\":\n\t\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"DB SWRev\").position.display\u003dTrue\n\telse:\n\t\tInspectionResult[4]\u003d1\n\tif OPCSWName\u003d\u003dNone or OPCSWName\u003d\u003d\"\":\n\t\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"OPC SWName\").position.display\u003dTrue\n\telse:\n\t\tInspectionResult[5]\u003d1\n\tif OPCSWRev\u003d\u003dNone or OPCSWRev\u003d\u003d\"\":\n\t\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"OPC SWRev\").position.display\u003dTrue\n\telse:\n\t\tInspectionResult[6]\u003d1\n\tif CaseSWName\u003d\u003dNone or CaseSWName\u003d\u003d\"\":\n\t\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"Case SWName\").position.display\u003dTrue\n\telse:\n\t\tInspectionResult[7]\u003d1\n\tif CaseSWRev\u003d\u003dNone or CaseSWRev\u003d\u003d\"\":\n\t\tself.parent.parent.getChild(\"Wrapper\").getChild(\"Col2\").getChild(\"Warning Labels\").getChild(\"Case SWRev\").position.display\u003dTrue\n\telse:\n\t\tInspectionResult[8]\u003d1\t\t\n\t\t\n\tif 0 not in InspectionResult:\n\t\t\n\t\t##laod tags\n\t\tloadPaths\u003d[\"[FMC1]FMC/Functions/GetNextBatch/ToEIM/CartonerVMSProgramSWName\",\n\t\t\"[FMC1]FMC/Functions/GetNextBatch/ToEIM/CartonerVMSProgramSWRev\",\n\t\t\"[FMC1]FMC/Functions/GetNextBatch/ToEIM/CasePackerVMSProgramSWName\",\n\t\t\"[FMC1]FMC/Functions/GetNextBatch/ToEIM/CasePackerVMSProgramSWRev\",\n\t\t\"[FMC1]FMC/Functions/GetNextBatch/ToEIM/LMSDatabaseSWName\",\n\t\t\"[FMC1]FMC/Functions/GetNextBatch/ToEIM/LMSDatabaseSWRev\",\n\t\t\"[FMC1]FMC/Functions/GetNextBatch/ToEIM/OPCRouterSWName\",\n\t\t\"[FMC1]FMC/Functions/GetNextBatch/ToEIM/OPCRouterSWRev\",\n\t\t\"[FMC1]FMC/Functions/GetNextBatch/ToEIM/UserID\"]\n\t\tloadValues\u003d[CartonerSWName,\n\t\tCartonerSWRev,\n\t\tCaseSWName,\n\t\tCaseSWRev,\n\t\tDBSWName,\n\t\tDBSWRev,\n\t\tOPCSWName,\n\t\tOPCSWRev,\n\t\tUserName]\n\t\tsystem.tag.writeBlocking(loadPaths, loadValues)\n\t\t\n\t\tfunction\u003d\"GetNextBatch\"\n\t\t##trigger  tag\n\t\ttriggerPaths\u003d[\"[FMC1]FMC/Functions/\"+function+\"//Handshaking/cStartCall\"]\n\t\t##reset\n\t\tsystem.tag.writeBlocking(triggerPaths, [0])\n\t\t#time.sleep(1)\n\t\t##trigger\n\t\tsystem.tag.writeBlocking(triggerPaths, [1])\n\t\t\n\t\t\n\t\tsystem.perspective.openPopup(\"Pop1\", \"FMC_Screens/Pop_Ups/Results Box\",showCloseIcon\u003dFalse,title\u003d\"\",\n\t\tresizable\u003dTrue,modal\u003dTrue,draggable\u003dFalse,overlayDismiss\u003dTrue,params\u003d{\"Type\":\"Get Next Batch\",\"Result\":True,\"Function\":function})\n\t\n"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Save"
+            },
+            "position": {
+              "basis": "300px"
+            },
+            "props": {
+              "image": {
+                "icon": {
+                  "path": "material/save"
+                }
+              },
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "Get Next Batch"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "Buttons"
+        },
+        "position": {
+          "basis": "60px",
+          "shrink": 0
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "classes": "Edges/Boxes_Radious Headers/Subview_Headers_Background",
+            "gap": 20,
+            "marginBottom": 20,
+            "padding": 10
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Spacer"
+                    },
+                    "position": {
+                      "basis": "270px"
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Mandatory_Signs"
+                      },
+                      "text": "****** All the fields are mandatory",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "Mandatory Label"
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "expression": "{parent.meta.name}+\u0027:\u0027"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "400px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "placeholder": "Enter Username",
+                      "style": {
+                        "textTransform": "uppercase"
+                      }
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "Username"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30,
+                    "marginTop": 20
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "230px"
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "Cartoner VMS Program:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Spacer"
+                    },
+                    "position": {
+                      "basis": "300px"
+                    },
+                    "props": {
+                      "text": "\n",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "Cartoner Label"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "SWName:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "400px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "placeholder": "Enter Cartoner VMS Program SWName",
+                      "style": {
+                        "textTransform": "uppercase"
+                      },
+                      "text": "SW14776"
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "SWName1"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "SWRev:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "400px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "placeholder": "Enter Cartoner VMS Program SWRev",
+                      "style": {
+                        "textTransform": "uppercase"
+                      },
+                      "text": "1.0.0.0"
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "SWRev1"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "230px"
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "LMS Database:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Spacer"
+                    },
+                    "position": {
+                      "basis": "300px"
+                    },
+                    "props": {
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "LMS Database"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "SWName:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "400px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "placeholder": "Enter LMS Database SWName",
+                      "style": {
+                        "textTransform": "uppercase"
+                      },
+                      "text": "SW14775"
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "SWName2"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "SWRev:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "400px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "placeholder": "Enter LMS Database SWRev",
+                      "style": {
+                        "textTransform": "uppercase"
+                      },
+                      "text": "1.0.0.0"
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "SWRev2"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Col1"
+            },
+            "position": {
+              "basis": "600px",
+              "grow": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 20,
+                "paddingRight": 20
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Spacer"
+                    },
+                    "position": {
+                      "basis": "270px"
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Mandatory_Signs"
+                      },
+                      "text": "****** All the fields are mandatory",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "Mandatory Label",
+                  "visible": false
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "230px"
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "Opc Routers:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Spacer"
+                    },
+                    "position": {
+                      "basis": "300px"
+                    },
+                    "props": {
+                      "text": "\n",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "OPC Label"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "SWName:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "400px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "placeholder": "Enter OPC Routers SWName",
+                      "style": {
+                        "textTransform": "uppercase"
+                      },
+                      "text": "SW14772"
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "OPCRouterSWName"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30
+                  },
+                  "text": "Col2:"
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "SWRev:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "400px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "placeholder": "Enter OPC Routers SWRev",
+                      "style": {
+                        "textTransform": "uppercase"
+                      },
+                      "text": "1.0.0.0"
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "OPCRouterSWRev"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "230px"
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "Case Packer VMS Program:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Spacer"
+                    },
+                    "position": {
+                      "basis": "300px"
+                    },
+                    "props": {
+                      "text": "\n",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "Case Packer Label"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "SWName:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "400px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "placeholder": "Case Packer VMS Program SWName",
+                      "style": {
+                        "textTransform": "uppercase"
+                      },
+                      "text": "SW14771"
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "CasePackerVMSProgramSWName"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Control/Control/Labels"
+                      },
+                      "text": "SWRev:",
+                      "textStyle": {
+                        "textAlign": "right"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "400px",
+                      "grow": 1
+                    },
+                    "props": {
+                      "placeholder": "Case Packer VMS Program SWRev",
+                      "style": {
+                        "textTransform": "uppercase"
+                      },
+                      "text": "1.0.0.0"
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "CasePackerVMSProgramSWRev"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 30,
+                    "marginBottom": 20
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "UserName"
+                    },
+                    "position": {
+                      "display": false
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "****The Username field can\u0027t be empty.",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Cartoner SWName"
+                    },
+                    "position": {
+                      "display": false
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "****The Cartoner VMS Program SWName field can\u0027t be empty.",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Cartoner SWRev"
+                    },
+                    "position": {
+                      "display": false
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "****The Cartoner VMS Program SWRev field can\u0027t be empty.",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "DB SWName"
+                    },
+                    "position": {
+                      "display": false
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "****The LMS Database SWName can\u0027t be empty.",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "DB SWRev"
+                    },
+                    "position": {
+                      "display": false
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "****The LMS Database SWRev can\u0027t be empty.",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "OPC SWName"
+                    },
+                    "position": {
+                      "display": false
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "****The OPC Routers SWName field can\u0027t be empty.",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "OPC SWRev"
+                    },
+                    "position": {
+                      "display": false
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "****THe OPC Routers SWRev field can\u0027t be empty.",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Case SWName"
+                    },
+                    "position": {
+                      "display": false
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "****The Case Packer VMS Program SWName can\u0027t be empty.",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Case SWRev"
+                    },
+                    "position": {
+                      "display": false
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "****The Case Packer VMS Program SWRev can\u0027t be empty.",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "Warning Labels"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "classes": "Fonts_Sizes/Warning_Labels",
+                    "gap": 10,
+                    "marginBottom": 20,
+                    "paddingLeft": 85
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Col2"
+            },
+            "position": {
+              "basis": "600px",
+              "grow": 1
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 20,
+                "marginRight": 20
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Wrapper"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "gap": 20
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Frames/Standard1"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

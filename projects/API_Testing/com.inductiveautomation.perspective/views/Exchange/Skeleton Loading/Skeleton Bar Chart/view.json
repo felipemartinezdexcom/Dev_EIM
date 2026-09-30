@@ -1,0 +1,125 @@
+{
+  "custom": {
+    "stylePath": "exchange/skeleton-loading/stylesheet-classes/skeleton-bar"
+  },
+  "params": {},
+  "propConfig": {
+    "custom.stylePath": {
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 279,
+      "width": 386
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "BarChart"
+        },
+        "position": {
+          "basis": "404px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.elements[0].style.classes": {
+            "binding": {
+              "config": {
+                "path": "view.custom.stylePath"
+              },
+              "type": "property"
+            }
+          },
+          "props.elements[1].style.classes": {
+            "binding": {
+              "config": {
+                "path": "view.custom.stylePath"
+              },
+              "type": "property"
+            }
+          },
+          "props.elements[2].style.classes": {
+            "binding": {
+              "config": {
+                "path": "view.custom.stylePath"
+              },
+              "type": "property"
+            }
+          },
+          "props.elements[3].style.classes": {
+            "binding": {
+              "config": {
+                "path": "view.custom.stylePath"
+              },
+              "type": "property"
+            }
+          },
+          "props.elements[4].style.classes": {
+            "binding": {
+              "config": {
+                "path": "view.custom.stylePath"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "elements": [
+            {
+              "d": "M0,90 L0,0 L15,0 L15,90 Z",
+              "name": "bar1",
+              "style": {},
+              "transform": "translate(10,100) scale(1,-1)",
+              "type": "path"
+            },
+            {
+              "d": "M0,70 L0,0 L15,0 L15,70 Z",
+              "name": "bar2",
+              "style": {},
+              "transform": "translate(35,100) scale(1,-1)",
+              "type": "path"
+            },
+            {
+              "d": "M0,50 L0,0 L15,0 L15,50 Z",
+              "name": "bar3",
+              "style": {},
+              "transform": "translate(60,100) scale(1,-1)",
+              "type": "path"
+            },
+            {
+              "d": "M0,80 L0,0 L15,0 L15,80 Z",
+              "name": "bar4",
+              "style": {},
+              "transform": "translate(85,100) scale(1,-1)",
+              "type": "path"
+            },
+            {
+              "d": "M0,40 L0,0 L15,0 L15,40 Z",
+              "name": "bar5",
+              "style": {},
+              "transform": "translate(110,100) scale(1,-1)",
+              "type": "path"
+            }
+          ],
+          "preserveAspectRatio": "xMinYMin",
+          "style": {
+            "overflow": "visible"
+          },
+          "viewBox": "0 0 140 100"
+        },
+        "type": "ia.shapes.svg"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "justify": "flex-end"
+    },
+    "type": "ia.container.flex"
+  }
+}

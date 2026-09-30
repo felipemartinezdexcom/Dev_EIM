@@ -1,0 +1,177 @@
+{
+  "custom": {},
+  "params": {
+    "data": "value",
+    "function_id": "",
+    "function_name": "value"
+  },
+  "propConfig": {
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.function_id": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.function_name": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 264,
+      "width": 366
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/delete",
+              "level": "error",
+              "message": "",
+              "title": "Delete Function"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "TextArea"
+            },
+            "position": {
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Are you sure you want to delete the selected function: \"+ {view.params.function_name}+\"? Once deleted, all the input parameters assigned to this function will also be removed in cascade.\""
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.input.text-area"
+          }
+        ],
+        "meta": {
+          "name": "Content"
+        },
+        "position": {
+          "basis": "160px",
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "justify": "space-around"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tusername\u003dself.session.props.auth.user.userName\n\tfunction_id\u003dself.view.params.function_id\n\trow\u003dself.view.params.data\n\tfunction_name\u003dself.view.params.function_name\n\t\n\tparams\u003d{\"function_id\":function_id}\n\tsystem.db.execUpdate(\"API/Configurations/Delete_Function\", params)\n\tsystem.db.execUpdate(\"API/Configurations/Delete_Param_Function\", params)\n\n\t\n\t##logEvent\n\n\t\n\tnew_row\u003d{\"function_name\":row[\u0027function_name\u0027],\n\t\t\t\"sys_interface\":row[\u0027sys_interface\u0027],\n\t\t\t\"custom_function_name\":row[\u0027custom_function_name\u0027],\n\t\t\t\"database_name\":row[\u0027database_name\u0027],\n\t\t\t\"database_schema\":row[\u0027database_schema\u0027]\n\t\t\t}\n\t\n\t\n\tlogparams\u003d{\"username\":username,\n\t\t\t   \"event_type\":\"Delete\",\n\t\t\t   \"before_change\":str(new_row),\n\t\t\t   \"after_change\":None,\n\t\t\t   \"description\":\"Deleted function {0}\".format(function_name)}\n\tAPI.Functions.log_activity(logparams)\n\t\n\t\n\t\n\tsystem.perspective.sendMessage(\"tablerefresh\")\n\tsystem.perspective.closePopup(\"\")"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "yes"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "yes"
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "no"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "No"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "Buttons"
+        },
+        "position": {
+          "basis": "35px",
+          "shrink": 0
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "gap": 20,
+            "marginBottom": 20,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 20
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Effects/Fade-In Frames/Standard1"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

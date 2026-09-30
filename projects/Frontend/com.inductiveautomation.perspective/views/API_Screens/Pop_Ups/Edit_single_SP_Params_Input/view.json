@@ -1,0 +1,347 @@
+{
+  "custom": {
+    "function_name": "value"
+  },
+  "params": {
+    "rowData": "value"
+  },
+  "propConfig": {
+    "custom.function_name": {
+      "persistent": true
+    },
+    "params.rowData": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 253,
+      "width": 873
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/settings",
+              "level": "popup",
+              "message": "value",
+              "title": "Edit  Input Parameter"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "L2"
+        },
+        "position": {
+          "basis": "32px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.params.label": {
+            "binding": {
+              "config": {
+                "expression": "\"Input Parameter\""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "icon": "material/format_list_bulleted"
+          },
+          "path": "API_Screens/Templates/SubviewHeader"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "label1"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "Fonts_Sizes/Component_Label"
+              },
+              "text": "Parameter Name:",
+              "textStyle": {
+                "textAlign": "left"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "param name"
+            },
+            "position": {
+              "basis": "300px",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.params.rowData[\u0027param_name\u0027]"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "type": "ia.input.text-field"
+          },
+          {
+            "meta": {
+              "name": "label2"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "Fonts_Sizes/Component_Label"
+              },
+              "text": "Data Type: ",
+              "textStyle": {
+                "textAlign": "left"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Dropdown"
+            },
+            "position": {
+              "basis": "110px",
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "path": "view.params.rowData[\u0027data_type\u0027]"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "INT",
+                  "value": "INT"
+                },
+                {
+                  "label": "VARCHAR",
+                  "value": "VARCHAR"
+                },
+                {
+                  "label": "BIT",
+                  "value": "BIT"
+                },
+                {
+                  "label": "FLOAT",
+                  "value": "FLOAT"
+                }
+              ]
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "meta": {
+              "name": "label3"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "Fonts_Sizes/Component_Label"
+              },
+              "text": "Required: ",
+              "textStyle": {
+                "textAlign": "left"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Required"
+            },
+            "position": {
+              "basis": "100px",
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "path": "view.params.rowData[\u0027required_param\u0027]"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "YES",
+                  "value": 1
+                },
+                {
+                  "label": "NO",
+                  "value": 0
+                }
+              ]
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "Content"
+        },
+        "position": {
+          "basis": "35px",
+          "shrink": 0
+        },
+        "props": {
+          "justify": "space-between",
+          "style": {
+            "gap": 10,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 10
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "grow": 1
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tparam_name\u003dself.parent.parent.getChild(\"Content\").getChild(\"param name\").props.text\n\tdata_type\u003dself.parent.parent.getChild(\"Content\").getChild(\"Dropdown\").props.value\n\trequired_param\u003dself.parent.parent.getChild(\"Content\").getChild(\"Required\").props.value\n\tparam_id\u003dself.view.params.rowData[\u0027param_id\u0027]\n\tusername\u003dself.session.props.auth.user.userName\n\trow\u003dself.view.params.rowData\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\n\tparams\u003d{\u0027param_name\u0027: param_name,\n\t\t\t\u0027data_type\u0027: data_type,\n\t\t\t\u0027required_param\u0027: required_param,\n\t\t\t\u0027username\u0027: username,\n\t\t\t\u0027param_id\u0027: param_id,\n\t\t\t\"database\":database}\n\tsystem.db.execUpdate(\"API/Configurations/Edit_Single_Param\", params)\n\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\n\t##logEvent\n\tfunction_name\u003drow[\u0027function_name\u0027]\n\tparams[\u0027function_name\u0027]\u003dfunction_name\n\t\n\t##logEvent\n\tfiltered_selected_row\u003d[]\n\t\n\told_row\u003d{\"function_name\":row[\u0027function_name\u0027],\n\t\t\t\"param_name\":row[\u0027param_name\u0027],\n\t\t\t\"data_type\":row[\u0027data_type\u0027],\n\t\t\t\"required_param\":row[\u0027required_param\u0027],\n\t\t\t\"param_id\":row[\u0027param_id\u0027]\n\t\t\t}\n\n\t\n\tlogparams\u003d{\"username\":username,\n\t\t   \"event_type\":\"Edit\",\n\t\t   \"before_change\":str(old_row),\n\t\t   \"after_change\":str(params),\n\t\t   \"description\":\"Edit function parameter {0} from function {1}\".format(row[\u0027param_name\u0027],function_name)}\n\tAPI.Functions.log_activity(logparams)\n\t\t\t\n\t\n\t\n\t\n\tsystem.perspective.closePopup(\"\")"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Add Record"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "Update"
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Close Dock"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "Close"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "Buttons"
+        },
+        "position": {
+          "basis": "35px",
+          "shrink": 0
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "gap": 20,
+            "marginBottom": 20,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 20
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Frames/Standard1 Margins/Box_Separation"
+      }
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "pass_function_name",
+          "pageScope": true,
+          "script": "\tself.view.custom.function_name\u003dpayload[\u0027function_name\u0027]",
+          "sessionScope": true,
+          "viewScope": true
+        }
+      ]
+    },
+    "type": "ia.container.flex"
+  }
+}

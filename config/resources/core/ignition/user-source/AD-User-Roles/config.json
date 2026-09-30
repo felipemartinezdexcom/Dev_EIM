@@ -1,0 +1,70 @@
+{
+  "profile": {
+    "cacheValidationTimeout": 15,
+    "failoverMode": "HARD",
+    "lockoutAttempts": 5,
+    "lockoutEnabled": true,
+    "lockoutWindow": 15,
+    "scheduleRestricted": false,
+    "type": "ADEASY"
+  },
+  "settings": {
+    "allowAnon": false,
+    "authenticationType": "AUTO",
+    "automaticSuffix": true,
+    "connectTimeout": 0,
+    "connectionPassword": {
+      "data": {
+        "ciphertext": "ZSx0S6_0yIl3cCkkvA",
+        "encrypted_key": "yGo-PTAk-m9DAZ5Qo96WZcL2m1FLBNvfhfjNq9boWDw9pUAabFACrg",
+        "iv": "A9sYFq3wKpAeyNau",
+        "protected": "eyJhbGciOiJBMjU2S1ciLCJlbmMiOiJBMjU2R0NNIiwiaWF0IjoxNzg4MTc2ODg2LCJ6aXAiOiJERUYifQ",
+        "tag": "ES2op7TMan1omHkN78MQOA"
+      },
+      "type": "Embedded"
+    },
+    "connectionUsername": "IgnitionAD",
+    "domain": "ign_dexlab.net",
+    "emailAttribute": "mail",
+    "fullNameAttribute": "name",
+    "groupRoleAttribute": "memberOf",
+    "host1": "30.30.30.28",
+    "legacyNamingEnabled": false,
+    "nestedGroups": true,
+    "pageSize": 1000,
+    "phoneAttribute": "telephoneNumber",
+    "port1": 389,
+    "port2": 389,
+    "readTimeout": 60000,
+    "referral": "FOLLOW",
+    "roleIdAttribute": {
+      "binary": true,
+      "name": "objectGUID"
+    },
+    "roleNameAttribute": "cn",
+    "roleSearchBase": "OU\u003dEIM-Users_Roles,DC\u003dign_dexlab,DC\u003dnet",
+    "roleSearchFilter": "(objectClass\u003dgroup)",
+    "saslMechanism": "DIGEST-MD5 CRAM-MD5",
+    "saslMutualAuthentication": false,
+    "saslProtectionStrength": "high,medium,low",
+    "saslQualityOfProtection": "auth-conf,auth-int,auth",
+    "saslRealm": "",
+    "securityProtocol": "AUTO",
+    "smsAttribute": "mobile",
+    "ssoDomain": "",
+    "ssoEnabled": false,
+    "usePrefixAndSuffixForGatewayUser": true,
+    "useSSL": false,
+    "userIdAttribute": {
+      "binary": true,
+      "name": "objectGUID"
+    },
+    "userListFilter": "(\u0026(objectClass\u003duser)(!(objectClass\u003dcomputer)))",
+    "userNameAttribute": "sAMAccountName",
+    "userPrefix": "",
+    "userRoleAttribute": "memberOf",
+    "userSearchBase": "OU\u003dEIM-Users_Roles,DC\u003dign_dexlab,DC\u003dnet",
+    "userSearchFilter": "(\u0026(objectClass\u003duser)(sAMAccountName\u003d{0}))",
+    "userSuffix": ""
+  }
+}

@@ -1,0 +1,410 @@
+{
+  "custom": {},
+  "params": {
+    "selected_rows": "value"
+  },
+  "propConfig": {
+    "params.selected_rows": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 483,
+      "width": 450
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/edit",
+              "level": "popup",
+              "message": "value",
+              "title": "Edit Database Function"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Icon"
+                },
+                "position": {
+                  "basis": "30px"
+                },
+                "props": {
+                  "path": "material/info"
+                },
+                "type": "ia.display.icon"
+              },
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "50px",
+                  "grow": 1
+                },
+                "props": {
+                  "text": "This change will apply to all selected Functions. Be Aware."
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "Warning"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "expression": "{parent.meta.name}+ \" :\""
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "classes": "Fonts_Sizes/Component_Label"
+                          },
+                          "textStyle": {
+                            "textAlign": "left"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "meta": {
+                          "name": "Label_0"
+                        },
+                        "position": {
+                          "grow": 1
+                        },
+                        "props": {
+                          "style": {
+                            "classes": "Fonts_Sizes/Component_Label"
+                          },
+                          "text": "**",
+                          "textStyle": {
+                            "color": "#FF0000",
+                            "fontWeight": "900",
+                            "textAlign": "left"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Database Name"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "35px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.placeholder": {
+                        "binding": {
+                          "config": {
+                            "expression": "\"Enter \"+{parent.meta.name}"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "Database Name"
+                },
+                "position": {
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "expression": "{parent.meta.name}+ \" :\""
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "classes": "Fonts_Sizes/Component_Label"
+                          },
+                          "textStyle": {
+                            "textAlign": "left"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "meta": {
+                          "name": "Label_0"
+                        },
+                        "position": {
+                          "grow": 1
+                        },
+                        "props": {
+                          "style": {
+                            "classes": "Fonts_Sizes/Component_Label"
+                          },
+                          "text": "**",
+                          "textStyle": {
+                            "color": "#FF0000",
+                            "fontWeight": "900",
+                            "textAlign": "left"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Database Schema"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "35px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.placeholder": {
+                        "binding": {
+                          "config": {
+                            "expression": "\"Enter \"+{parent.meta.name}"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "Database Schema"
+                },
+                "position": {
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Database"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\timport time\n\tusername\u003dself.session.props.auth.user.userName\n\tselected_rows\u003dself.view.params.selected_rows\n\tdatabase_name\u003dself.parent.parent.getChild(\"Database\").getChild(\"Database Name\").getChild(\"TextField\").props.text\n\tdatabase_schema\u003dself.parent.parent.getChild(\"Database\").getChild(\"Database Schema\").getChild(\"TextField\").props.text\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\t\n\tif username\u003d\u003dNone:\n\t\tusername\u003d\"User-Interface\"\n\t\n\tupdated_data\u003d[]\n\tfor function in selected_rows:\n\t\t\n\t\n\t\tparameters\u003d{\"function_id\":function[\u0027function_id\u0027],\n\t\t\t\t\t\"username\":username,\n\t\t\t\t\t\"database_name\":database_name,\n\t\t\t\t\t\"database_schema\":database_schema,\n\t\t\t\t \t\"database\":database\n\t\t}\n\t\tsystem.db.execUpdate(\"API/Equipment_Manager/Functions/Update_DB_Function\", parameters)\n\t\tparameters[\u0027function_name\u0027]\u003dfunction[\u0027function_name\u0027]\n\t\tupdated_data.append(parameters)\n\n\t##logEvent\n\tfiltered_selected_rows\u003d[]\n\tfor row in selected_rows:\n\t\tnew_row\u003d{\"function_name\":row[\u0027function_name\u0027],\n\t\t\t\t\"database_name\":row[\u0027database_name\u0027],\n\t\t\t\t\"database_schema\":row[\u0027database_schema\u0027],\n\t\t\t\t\"fucntion_id\":row[\u0027function_id\u0027]\n\t\t\t\t}\n\t\tfiltered_selected_rows.append(new_row)\n\t\n\tlogparams\u003d{\"username\":username,\n\t\t\t   \"event_type\":\"Edit\",\n\t\t\t   \"before_change\":str(filtered_selected_rows),\n\t\t\t   \"after_change\":str(updated_data),\n\t\t\t   \"description\":\"edit multiple db functions\"}\n\tAPI.Functions.log_activity(logparams)\n\t\n\t\n\tsystem.perspective.sendMessage(\"tablerefresh\")\n\tsystem.perspective.closePopup(\"\")\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Add Record"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "propConfig": {
+                  "props.enabled": {
+                    "binding": {
+                      "config": {
+                        "struct": {
+                          "database_name": "{.../Database/Database Name/TextField.props.text}",
+                          "database_schema": "{.../Database/Database Schema/TextField.props.text}"
+                        },
+                        "waitOnAll": true
+                      },
+                      "transforms": [
+                        {
+                          "code": "\ttry:\n\t\tif len(value[\u0027database_name\u0027]) and len(value[\u0027database_schema\u0027])\u003e3:\n\t\t\treturn True\n\t\telse:\n\t\t\treturn False\n\texcept:\n\t\treturn False",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "expr-struct"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Update"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Close Dock"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Close"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "Buttons"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "justify": "center",
+              "style": {
+                "gap": 20,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 20
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Wrapper"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "justify": "space-evenly"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Frames/Standard1"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

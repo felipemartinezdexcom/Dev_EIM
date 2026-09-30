@@ -1,0 +1,702 @@
+{
+  "custom": {},
+  "params": {
+    "data": {
+      "icon": "material/info",
+      "level": "success",
+      "message": "value",
+      "title": "value"
+    }
+  },
+  "propConfig": {
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 483,
+      "width": 450
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/add_circle",
+              "level": "popup",
+              "message": "value",
+              "title": "Add Function"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "expression": "{parent.meta.name}+ \" :\""
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Label_0"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "**",
+                      "textStyle": {
+                        "color": "#FF0000",
+                        "fontWeight": "900",
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "Function Name"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "meta": {
+                  "name": "TextField"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.placeholder": {
+                    "binding": {
+                      "config": {
+                        "expression": "\"Enter \"+{parent.meta.name}"
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "Effects/input_radious"
+                  }
+                },
+                "type": "ia.input.text-field"
+              }
+            ],
+            "meta": {
+              "name": "Function Name"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "System Interface:",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Label_0"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "**",
+                      "textStyle": {
+                        "color": "#FF0000",
+                        "fontWeight": "900",
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "Sys Interface"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "meta": {
+                  "name": "Dropdown"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "options": [
+                    {
+                      "label": "Database",
+                      "value": "Database"
+                    },
+                    {
+                      "label": "Custom Function",
+                      "value": "Custom Function"
+                    }
+                  ],
+                  "style": {
+                    "classes": "Effects/input_radious"
+                  },
+                  "value": "Database"
+                },
+                "type": "ia.input.dropdown"
+              }
+            ],
+            "meta": {
+              "name": "Sys Interface"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "expression": "{parent.meta.name}+ \" :\""
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "classes": "Fonts_Sizes/Component_Label"
+                          },
+                          "textStyle": {
+                            "textAlign": "left"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "meta": {
+                          "name": "Label_0"
+                        },
+                        "position": {
+                          "grow": 1
+                        },
+                        "props": {
+                          "style": {
+                            "classes": "Fonts_Sizes/Component_Label"
+                          },
+                          "text": "**",
+                          "textStyle": {
+                            "color": "#FF0000",
+                            "fontWeight": "900",
+                            "textAlign": "left"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Database Name"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "35px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.placeholder": {
+                        "binding": {
+                          "config": {
+                            "expression": "\"Enter \"+{parent.meta.name}"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Effects/input_radious"
+                      }
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "Database Name"
+                },
+                "position": {
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "expression": "{parent.meta.name}+ \" :\""
+                              },
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "classes": "Fonts_Sizes/Component_Label"
+                          },
+                          "textStyle": {
+                            "textAlign": "left"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "meta": {
+                          "name": "Label_0"
+                        },
+                        "position": {
+                          "grow": 1
+                        },
+                        "props": {
+                          "style": {
+                            "classes": "Fonts_Sizes/Component_Label"
+                          },
+                          "text": "**",
+                          "textStyle": {
+                            "color": "#FF0000",
+                            "fontWeight": "900",
+                            "textAlign": "left"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Database Schema"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "basis": "35px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.placeholder": {
+                        "binding": {
+                          "config": {
+                            "expression": "\"Enter \"+{parent.meta.name}"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Effects/input_radious"
+                      }
+                    },
+                    "type": "ia.input.text-field"
+                  }
+                ],
+                "meta": {
+                  "name": "Database Schema"
+                },
+                "position": {
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Database"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "position.display": {
+                "binding": {
+                  "config": {
+                    "expression": "{../Sys Interface/Dropdown.props.value}\u003d\u0027Database\u0027"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\n\tusername\u003dself.session.props.auth.user.userName\n\tfunction_name\u003dself.parent.parent.getChild(\"Function Name\").getChild(\"TextField\").props.text\n\tsys_interface\u003dself.parent.parent.getChild(\"Sys Interface\").getChild(\"Dropdown\").props.value\n\tdatabase_name\u003dself.parent.parent.getChild(\"Database\").getChild(\"Database Name\").getChild(\"TextField\").props.text\n\tdatabase_schema\u003dself.parent.parent.getChild(\"Database\").getChild(\"Database Schema\").getChild(\"TextField\").props.text\n\tcustom_function_name\u003dself.parent.parent.getChild(\"Custom_Function\").getChild(\"Dropdown\").props.value\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"material/info\",\n\t\t\t\t\t\t  \"title\": \"\",\n\t\t\t\t\t\t  \"level\": \"\",\n\t\t\t\t\t\t  \"message\": \"\"}}\n\n\t#if function_name!\u003d None or function_name!\u003d\"\":\n\t\t\n\tparameters\u003d{\"function_name\":function_name,\n\t\t\t\t\"username\":username,\n\t\t\t\t\"sys_interface\":sys_interface,\n\t\t\t\t\"custom_function_name\":custom_function_name,\n\t\t\t\t\"database_name\":database_name,\n\t\t\t\t\"database_schema\":database_schema}\n\tresponse\u003dsystem.db.execUpdate(\"API/Configurations/Add_Function_No_Ret\", parameters)\n\t\n\tif response\u003d\u003d0:\n\t\t\n\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"Another store procedure with the same name was found in the config file. Please add a new name.\"\n\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Duplicated Store Procedure\"\n\t\tmessageboxparams[\u0027data\u0027][\"level\"]\u003d \"warning\"\n\n\t\t\n\t\t\t\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"msg1\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\t\t\n\telif response\u003d\u003d1:\n\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"The Store Produre ---{0}--- was successfully added to the config file.\".format(function_name)\n\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Store Procedure Added\"\n\t\tmessageboxparams[\u0027data\u0027][\"level\"]\u003d \"success\"\n\t\tmessageboxparams[\u0027data\u0027][\"icon\"]\u003d \"material/add_circle\"\n\n\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"msg1\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\tsystem.perspective.closePopup(\"ASP\")\n"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "Custom Function:",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Label_0"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "text": "**",
+                      "textStyle": {
+                        "color": "#FF0000",
+                        "fontWeight": "900",
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "meta": {
+                  "name": "Dropdown"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.options": {
+                    "binding": {
+                      "config": {
+                        "expression": "now(0)"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\timport types\n\t\n\t#import API.Function_Calls\n\t\n\tavailable_functions \u003d []\n\t\n\t# Get the class\n\tcls \u003d API.Function_Calls.CustomFunctions\n\t\n\t# Iterate through the class attributes\n\tfor attribute_name in dir(cls):\n\t\tattribute_value \u003d getattr(cls, attribute_name)\n\t\n\t\tif attribute_name:\n\t\t    newrow \u003d {\n\t\t        \"label\": attribute_name,\n\t\t        \"value\": attribute_name\n\t\t    }\n\t\t    available_functions.append(newrow)\n\t\n\treturn available_functions",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "Effects/input_radious"
+                  }
+                },
+                "type": "ia.input.dropdown"
+              }
+            ],
+            "meta": {
+              "name": "Custom_Function"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "position.display": {
+                "binding": {
+                  "config": {
+                    "expression": "{../Sys Interface/Dropdown.props.value}\u003d\u0027Custom Function\u0027"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\n\tusername\u003dself.session.props.auth.user.userName\n\tfunction_name\u003dself.parent.parent.getChild(\"Function Name\").getChild(\"TextField\").props.text\n\tsys_interface\u003dself.parent.parent.getChild(\"Sys Interface\").getChild(\"Dropdown\").props.value\n\tdatabase_name\u003dself.parent.parent.getChild(\"Database\").getChild(\"Database Name\").getChild(\"TextField\").props.text\n\tdatabase_schema\u003dself.parent.parent.getChild(\"Database\").getChild(\"Database Schema\").getChild(\"TextField\").props.text\n\tcustom_function_name\u003dself.parent.parent.getChild(\"Custom_Function\").getChild(\"Dropdown\").props.value\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"material/info\",\n\t\t\t\t\t\t  \"title\": \"\",\n\t\t\t\t\t\t  \"level\": \"\",\n\t\t\t\t\t\t  \"message\": \"\"}}\n\t\n\tif username\u003d\u003dNone:\n\t\tusername\u003d\"User-Interface\"\n\n\t\n\tparameters\u003d{\"function_name\":function_name,\n\t\t\t\t\"username\":username,\n\t\t\t\t\"sys_interface\":sys_interface,\n\t\t\t\t\"database_name\":database_name,\n\t\t\t\t\"database_schema\":database_schema,\n\t\t\t\t\"custom_function_name\":custom_function_name}\n\tfunction_id\u003dsystem.db.execQuery(\"API/Configurations/Add_Function\", parameters)\n\t\n\tif len(function_id)\u003d\u003d0:\n\t\t\n\t\tmessageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"Another function with the same name was found in the config file. Please add a new name.\"\n\t\tmessageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Duplicated Function\"\n\t\tmessageboxparams[\u0027data\u0027][\"level\"]\u003d \"warning\"\n\n\t\t\n\t\t\t\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"msg1\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\t\t\n\telif len(function_id)\u003d\u003d1:\n\t\t#messageboxparams[\u0027data\u0027][\u0027message\u0027]\u003d\"The Function ---{0}--- was successfully added to the config file.\".format(function_name)\n\t\t#messageboxparams[\u0027data\u0027][\u0027title\u0027]\u003d\"Function Added\"\n\t\t#messageboxparams[\u0027data\u0027][\"level\"]\u003d \"success\"\n\t\t#messageboxparams[\u0027data\u0027][\"icon\"]\u003d \"material/add_circle\"\n\n\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\t\t\n\t\tpopup_params\u003d{\"function_id\":function_id[0][\u0027ID\u0027],\n\t\t\t\t\t  \"function_name\":function_name}\n\t\tsystem.perspective.openPopup(\"AddInputParams\", \"API_Screens/Pop_Ups/Add_Function_Params_Input\",popup_params, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\n\t\t##logEvent\n\t\tlogparams\u003d{\"username\":username,\n\t\t\t\t   \"event_type\":\"Add\",\n\t\t\t\t   \"before_change\":None,\n\t\t\t\t   \"after_change\":str(parameters),\n\t\t\t\t   \"description\":\"added new function {}\".format(function_name)}\n\t\tAPI.Functions.log_activity(logparams)\n\t\t#system.perspective.openPopup(\"msg1\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\tsystem.perspective.closePopup(\"ASP\")\n"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Add Record"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "propConfig": {
+                  "props.enabled": {
+                    "binding": {
+                      "config": {
+                        "struct": {
+                          "custom_function_name": "{.../Custom_Function/Dropdown.props.value}",
+                          "database_name": "{.../Database/Database Name/TextField.props.text}",
+                          "database_schema": "{.../Database/Database Schema/TextField.props.text}",
+                          "func_name": "{.../Function Name/TextField.props.text}",
+                          "sys_interface": "{.../Sys Interface/Dropdown.props.value}"
+                        },
+                        "waitOnAll": true
+                      },
+                      "transforms": [
+                        {
+                          "code": "\tif len(value[\u0027func_name\u0027])\u003e5:\n\t\tif value[\u0027sys_interface\u0027]\u003d\u003d\u0027Database\u0027:\n\t\t\tif len(value[\u0027database_name\u0027]) and len(value[\u0027database_schema\u0027])\u003e3:\n\t\t\t\treturn True\n\t\t\telse:\n\t\t\t\treturn False\n\t\telif value[\u0027sys_interface\u0027]\u003d\u003d\u0027Custom Function\u0027:\n\t\t\tif len(value[\u0027custom_function_name\u0027])\u003e5:\n\t\t\t\treturn True\n\t\t\telse:\n\t\t\t\treturn False\n\telse:\n\t\treturn False",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "expr-struct"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Submit"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Close Dock"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Close"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "Buttons"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "justify": "center",
+              "style": {
+                "gap": 20,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 20
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Wrapper"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "justify": "space-evenly"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Frames/Standard1"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "base": {
+    "style": {
+      "color": "var(--neutral-80)",
+      "fontFamily": "Arial",
+      "fontSize": "24px",
+      "fontWeight": "700",
+      "textAlign": "center"
+    }
+  }
+}

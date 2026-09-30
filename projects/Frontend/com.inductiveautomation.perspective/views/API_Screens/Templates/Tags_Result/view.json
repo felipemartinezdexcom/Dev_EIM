@@ -1,0 +1,173 @@
+{
+  "custom": {},
+  "params": {
+    "Folder": "value",
+    "TagName": "value",
+    "TagValue": "value"
+  },
+  "propConfig": {
+    "params.Folder": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.TagName": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.TagValue": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 39,
+      "width": 835
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "FolderLabel"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "Fonts_Sizes/Component_Label",
+            "fontSize": 12,
+            "marginLeft": 10
+          },
+          "text": "Folder:"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "150px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.Folder"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "borderRightStyle": "solid",
+            "borderRightWidth": 1
+          },
+          "textStyle": {
+            "fontSize": 12
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "TagName Label"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "Fonts_Sizes/Component_Label",
+            "fontSize": 12
+          },
+          "text": "Name:"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "basis": "250px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.TagName"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "borderRightStyle": "solid",
+            "borderRightWidth": 1
+          },
+          "textStyle": {
+            "fontSize": 12
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "TagValue Label"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "Fonts_Sizes/Component_Label",
+            "fontSize": 12
+          },
+          "text": "Value:"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "basis": "200px",
+          "grow": 1,
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.TagValue"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "textStyle": {
+            "fontSize": 12
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "style": {
+        "classes": "Frames/Standard1",
+        "gap": 10
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

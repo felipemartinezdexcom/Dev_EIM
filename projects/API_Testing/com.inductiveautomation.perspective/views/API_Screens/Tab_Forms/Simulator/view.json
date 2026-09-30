@@ -1,0 +1,646 @@
+{
+  "custom": {
+    "data": {
+      "function_id": null,
+      "function_name": "CamstarGetTraining"
+    }
+  },
+  "params": {},
+  "propConfig": {
+    "custom.data": {
+      "binding": {
+        "config": {
+          "struct": {
+            "custom_function": "{/root/Filters/FilterContainer/Custom_Functions/Dropdown.props.value}",
+            "database_function": "{/root/Filters/FilterContainer/Database_Function/Dropdown.props.value}",
+            "database_name": "{/root/Filters/FilterContainer/DataBase/Dropdown.props.value}",
+            "database_schema": "{/root/Filters/FilterContainer/Schema/Dropdown.props.value}",
+            "sys_interface": "{/root/Filters/FilterContainer/Sys_interface/Dropdown.props.value}"
+          },
+          "waitOnAll": false
+        },
+        "overlayOptOut": true,
+        "transforms": [
+          {
+            "code": "\tqueryPath\u003d\"\"\n\tparams\u003d{\"function_name\":\"\"}\n\tif value[\u0027sys_interface\u0027]\u003d\u003d\u0027Custom Function\u0027:\n\t\tqueryPath\u003d\"API/Configurations/Get_Custom_FunctionId\"\n\t\tparams[\u0027function_name\u0027]\u003dvalue[\u0027custom_function\u0027]\n\telif value[\u0027sys_interface\u0027]\u003d\u003d\u0027Database\u0027:\n\t\tqueryPath\u003d\"API/Configurations/Get_DB_FunctionId\"\n\t\tparams[\u0027function_name\u0027]\u003dvalue[\u0027database_function\u0027]\n\t\tparams[\u0027database_name\u0027]\u003dvalue[\u0027database_name\u0027]\n\t\tparams[\u0027database_schema\u0027]\u003dvalue[\u0027database_schema\u0027]\n\t\t\n\tfunction_id\u003dsystem.db.execScalar(queryPath, params)\n\tdata\u003d{\"function_name\":params[\u0027function_name\u0027],\n\t\t  \"function_id\":function_id}\n\treturn data\n",
+            "type": "script"
+          }
+        ],
+        "type": "expr-struct"
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 792,
+      "width": 2008
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/Col_Headers"
+                      },
+                      "text": "Sys Interface:",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Dropdown"
+                    },
+                    "position": {
+                      "basis": "300px"
+                    },
+                    "propConfig": {
+                      "props.options": {
+                        "binding": {
+                          "config": {
+                            "queryPath": "API/Configurations/Get_Sys_Interface_Options",
+                            "returnFormat": "json"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\toptions\u003d[]\n\tfor row in value:\n\t\tnewrow\u003d{\"value\":row[\u0027label\u0027],\"label\":row[\u0027label\u0027]}\n\t\toptions.append(newrow)\n\treturn options",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Effects/input_radious",
+                        "min-width": "150px"
+                      },
+                      "value": "Custom Function"
+                    },
+                    "type": "ia.input.dropdown"
+                  }
+                ],
+                "meta": {
+                  "name": "Sys_interface"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/Col_Headers"
+                      },
+                      "text": "Database:",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Dropdown"
+                    },
+                    "position": {
+                      "basis": "300px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.options": {
+                        "binding": {
+                          "config": {
+                            "queryPath": "API/Configurations/Get_Sys_Interface_Database_Options",
+                            "returnFormat": "json"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\toptions\u003d[]\n\tfor row in value:\n\t\tnewrow\u003d{\"value\":row[\u0027label\u0027],\"label\":row[\u0027label\u0027]}\n\t\toptions.append(newrow)\n\treturn options",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "dropdownOptionStyle": {
+                        "classes": "Effects/input_radious"
+                      },
+                      "style": {
+                        "classes": "Effects/input_radious",
+                        "min-width": "150px"
+                      },
+                      "value": "Averna_mfgdb"
+                    },
+                    "type": "ia.input.dropdown"
+                  }
+                ],
+                "meta": {
+                  "name": "DataBase"
+                },
+                "position": {
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "position.display": {
+                    "binding": {
+                      "config": {
+                        "path": "../Sys_interface/Dropdown.props.value"
+                      },
+                      "transforms": [
+                        {
+                          "fallback": false,
+                          "inputType": "scalar",
+                          "mappings": [
+                            {
+                              "input": "Database",
+                              "output": true
+                            }
+                          ],
+                          "outputType": "scalar",
+                          "type": "map"
+                        }
+                      ],
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/Col_Headers"
+                      },
+                      "text": "Schema:",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Dropdown"
+                    },
+                    "position": {
+                      "basis": "300px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.options": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "database_name": "{.../DataBase/Dropdown.props.value}"
+                            },
+                            "queryPath": "API/Configurations/Get_Sys_Interface_Database_Schemas_Options",
+                            "returnFormat": "json"
+                          },
+                          "overlayOptOut": true,
+                          "transforms": [
+                            {
+                              "code": "\toptions\u003d[]\n\tfor row in value:\n\t\tnewrow\u003d{\"value\":row[\u0027label\u0027],\"label\":row[\u0027label\u0027]}\n\t\toptions.append(newrow)\n\treturn options",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "dropdownOptionStyle": {
+                        "classes": "Effects/input_radious"
+                      },
+                      "style": {
+                        "classes": "Effects/input_radious",
+                        "min-width": "150px"
+                      },
+                      "value": "LTDD"
+                    },
+                    "type": "ia.input.dropdown"
+                  }
+                ],
+                "meta": {
+                  "name": "Schema"
+                },
+                "position": {
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "position.display": {
+                    "binding": {
+                      "config": {
+                        "path": "../Sys_interface/Dropdown.props.value"
+                      },
+                      "transforms": [
+                        {
+                          "fallback": false,
+                          "inputType": "scalar",
+                          "mappings": [
+                            {
+                              "input": "Database",
+                              "output": true
+                            }
+                          ],
+                          "outputType": "scalar",
+                          "type": "map"
+                        }
+                      ],
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/Col_Headers"
+                      },
+                      "text": "Select Function:",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Dropdown"
+                    },
+                    "position": {
+                      "basis": "300px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.options": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "database_name": "{.../DataBase/Dropdown.props.value}",
+                              "database_schema": "{.../Schema/Dropdown.props.value}"
+                            },
+                            "queryPath": "API/Configurations/Get_Sys_Interface_Database_Schemas_Functions_Options",
+                            "returnFormat": "json"
+                          },
+                          "overlayOptOut": true,
+                          "transforms": [
+                            {
+                              "code": "\toptions\u003d[]\n\tfor row in value:\n\t\tnewrow\u003d{\"value\":row[\u0027label\u0027],\"label\":row[\u0027label\u0027]}\n\t\toptions.append(newrow)\n\treturn options",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "dropdownOptionStyle": {
+                        "classes": "Effects/input_radious"
+                      },
+                      "showClearIcon": true,
+                      "style": {
+                        "classes": "Effects/input_radious",
+                        "min-width": "150px"
+                      },
+                      "value": null
+                    },
+                    "type": "ia.input.dropdown"
+                  }
+                ],
+                "meta": {
+                  "name": "Database_Function"
+                },
+                "position": {
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "position.display": {
+                    "binding": {
+                      "config": {
+                        "path": "../Sys_interface/Dropdown.props.value"
+                      },
+                      "transforms": [
+                        {
+                          "fallback": false,
+                          "inputType": "scalar",
+                          "mappings": [
+                            {
+                              "input": "Database",
+                              "output": true
+                            }
+                          ],
+                          "outputType": "scalar",
+                          "type": "map"
+                        }
+                      ],
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/Col_Headers"
+                      },
+                      "text": "Select Function:",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Dropdown"
+                    },
+                    "position": {
+                      "basis": "300px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.options": {
+                        "binding": {
+                          "config": {
+                            "queryPath": "API/Configurations/Get_Sys_Interface_Custom_Functions",
+                            "returnFormat": "json"
+                          },
+                          "overlayOptOut": true,
+                          "transforms": [
+                            {
+                              "code": "\toptions\u003d[]\n\tfor row in value:\n\t\tnewrow\u003d{\"value\":row[\u0027label\u0027],\"label\":row[\u0027label\u0027]}\n\t\toptions.append(newrow)\n\treturn options",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "dropdownOptionStyle": {
+                        "classes": "Effects/input_radious"
+                      },
+                      "style": {
+                        "classes": "Effects/input_radious"
+                      },
+                      "value": "CamstarGetTraining"
+                    },
+                    "type": "ia.input.dropdown"
+                  }
+                ],
+                "meta": {
+                  "name": "Custom_Functions"
+                },
+                "position": {
+                  "basis": "700px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "position.display": {
+                    "binding": {
+                      "config": {
+                        "path": "../Sys_interface/Dropdown.props.value"
+                      },
+                      "transforms": [
+                        {
+                          "fallback": false,
+                          "inputType": "scalar",
+                          "mappings": [
+                            {
+                              "input": "Custom Function",
+                              "output": true
+                            }
+                          ],
+                          "outputType": "scalar",
+                          "type": "map"
+                        }
+                      ],
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "FilterContainer"
+            },
+            "position": {
+              "basis": "36px"
+            },
+            "props": {
+              "style": {
+                "marginLeft": 10,
+                "marginRight": 20
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Filters"
+        },
+        "position": {
+          "basis": "70px",
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "justify": "center",
+          "style": {
+            "classes": "Effects/boxes_frame Effects/input_radious Effects/padding-boxes Headers/Subview_Headers_Background"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Simulator_Calls"
+            },
+            "position": {
+              "basis": "60%",
+              "grow": 1
+            },
+            "propConfig": {
+              "props.params.data": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.data"
+                  },
+                  "type": "property"
+                }
+              },
+              "props.style.marginRight": {
+                "binding": {
+                  "config": {
+                    "path": "page.props.dimensions.viewport.width"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif value\u003e1100:\n\t\treturn 20\n\telse:\n\t\t\n\t\treturn 0",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "path": "API_Screens/Tab_Forms/Simulator_Calls",
+              "style": {
+                "borderTopRightRadius": 10,
+                "min-width": "800px"
+              }
+            },
+            "type": "ia.display.view"
+          },
+          {
+            "meta": {
+              "name": "Results Box"
+            },
+            "position": {
+              "basis": "700px",
+              "grow": 1
+            },
+            "props": {
+              "params": {
+                "Function": "GetNextBatch",
+                "Result": true,
+                "Type": "value",
+                "label": "value"
+              },
+              "path": "API_Screens/Templates/Results Box",
+              "style": {
+                "borderTopLeftRadius": 10,
+                "min-width": "250px"
+              }
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "meta": {
+          "name": "Content"
+        },
+        "position": {
+          "basis": "200px",
+          "grow": 1
+        },
+        "props": {
+          "style": {
+            "borderBottomLeftRadius": 10,
+            "borderBottomRightRadius": 10,
+            "borderTopLeftRadius": 10,
+            "borderTopRightRadius": 10,
+            "marginLeft": 5,
+            "marginRight": 5
+          },
+          "wrap": "wrap"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "justify": "center",
+      "wrap": "wrap"
+    },
+    "type": "ia.container.flex"
+  }
+}

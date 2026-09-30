@@ -1,0 +1,1 @@
+select distinct (database_name) as label from [API].FunctionsList

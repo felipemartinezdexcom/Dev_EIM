@@ -1,0 +1,2379 @@
+{
+  "custom": {
+    "actions": {
+      "actions": [
+        {
+          "cnt": 287,
+          "displaypath": "resources modified"
+        },
+        {
+          "cnt": 286,
+          "displaypath": "project save"
+        },
+        {
+          "cnt": 141,
+          "displaypath": "tag write"
+        },
+        {
+          "cnt": 65,
+          "displaypath": "login"
+        },
+        {
+          "cnt": 36,
+          "displaypath": "tag edit"
+        },
+        {
+          "cnt": 16,
+          "displaypath": "logout"
+        },
+        {
+          "cnt": 13,
+          "displaypath": "Web Auth Status Change"
+        },
+        {
+          "cnt": 10,
+          "displaypath": "resources created"
+        },
+        {
+          "cnt": 9,
+          "displaypath": "Login Response"
+        },
+        {
+          "cnt": 9,
+          "displaypath": "resources deleted"
+        },
+        {
+          "cnt": 9,
+          "displaypath": "Login Request"
+        },
+        {
+          "cnt": 8,
+          "displaypath": "Logout Response"
+        },
+        {
+          "cnt": 8,
+          "displaypath": "Logout Request"
+        },
+        {
+          "cnt": 3,
+          "displaypath": "modify resource"
+        },
+        {
+          "cnt": 2,
+          "displaypath": "create resource"
+        },
+        {
+          "cnt": 1,
+          "displaypath": "project updated"
+        },
+        {
+          "cnt": 1,
+          "displaypath": "gateway startup"
+        },
+        {
+          "cnt": 1,
+          "displaypath": "gateway shutdown"
+        }
+      ]
+    },
+    "actualDateTime": {
+      "$": [
+        "ts",
+        192,
+        1771535470899
+      ],
+      "$ts": 1770068427046
+    },
+    "database": {},
+    "endDate": {
+      "$": [
+        "ts",
+        192,
+        1771535485928
+      ],
+      "$ts": 1770068400000
+    },
+    "events": {},
+    "pollRate": 5,
+    "refreshBindings": true,
+    "startDate": {
+      "$": [
+        "ts",
+        192,
+        1771535505588
+      ],
+      "$ts": 1770008400000
+    },
+    "times": {},
+    "users": {}
+  },
+  "events": {
+    "system": {
+      "onStartup": {
+        "config": {
+          "script": "\tself.custom.refreshBindings \u003d True"
+        },
+        "scope": "G",
+        "type": "script"
+      }
+    }
+  },
+  "params": {},
+  "propConfig": {
+    "custom.actions": {
+      "persistent": true
+    },
+    "custom.actions.actionDropdown": {
+      "binding": {
+        "config": {
+          "expression": "runScript(\"exchange.eventAnalysis.event.getActionList\"\r\n\t, {view.custom.pollRate}*1000\r\n\t, {view.custom.database.dbConnection}\r\n\t)"
+        },
+        "type": "expr"
+      }
+    },
+    "custom.actions.actionFrequency": {
+      "binding": {
+        "config": {
+          "expression": "runScript(\"exchange.eventAnalysis.event.getActionFrequencies\"\r\n\t, {view.custom.pollRate}*1000\r\n\t, {view.custom.database.dbConnection}\r\n\t, {view.custom.times.startDateFormatted}\r\n\t, {view.custom.times.endDateFormatted}\r\n\t, {view.custom.users.userSelectList}\r\n\t)"
+        },
+        "type": "expr"
+      }
+    },
+    "custom.actions.actionSelectList": {
+      "binding": {
+        "config": {
+          "path": "/root/Tables/Events/EventTable/FlexContainer/FilterAction/DropdownAction.props.value"
+        },
+        "transforms": [
+          {
+            "code": "\tif value \u003d\u003d None: \n\t\tval \u003d [] \n\telse: \n\t\tval \u003d str(value)\n\treturn val",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      }
+    },
+    "custom.actions.dsActions": {
+      "binding": {
+        "config": {
+          "struct": {
+            "actionsFrequency": "{view.custom.actions.actionFrequency}",
+            "successful": "{view.custom.actions.successfulAction}",
+            "totalEvents": "{view.custom.events.eventsTable}"
+          },
+          "waitOnAll": true
+        },
+        "transforms": [
+          {
+            "code": "\timport json\n\t\n\tsuccessful \u003d value[\"successful\"]\n\ttotalEvents \u003d value[\"totalEvents\"]\n\tactionsFrequency \u003d value[\"actionsFrequency\"]\n\t\n\ttotalEventsNum \u003d totalEvents.rowCount\n\t\n\theaders \u003d [\"displaypath\", \"cnt\", \"percentage\"]\n\t\n\trows \u003d []\n\t\n\t# Filas fijas arriba - todo como string para evitar conflicto de tipos\n\trows.append([\"Successfull Action\", str(successful), \"\"])\n\trows.append([\"Total Events\", str(totalEventsNum), \"\"])\n\t\n\t# Filas de acciones - cnt y percentage también como string\n\tfor item in actionsFrequency:\n\t    if isinstance(item, str):\n\t        item \u003d json.loads(item)\n\t    \n\t    cnt \u003d int(item[\"cnt\"])\n\t    displaypath \u003d item[\"displaypath\"]\n\t    percentage \u003d round((float(cnt) / float(totalEventsNum) * 100), 2) if totalEventsNum else 0\n\t    \n\t    rows.append([displaypath, str(cnt), str(percentage)])\n\t\n\treturn system.dataset.toDataSet(headers, rows)",
+            "type": "script"
+          }
+        ],
+        "type": "expr-struct"
+      }
+    },
+    "custom.actions.successfulAction": {
+      "binding": {
+        "config": {
+          "expression": "runScript(\"exchange.eventAnalysis.event.countSuccessfulOperations\"\r\n\t, {view.custom.pollRate}*1000\r\n\t, {view.custom.database.dbConnection}\r\n\t, {view.custom.times.startDateFormatted}\r\n\t, {view.custom.times.endDateFormatted}\r\n\t)"
+        },
+        "transforms": [
+          {
+            "code": "\ttotalEvent \u003d self.custom.events.totalEventValue\n    \n\ttry:\n\t    v \u003d float(value)\n\t    t \u003d float(totalEvent)\n\t    \n\t    if t \u003c\u003d 0 or v \u003c 0 or v \u003e t:\n\t        return \"0.0 %\"\n\t    \n\t    result \u003d round((v / t) * 100.0, 1)\n\t    return str(result) + \u0027 %\u0027\n\texcept:\n\t    return \"0.0 %\"",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      }
+    },
+    "custom.actualDateTime": {
+      "persistent": true
+    },
+    "custom.database": {
+      "persistent": true
+    },
+    "custom.database.dbConnection": {
+      "binding": {
+        "config": {
+          "expression": "runScript(\"exchange.eventAnalysis.db.getDefaultDatabaseName\"\r\n\t, {view.custom.pollRate}*1000\r\n\t)"
+        },
+        "type": "expr"
+      }
+    },
+    "custom.database.dbType": {
+      "binding": {
+        "config": {
+          "expression": "runScript(\"exchange.eventAnalysis.db.getDefaultDatabaseType\"\r\n\t, {view.custom.pollRate}*1000\r\n\t)"
+        },
+        "type": "expr"
+      }
+    },
+    "custom.endDate": {
+      "persistent": true
+    },
+    "custom.events": {
+      "persistent": true
+    },
+    "custom.events.eventsTable": {
+      "binding": {
+        "config": {
+          "expression": "runScript(\"exchange.eventAnalysis.event.getEventTable\"\r\n\t, {view.custom.pollRate}*1000\r\n\t, {view.custom.database.dbConnection}\r\n\t, {view.custom.times.startDateFormatted}\r\n\t, {view.custom.times.endDateFormatted}\r\n\t, {view.custom.users.userSelectList}\r\n\t, {view.custom.actions.actionSelectList}\r\n\t)"
+        },
+        "type": "expr"
+      }
+    },
+    "custom.events.topTagWriteTargets": {
+      "binding": {
+        "config": {
+          "expression": "runScript(\"exchange.eventAnalysis.event.getTopTagWriteTargets\"\r\n\t, {view.custom.pollRate}*1000\r\n\t, {view.custom.database.dbConnection}\r\n\t, {view.custom.times.startDateFormatted}\r\n\t, {view.custom.times.endDateFormatted}\r\n\t, {view.custom.users.userSelectList}\r\n\t)"
+        },
+        "type": "expr"
+      }
+    },
+    "custom.events.totalEventValue": {
+      "binding": {
+        "config": {
+          "expression": "runScript(\"exchange.eventAnalysis.event.getTotalEvents\"\r\n\t, {view.custom.pollRate}*1000\r\n\t, {view.custom.database.dbConnection}\r\n\t, {view.custom.times.startDateFormatted}\r\n\t, {view.custom.times.endDateFormatted}\r\n\t)"
+        },
+        "transforms": [
+          {
+            "code": "\treturn value.getValueAt(0,0)",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      }
+    },
+    "custom.pollRate": {
+      "persistent": true
+    },
+    "custom.startDate": {
+      "persistent": true
+    },
+    "custom.times": {
+      "persistent": true
+    },
+    "custom.times.actualDateTime": {
+      "binding": {
+        "config": {
+          "expression": "{[System]Gateway/CurrentDateTime}"
+        },
+        "type": "expr"
+      }
+    },
+    "custom.times.endDate": {
+      "binding": {
+        "config": {
+          "expression": "{view.custom.times.actualDateTime}"
+        },
+        "transforms": [
+          {
+            "code": "\n\t\"\"\"\n\tTransform date value based on user-selected period and shift options.\n\t\n\tArgs:\n\t\tvalue (Date): Date value to transform\n\t\tquality (Quality): Data quality (not used)\n\t\ttimestamp (Timestamp): Value timestamp (not used)\n\t\n\tReturns:\n\t\tDate: Transformed date based on selected options\n\t\n\tExample:\n\t\t# User selects \"Shift A\" with \"Day\" shift\n\t\t# Input: 2026-02-03 14:30:00\n\t\t# Output: 2026-02-03 05:59:59\n\t\"\"\"\n\t\n\tdef setDateTime(year, month, day, hour, minute\u003d0, second\u003d0):\n\t\t\"\"\"\n\t\tSet date and time to specific values.\n\t\t\n\t\tArgs:\n\t\t\tyear (int): Year\n\t\t\tmonth (int): Month\n\t\t\tday (int): Day\n\t\t\thour (int): Hour\n\t\t\tminute (int, optional): Minute. Defaults to 0.\n\t\t\tsecond (int, optional): Second. Defaults to 0.\n\t\t\n\t\tReturns:\n\t\t\tDate: Date with specified time\n\t\t\"\"\"\n\t\tdate \u003d system.date.getDate(year, month, day)\n\t\treturn system.date.setTime(date, hour, minute, second)\n\t\n\t# Extract date components\n\tyear \u003d system.date.getYear(value)\n\tmonth \u003d system.date.getMonth(value)\n\tday \u003d system.date.getDayOfMonth(value)\n\thour \u003d system.date.getHour24(value)\n\tminute \u003d system.date.getMinute(value)\n\t\n\t# Get user selections\n\tendTime \u003d self.getChild(\"root\").getChild(\"Filters\").getChild(\"FilterContainer\").getChild(\"FilterEndDate\").getChild(\"DateTimeInputEndDate\").props.value\n\tshift \u003d self.custom.times.shift\n\tdropDownPeriod \u003d self.getChild(\"root\").getChild(\"Filters\").getChild(\"FilterContainer\").getChild(\"FilterPeriod\").getChild(\"DropdownPeriod\").props.value\n\t\n\t# Process selected period\n\tif dropDownPeriod \u003d\u003d 7:  # Custom selected\n\t\tvalue \u003d endTime\n\t\n\telif dropDownPeriod \u003d\u003d 0:  # Shift A\n\t\tif shift \u003d\u003d \u0027Day\u0027:\n\t\t\tvalue \u003d setDateTime(year, month, day, 5, 59, 59)\n\t\telif shift \u003d\u003d \u0027Night\u0027:\n\t\t\tif hour \u003c 18:  # In Shift C between 0:00 and 5:59\n\t\t\t\tvalue \u003d setDateTime(year, month, day - 1, 17, 59, 59)\n\t\t\telse:\n\t\t\t\tvalue \u003d setDateTime(year, month, day, 17, 59, 59)\n\t\n\telif dropDownPeriod \u003d\u003d 1:  # Shift B\n\t\tvalue \u003d setDateTime(year, month, day, hour, minute, 0)\n\t\n\telif dropDownPeriod \u003d\u003d 3:  # Previous Day\n\t\tvalue \u003d setDateTime(year, month, day - 1, 23, 59, 59)\n\t\n\telse:  # Default case - current hour and minute\n\t\tvalue \u003d setDateTime(year, month, day, hour, minute, 0)\n\t\n\treturn value",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      }
+    },
+    "custom.times.endDateFormatted": {
+      "binding": {
+        "config": {
+          "path": "/root/Filters/FilterContainer/FilterEndDate/DateTimeInputEndDate.props.formattedValue"
+        },
+        "type": "property"
+      }
+    },
+    "custom.times.shift": {
+      "binding": {
+        "config": {
+          "expression": "if(dateExtract({view.custom.times.actualDateTime},\u0027hour\u0027) \u003e\u003d 6 \u0026\u0026 dateExtract({this.custom.times.actualDateTime},\u0027hour\u0027) \u003c 18,\r\n\t\t\u0027Day\u0027, \r\n\t\tif(dateExtract({this.custom.times.actualDateTime},\u0027hour\u0027) \u003e\u003d 18 || dateExtract({this.custom.times.actualDateTime},\u0027hour\u0027) \u003c 6, \r\n\t\t\t\t\u0027Night\u0027, \r\n\t\t\t\u0027none\u0027\r\n\t\t\t)\r\n\t\t)\r\n\t\r\n"
+        },
+        "type": "expr"
+      }
+    },
+    "custom.times.startDate": {
+      "binding": {
+        "config": {
+          "expression": "{view.custom.times.actualDateTime}"
+        },
+        "transforms": [
+          {
+            "code": "\n\t\"\"\"\n\tTransform date value based on user-selected period and shift options.\n\t\n\tArgs:\n\t\tvalue (Date): Date value to transform\n\t\tquality (Quality): Data quality (not used)\n\t\ttimestamp (Timestamp): Value timestamp (not used)\n\t\n\tReturns:\n\t\tDate: Transformed date based on selected options\n\t\n\tExample:\n\t\t# User selects \"Current Day\" with \"Day\" shift\n\t\t# Input: 2026-02-03 14:30:00\n\t\t# Output: 2026-02-03 00:00:00\n\t\"\"\"\n\t\n\tdef setDateTime(year, month, day, hour):\n\t\t\"\"\"\n\t\tSet date and time to specific values.\n\t\t\n\t\tArgs:\n\t\t\tyear (int): Year\n\t\t\tmonth (int): Month\n\t\t\tday (int): Day\n\t\t\thour (int): Hour\n\t\t\n\t\tReturns:\n\t\t\tDate: Date with specified time (minutes and seconds set to 0)\n\t\t\"\"\"\n\t\tdate \u003d system.date.getDate(year, month, day)\n\t\treturn system.date.setTime(date, hour, 0, 0)\n\t\n\t# Extract date components\n\tyear \u003d system.date.getYear(value)\n\tmonth \u003d system.date.getMonth(value)\n\tday \u003d system.date.getDayOfMonth(value)\n\thour \u003d system.date.getHour24(value)\n\tdayOfWeek \u003d system.date.getDayOfWeek(value)\n\t\n\t# Get user selections\n\tdropDownPeriod \u003d self.getChild(\"root\").getChild(\"Filters\").getChild(\"FilterContainer\").getChild(\"FilterPeriod\").getChild(\"DropdownPeriod\").props.value\n\tshift \u003d self.custom.times.shift\n\tstartTime \u003d self.getChild(\"root\").getChild(\"Filters\").getChild(\"FilterContainer\").getChild(\"FilterStartDate\").getChild(\"DateTimeInputStartDate\").props.value\n\t\n\t# Process selected period\n\tif dropDownPeriod !\u003d 7:  # Not custom option\n\t\tif dropDownPeriod \u003d\u003d 4:  # Current Day\n\t\t\tnewDate \u003d setDateTime(year, month, day, 0)\n\t\t\tvalue \u003d newDate\n\t\t\n\t\telif dropDownPeriod \u003d\u003d 3:  # Previous Day\n\t\t\tnewDate \u003d setDateTime(year, month, day - 1, 0)\n\t\t\tvalue \u003d newDate\n\t\t\n\t\telif dropDownPeriod \u003d\u003d -1:  # No specific selection\n\t\t\tvalue \u003d setDateTime(year, month, day, hour)\n\t\t\n\t\telif dropDownPeriod \u003d\u003d 6:  # Months\n\t\t\tvalue \u003d setDateTime(year, month, 1, 0)\n\t\t\n\t\telif dropDownPeriod \u003d\u003d 5:  # Weeks\n\t\t\t# Calculate day of week (1: Sunday, 7: Saturday)\n\t\t\tdayOfWeek \u003d system.date.getDayOfWeek(system.date.getDate(year, month, day))\n\t\t\t\n\t\t\t# Calculate previous Monday\n\t\t\tif dayOfWeek \u003d\u003d 2:  # If it is Monday (Day 2)\n\t\t\t\tif hour \u003e\u003d 6:\n\t\t\t\t\tpreviousMonday \u003d system.date.addDays(system.date.getDate(year, month, day), -dayOfWeek + 2)\n\t\t\t\telse:\n\t\t\t\t\t# Go back one week (7 days)\n\t\t\t\t\tpreviousMonday \u003d system.date.addDays(system.date.getDate(year, month, day), -7)\n\t\t\t\n\t\t\telif dayOfWeek \u003e 2:\n\t\t\t\tpreviousMonday \u003d system.date.addDays(system.date.getDate(year, month, day), -dayOfWeek + 2)\n\t\t\t\n\t\t\telse:\n\t\t\t\tpreviousMonday \u003d system.date.addDays(system.date.getDate(year, month, day), -6)\n\t\t\t\n\t\t\t# Set time to 00:00:00\n\t\t\tvalue \u003d setDateTime(\n\t\t\t\tsystem.date.getYear(previousMonday),\n\t\t\t\tsystem.date.getMonth(previousMonday),\n\t\t\t\tsystem.date.getDayOfMonth(previousMonday),\n\t\t\t\t0\n\t\t\t)\n\t\t\n\t\t# Shift logic\n\t\tif shift \u003d\u003d \u0027Day\u0027:\n\t\t\tif dropDownPeriod \u003d\u003d 0:  # Shift C\n\t\t\t\tvalue \u003d setDateTime(year, month, day - 1, 18)\n\t\t\t\n\t\t\telif dropDownPeriod \u003d\u003d 1:  # Shift A\n\t\t\t\tvalue \u003d setDateTime(year, month, day, 6)\n\t\t\n\t\telif shift \u003d\u003d \u0027Night\u0027:\n\t\t\tif dropDownPeriod \u003d\u003d 0:  # Shift C\n\t\t\t\tvalue \u003d setDateTime(year, month, day if hour \u003e\u003d 18 else day - 1, 6)\n\t\t\t\n\t\t\telif dropDownPeriod \u003d\u003d 1:  # Shift A\n\t\t\t\tvalue \u003d setDateTime(year, month, day if hour \u003e\u003d 18 else day - 1, 18)\n\t\n\telse:\n\t\t# If dropdown period is 7 (custom), use start time\n\t\tvalue \u003d startTime\n\t\n\treturn value",
+            "type": "script"
+          }
+        ],
+        "type": "expr"
+      }
+    },
+    "custom.times.startDateFormatted": {
+      "binding": {
+        "config": {
+          "path": "/root/Filters/FilterContainer/FilterStartDate/DateTimeInputStartDate.props.formattedValue"
+        },
+        "type": "property"
+      }
+    },
+    "custom.users": {
+      "persistent": true
+    },
+    "custom.users.lastLoginLogoutTable": {
+      "binding": {
+        "config": {
+          "expression": "runScript(\"exchange.eventAnalysis.event.getLastLoginLogout\"\r\n\t, {view.custom.pollRate}*1000\r\n\t, {view.custom.database.dbConnection}\r\n\t, {view.custom.users.userSelectList}\r\n\t)"
+        },
+        "type": "expr"
+      }
+    },
+    "custom.users.userDropdown": {
+      "binding": {
+        "config": {
+          "expression": "runScript(\"exchange.eventAnalysis.event.getUserList\"\r\n\t, {view.custom.pollRate}*1000\r\n\t, {view.custom.database.dbConnection}\r\n\t)"
+        },
+        "type": "expr"
+      }
+    },
+    "custom.users.userSelectList": {
+      "binding": {
+        "config": {
+          "path": "/root/Filters/FilterContainer/FilterUser/DropdownUser.props.value"
+        },
+        "transforms": [
+          {
+            "code": "\tif value \u003d\u003d None: \n\t\tval \u003d [] \n\telse: \n\t\tval \u003d str(value)\n\treturn val",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      }
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 1020,
+      "width": 1920
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "LabelPeriod"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "enabled": false,
+                      "style": {
+                        "backgroundColor": "transparent",
+                        "fontSize": "1.5vh",
+                        "textAlign": "left",
+                        "whiteSpace": "pre"
+                      },
+                      "text": "Period: ",
+                      "textStyle": {
+                        "color": "--neutral-60"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "custom": {
+                      "selectedLabel": ""
+                    },
+                    "events": {
+                      "component": {
+                        "onActionPerformed": {
+                          "config": {
+                            "script": "\tself.view.custom.refreshBindings \u003d True"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "DropdownPeriod"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "maxMenuHeight": 1000,
+                      "options": [
+                        {
+                          "label": "Previous Shift",
+                          "value": 0
+                        },
+                        {
+                          "label": "Actual Shift",
+                          "value": 1
+                        },
+                        {
+                          "label": "Previous Day",
+                          "value": 3
+                        },
+                        {
+                          "label": "Actual Day",
+                          "value": 4
+                        },
+                        {
+                          "label": "Week",
+                          "value": 5
+                        },
+                        {
+                          "label": "Month",
+                          "value": 6
+                        },
+                        {
+                          "label": "Custom",
+                          "value": 7
+                        }
+                      ],
+                      "placeholder": {
+                        "icon": {
+                          "path": "material/search",
+                          "style": {
+                            "height": "2vh",
+                            "width": "1vw"
+                          }
+                        },
+                        "text": "Seleccione periodo"
+                      },
+                      "style": {
+                        "classes": "exchange/event-analytics/dropdown/type1"
+                      },
+                      "value": 4
+                    },
+                    "type": "ia.input.dropdown"
+                  }
+                ],
+                "meta": {
+                  "name": "FilterPeriod"
+                },
+                "position": {
+                  "basis": "309.2px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Exchange/Container/Widget",
+                    "marginLeft": 10,
+                    "overflow": "hidden",
+                    "paddingBottom": 0,
+                    "paddingLeft": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "LabelStartDate"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "enabled": false,
+                      "style": {
+                        "backgroundColor": "transparent",
+                        "fontSize": "1.5vh",
+                        "textAlign": "right",
+                        "textIndent": "1",
+                        "whiteSpace": "pre-wrap"
+                      },
+                      "text": "Start Date: ",
+                      "textStyle": {
+                        "color": "--neutral-60"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "events": {
+                      "component": {
+                        "onActionPerformed": {
+                          "config": {
+                            "script": "\tself.view.custom.refreshBindings \u003d True"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      },
+                      "system": {
+                        "onStartup": {
+                          "config": {
+                            "script": "\n\t\"\"\"\n\tSet date to yesterday at current time and refresh all event analysis bindings.\n\t\n\tThis script is typically called from a button or component event to update\n\tthe view with yesterday\u0027s data.\n\t\"\"\"\n\t\n\t# Get current datetime components\n\tnow \u003d system.date.now()\n\tyear \u003d system.date.getYear(now)\n\tmonth \u003d system.date.getMonth(now)\n\tday \u003d system.date.getDayOfMonth(now)\n\thour \u003d system.date.getHour24(now)\n\tminute \u003d system.date.getMinute(now)\n\t\n\t# Set date to yesterday at current time\n\tdate \u003d system.date.getDate(year, month, day - 1)\n\tnewDate \u003d system.date.setTime(date, hour, minute, 0)\n\t\n\t# Update component value\n\tself.props.value \u003d newDate\n\t\n\t# Refresh all event analysis bindings\n\tself.view.custom.refreshBindings \u003d True"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "DateTimeInputStartDate"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.enabled": {
+                        "binding": {
+                          "config": {
+                            "expression": "if({.../FilterPeriod/DropdownPeriod.props.value} !\u003d 7 ,false,true)\r\n"
+                          },
+                          "type": "expr"
+                        }
+                      },
+                      "props.maxDate": {
+                        "binding": {
+                          "config": {
+                            "expression": "now(5000)"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\tYear \u003d system.date.getYear(value)\n\tMonth \u003d system.date.getMonth(value)\n\tDay \u003d system.date.getDayOfMonth(value)\n\tHour \u003d system.date.getHour24(value)\n\t\n\tdate \u003d system.date.getDate(Year, Month, Day)\n\tdatetime \u003d system.date.setTime(date, Hour, 00, 00)\n\tnewDate \u003d datetime\n\tvalue \u003d newDate\n\treturn value",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      },
+                      "props.value": {
+                        "binding": {
+                          "config": {
+                            "path": "view.custom.times.startDate"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "dismissOnSelect": false,
+                      "format": "YYYY-MM-DD HH:mm:ss",
+                      "formattedValue": "2026-05-19 00:00:00",
+                      "inputProps": {
+                        "style": {
+                          "classes": "exchange/event-analytics/dropdown/type1",
+                          "margin": 0
+                        }
+                      },
+                      "locale": "es",
+                      "style": {
+                        "margin": 6
+                      }
+                    },
+                    "type": "ia.input.date-time-input"
+                  }
+                ],
+                "meta": {
+                  "name": "FilterStartDate"
+                },
+                "props": {
+                  "style": {
+                    "classes": "exchange/event-analytics/container/widget",
+                    "marginLeft": 10,
+                    "overflow": "hidden",
+                    "paddingBottom": 0,
+                    "paddingLeft": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "LabelEndDate"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "backgroundColor": "transparent",
+                        "color": "--neutral-60",
+                        "fontSize": "1.5vh",
+                        "textAlign": "right",
+                        "whiteSpace": "pre"
+                      },
+                      "text": "End Date: "
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "events": {
+                      "component": {
+                        "onActionPerformed": {
+                          "config": {
+                            "script": "\t# Refresh all event analysis bindings\n\tself.view.custom.refreshBindings \u003d True"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      },
+                      "system": {
+                        "onStartup": {
+                          "config": {
+                            "script": "\n\t\"\"\"\n\tSet date to current datetime and refresh all event analysis bindings.\n\t\n\tThis action is typically called from a button click to update the view\n\twith current datetime data.\n\t\"\"\"\n\t\n\t# Get current datetime components\n\tnow \u003d system.date.now()\n\tyear \u003d system.date.getYear(now)\n\tmonth \u003d system.date.getMonth(now)\n\tday \u003d system.date.getDayOfMonth(now)\n\thour \u003d system.date.getHour24(now)\n\tminute \u003d system.date.getMinute(now)\n\t\n\t# Set date to current datetime\n\tdate \u003d system.date.getDate(year, month, day)\n\tnewDate \u003d system.date.setTime(date, hour, minute, 0)\n\t\n\t# Update component value\n\tself.props.value \u003d newDate\n\t\n\t# Refresh all event analysis bindings\n\tself.view.custom.refreshBindings \u003d True"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "DateTimeInputEndDate"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.enabled": {
+                        "binding": {
+                          "config": {
+                            "expression": "if({.../FilterPeriod/DropdownPeriod.props.value} !\u003d 7 ,false,true)\r\n"
+                          },
+                          "type": "expr"
+                        }
+                      },
+                      "props.maxDate": {
+                        "binding": {
+                          "config": {
+                            "expression": "now(5000)"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\tYear \u003d system.date.getYear(value)\n\tMonth \u003d system.date.getMonth(value)\n\tDay \u003d system.date.getDayOfMonth(value)\n\tHour \u003d system.date.getHour24(value)\n\tMinute \u003d system.date.getMinute(value)\n\t\n\tdate \u003d system.date.getDate(Year, Month, Day)\n\tdatetime \u003d system.date.setTime(date, Hour, Minute, 00)\n\tnewDate \u003d datetime\n\tvalue \u003d newDate\n\treturn value",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "expr"
+                        }
+                      },
+                      "props.minDate": {
+                        "binding": {
+                          "config": {
+                            "path": ".../FilterStartDate/DateTimeInputStartDate.props.value"
+                          },
+                          "type": "property"
+                        }
+                      },
+                      "props.value": {
+                        "binding": {
+                          "config": {
+                            "path": "view.custom.times.endDate"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "dismissOnSelect": false,
+                      "format": "YYYY-MM-DD HH:mm:ss",
+                      "formattedValue": "2026-05-19 10:26:00",
+                      "inputProps": {
+                        "style": {
+                          "classes": "exchange/event-analytics/dropdown/type1",
+                          "margin": 0
+                        }
+                      },
+                      "locale": "es",
+                      "style": {
+                        "margin": 6
+                      }
+                    },
+                    "type": "ia.input.date-time-input"
+                  }
+                ],
+                "meta": {
+                  "name": "FilterEndDate"
+                },
+                "props": {
+                  "style": {
+                    "classes": "exchange/event-analytics/container/widget",
+                    "marginLeft": 10,
+                    "overflow": "hidden",
+                    "paddingBottom": 0,
+                    "paddingLeft": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "LabelUser"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "color": "--neutral-60",
+                        "fontSize": "1.5vh",
+                        "textAlign": "right",
+                        "whiteSpace": "pre"
+                      },
+                      "text": "User: "
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "events": {
+                      "component": {
+                        "onActionPerformed": {
+                          "config": {
+                            "script": "\tself.view.custom.refreshBindings \u003d True"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "DropdownUser"
+                    },
+                    "position": {
+                      "basis": "300px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.options": {
+                        "binding": {
+                          "config": {
+                            "path": "view.custom.users.userDropdown"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "multiSelect": true,
+                      "style": {
+                        "classes": "exchange/event-analytics/dropdown/type1"
+                      },
+                      "value": null,
+                      "wrapMultiSelectValues": false
+                    },
+                    "type": "ia.input.dropdown"
+                  }
+                ],
+                "meta": {
+                  "name": "FilterUser"
+                },
+                "position": {
+                  "basis": "398px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "exchange/event-analytics/container/widget",
+                    "marginLeft": 10,
+                    "overflow": "hidden",
+                    "paddingBottom": 5,
+                    "paddingLeft": 10
+                  },
+                  "wrap": "wrap"
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "LabelAction"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "color": "--neutral-60",
+                        "fontSize": "1.5vh",
+                        "textAlign": "right",
+                        "whiteSpace": "pre"
+                      },
+                      "text": "Action: "
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "events": {
+                      "component": {
+                        "onActionPerformed": {
+                          "config": {
+                            "script": "\tself.view.refreshBinding(\"custom.users.lastLoginLogoutTable\")\n\tself.view.refreshBinding(\"custom.events.totalEventValue\")\n\tself.view.refreshBinding(\"custom.actions.actionFrequency\")\n\tself.view.refreshBinding(\"custom.events.eventsTable\")\n\tself.view.refreshBinding(\"custom.events.topTagWriteTargets\")\n\tself.view.refreshBinding(\"custom.actions.successfulAction\")\n\tself.view.refreshBinding(\"custom.users.userSelectList\")\n\tself.view.refreshBinding(\"custom.actions.actionSelectList\")"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "DropdownAction"
+                    },
+                    "position": {
+                      "basis": "300px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.options": {
+                        "binding": {
+                          "config": {
+                            "path": "view.custom.actions.actionDropdown"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "multiSelect": true,
+                      "style": {
+                        "classes": "Exchange/Dropdown/Type1"
+                      },
+                      "value": null
+                    },
+                    "type": "ia.input.dropdown"
+                  }
+                ],
+                "meta": {
+                  "name": "FilterAction"
+                },
+                "position": {
+                  "basis": "406px",
+                  "display": false
+                },
+                "props": {
+                  "style": {
+                    "classes": "Exchange/Container/Widget",
+                    "marginLeft": 10,
+                    "overflow": "hidden",
+                    "paddingBottom": 5,
+                    "paddingLeft": 10
+                  },
+                  "wrap": "wrap"
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "FilterContainer"
+            },
+            "position": {
+              "grow": 1
+            },
+            "props": {
+              "style": {
+                "classes": "exchange/event-analytics/container/widget",
+                "marginLeft": 20,
+                "marginRight": 20,
+                "marginTop": 20
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Filters"
+        },
+        "position": {
+          "basis": "64px"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "hasDelegate": true,
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "50px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "borderBottomColor": "#FEFEFE",
+                    "borderBottomStyle": "solid",
+                    "borderBottomWidth": 1,
+                    "classes": "exchange/event-analytics/text/titles-18-c"
+                  },
+                  "text": "Event Metrics"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Table"
+                },
+                "position": {
+                  "basis": "400px",
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.data": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.actions.dsActions"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "columns": [
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "displaypath",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "center",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": "Events"
+                      },
+                      "justify": "left",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": false,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": "",
+                        "paddingLeft": 20
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": ""
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "cnt",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "center",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": "Value"
+                      },
+                      "justify": "center",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": ""
+                    }
+                  ],
+                  "headerStyle": {
+                    "classes": "exchange/event-analytics/table/header"
+                  },
+                  "pager": {
+                    "bottom": false
+                  },
+                  "style": {
+                    "borderStyle": "none",
+                    "borderTopLeftRadius": 0,
+                    "borderTopRightRadius": 0,
+                    "classes": "exchange/event-analytics/table/general",
+                    "minHeight": "250px",
+                    "overflow": "hidden"
+                  },
+                  "virtualized": false
+                },
+                "type": "ia.display.table"
+              }
+            ],
+            "meta": {
+              "name": "EventKpis"
+            },
+            "position": {
+              "basis": "374px"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "classes": "exchange/event-analytics/container/widget",
+                "marginLeft": 20,
+                "overflow": "hidden"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "hasDelegate": true,
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "borderBottomColor": "#FEFEFE",
+                            "borderBottomStyle": "solid",
+                            "borderBottomWidth": 1,
+                            "classes": "exchange/event-analytics/text/titles-18-c"
+                          },
+                          "text": "Top 10 Tag Write Targets"
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "meta": {
+                          "name": "Table"
+                        },
+                        "position": {
+                          "grow": 1
+                        },
+                        "propConfig": {
+                          "props.data": {
+                            "binding": {
+                              "config": {
+                                "path": "view.custom.events.topTagWriteTargets"
+                              },
+                              "type": "property"
+                            }
+                          }
+                        },
+                        "props": {
+                          "columns": [
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY HH:mm:ss",
+                              "editable": false,
+                              "field": "tag",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "Action Target"
+                              },
+                              "justify": "left",
+                              "number": "value",
+                              "numberFormat": "$ (0,0.00)",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "date",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": 470
+                            },
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY HH:mm:ss",
+                              "editable": false,
+                              "field": "write_count",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "Total Changes"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "0,0.##",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "auto",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": "auto"
+                            },
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY HH:mm:ss",
+                              "editable": false,
+                              "field": "last_value",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "Last value"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "0,0.##",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "auto",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": "auto"
+                            }
+                          ],
+                          "headerStyle": {
+                            "classes": "exchange/event-analytics/table/header"
+                          },
+                          "pager": {
+                            "bottom": false
+                          },
+                          "style": {
+                            "borderStyle": "none",
+                            "classes": "exchange/event-analytics/table/general",
+                            "minHeight": "250px"
+                          }
+                        },
+                        "type": "ia.display.table"
+                      }
+                    ],
+                    "meta": {
+                      "name": "TopTagWriteTargetsTable"
+                    },
+                    "position": {
+                      "basis": "50%"
+                    },
+                    "props": {
+                      "direction": "column",
+                      "style": {
+                        "classes": "exchange/event-analytics/container/widget",
+                        "marginRight": 20
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "hasDelegate": true,
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "50px",
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "borderBottomColor": "#FEFEFE",
+                            "borderBottomStyle": "solid",
+                            "borderBottomWidth": 1,
+                            "classes": "exchange/event-analytics/text/titles-18-c"
+                          },
+                          "text": "Last Login/Logout"
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "meta": {
+                          "name": "Table"
+                        },
+                        "position": {
+                          "grow": 1
+                        },
+                        "propConfig": {
+                          "props.data": {
+                            "binding": {
+                              "config": {
+                                "path": "view.custom.users.lastLoginLogoutTable"
+                              },
+                              "type": "property"
+                            }
+                          }
+                        },
+                        "props": {
+                          "columns": [
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY HH:mm:ss",
+                              "editable": false,
+                              "field": "actor",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "User"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "$ (0,0.00)",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "date",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": "auto"
+                            },
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY HH:mm:ss",
+                              "editable": false,
+                              "field": "login_time",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "Last Login"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "0,0.##",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "auto",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": "auto"
+                            },
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY HH:mm:ss",
+                              "editable": false,
+                              "field": "logout_time",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "Last Logout"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "0,0.##",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "auto",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": "auto"
+                            },
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "none",
+                              "editable": false,
+                              "field": "duration",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "Session Duration"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "0,0.##",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "auto",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": "auto"
+                            },
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "none",
+                              "editable": false,
+                              "field": "login_source",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "Login Source"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "0,0.##",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "auto",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": "auto"
+                            }
+                          ],
+                          "headerStyle": {
+                            "classes": "exchange/event-analytics/table/header"
+                          },
+                          "pager": {
+                            "bottom": false
+                          },
+                          "style": {
+                            "borderStyle": "none",
+                            "classes": "exchange/event-analytics/table/general"
+                          }
+                        },
+                        "type": "ia.display.table"
+                      }
+                    ],
+                    "meta": {
+                      "name": "LastLoginLogoutTable"
+                    },
+                    "position": {
+                      "basis": "50%"
+                    },
+                    "props": {
+                      "direction": "column",
+                      "style": {
+                        "classes": "exchange/event-analytics/container/widget",
+                        "marginRight": 20
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "TagAndLogin"
+                },
+                "position": {
+                  "basis": "60%"
+                },
+                "props": {
+                  "style": {
+                    "marginLeft": 20
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "hasDelegate": true,
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "343px",
+                          "shrink": 0
+                        },
+                        "props": {
+                          "style": {
+                            "borderBottomColor": "#FEFEFE",
+                            "borderBottomStyle": "solid",
+                            "borderBottomWidth": 0,
+                            "classes": "exchange/event-analytics/text/titles-18-c"
+                          },
+                          "text": "Events"
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "meta": {
+                          "name": "Spacer"
+                        },
+                        "position": {
+                          "basis": "155px"
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "children": [
+                          {
+                            "meta": {
+                              "name": "LabelAction"
+                            },
+                            "position": {
+                              "shrink": 0
+                            },
+                            "props": {
+                              "style": {
+                                "color": "--neutral-60",
+                                "fontSize": "1.5vh",
+                                "textAlign": "right",
+                                "whiteSpace": "pre"
+                              },
+                              "text": "Action: "
+                            },
+                            "type": "ia.display.label"
+                          },
+                          {
+                            "events": {
+                              "component": {
+                                "onActionPerformed": {
+                                  "config": {
+                                    "script": "\tself.view.refreshBinding(\"custom.users.lastLoginLogoutTable\")\n\tself.view.refreshBinding(\"custom.events.totalEventValue\")\n\tself.view.refreshBinding(\"custom.actions.actionFrequency\")\n\tself.view.refreshBinding(\"custom.events.eventsTable\")\n\tself.view.refreshBinding(\"custom.events.topTagWriteTargets\")\n\tself.view.refreshBinding(\"custom.actions.successfulAction\")\n\tself.view.refreshBinding(\"custom.users.userSelectList\")\n\tself.view.refreshBinding(\"custom.actions.actionSelectList\")"
+                                  },
+                                  "scope": "G",
+                                  "type": "script"
+                                }
+                              }
+                            },
+                            "meta": {
+                              "name": "DropdownAction"
+                            },
+                            "position": {
+                              "basis": "300px",
+                              "grow": 1
+                            },
+                            "propConfig": {
+                              "props.options": {
+                                "binding": {
+                                  "config": {
+                                    "path": "view.custom.actions.actionDropdown"
+                                  },
+                                  "type": "property"
+                                }
+                              }
+                            },
+                            "props": {
+                              "multiSelect": true,
+                              "style": {
+                                "classes": "exchange/event-analytics/dropdown/type1"
+                              },
+                              "value": null
+                            },
+                            "type": "ia.input.dropdown"
+                          }
+                        ],
+                        "meta": {
+                          "name": "FilterAction"
+                        },
+                        "position": {
+                          "basis": "401px"
+                        },
+                        "props": {
+                          "style": {
+                            "classes": "exchange/event-analytics/container/widget",
+                            "marginLeft": 10,
+                            "overflow": "hidden",
+                            "paddingBottom": 5,
+                            "paddingLeft": 10
+                          },
+                          "wrap": "wrap"
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "FlexContainer"
+                    },
+                    "position": {
+                      "basis": "50px"
+                    },
+                    "props": {
+                      "justify": "flex-end",
+                      "style": {
+                        "borderBottomColor": "#FEFEFE",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": 1
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Table"
+                        },
+                        "position": {
+                          "size": "large"
+                        },
+                        "propConfig": {
+                          "props.data": {
+                            "binding": {
+                              "config": {
+                                "path": "view.custom.events.eventsTable"
+                              },
+                              "type": "property"
+                            }
+                          }
+                        },
+                        "props": {
+                          "columns": [
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY HH:mm:ss",
+                              "editable": false,
+                              "field": "event_timestamp",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "DateTime"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "$ (0,0.00)",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "date",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": 40
+                            },
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY",
+                              "editable": false,
+                              "field": "actor",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "User"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "0,0.##",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "auto",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": 40
+                            },
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY",
+                              "editable": false,
+                              "field": "action",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "Action"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "0,0.##",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "auto",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": 40
+                            },
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY",
+                              "editable": false,
+                              "field": "action_target",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "Action Target"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "0,0.##",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "auto",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": 50
+                            },
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY",
+                              "editable": false,
+                              "field": "action_value",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "Action Value"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "0,0.##",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "auto",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": true,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": 500
+                            },
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY",
+                              "editable": false,
+                              "field": "status_code",
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": "Status Code"
+                              },
+                              "justify": "center",
+                              "number": "value",
+                              "numberFormat": "none",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "#62A3F6",
+                                  "linecap": "round",
+                                  "width": 5
+                                },
+                                "max": 100,
+                                "track": {
+                                  "color": "#DADADA",
+                                  "linecap": "round",
+                                  "width": 2
+                                },
+                                "value": {
+                                  "color": "#7D7D7D",
+                                  "show": true
+                                }
+                              },
+                              "render": "number",
+                              "resizable": true,
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "#2196F3",
+                                  "unselected": "#FFFFFF"
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "width": 50
+                            }
+                          ],
+                          "headerStyle": {
+                            "classes": "exchange/event-analytics/table/header"
+                          },
+                          "pager": {
+                            "bottom": false
+                          },
+                          "style": {
+                            "borderStyle": "none",
+                            "classes": "exchange/event-analytics/table/general",
+                            "minHeight": "250px"
+                          }
+                        },
+                        "type": "ia.display.table"
+                      }
+                    ],
+                    "meta": {
+                      "name": "BreakpointContainer"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "props": {
+                      "currentBreakpoint": "large"
+                    },
+                    "type": "ia.container.breakpt"
+                  }
+                ],
+                "meta": {
+                  "name": "EventTable"
+                },
+                "position": {
+                  "basis": "40%"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "classes": "exchange/event-analytics/container/widget",
+                    "marginLeft": 20,
+                    "marginRight": 20,
+                    "marginTop": 20,
+                    "overflow": "hidden"
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Events"
+            },
+            "position": {
+              "basis": "200px",
+              "grow": 1
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Tables"
+        },
+        "position": {
+          "basis": "200px",
+          "grow": 1
+        },
+        "props": {
+          "style": {
+            "marginBottom": 20,
+            "marginTop": 20
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

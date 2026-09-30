@@ -1,0 +1,121 @@
+{
+  "custom": {},
+  "params": {
+    "data": {
+      "icon": "material/info",
+      "level": "info",
+      "message": "value",
+      "title": "value"
+    }
+  },
+  "propConfig": {
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 264,
+      "width": 366
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.params.data.icon": {
+            "binding": {
+              "config": {
+                "path": "view.params.data.icon"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.data.level": {
+            "binding": {
+              "config": {
+                "path": "view.params.data.level"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.data.title": {
+            "binding": {
+              "config": {
+                "path": "view.params.data.title"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "data": {
+              "message": "value"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "TextArea"
+            },
+            "position": {
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.params.data.message"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.input.text-area"
+          }
+        ],
+        "meta": {
+          "name": "Content"
+        },
+        "position": {
+          "basis": "160px",
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "justify": "space-around"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Effects/Fade-In"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

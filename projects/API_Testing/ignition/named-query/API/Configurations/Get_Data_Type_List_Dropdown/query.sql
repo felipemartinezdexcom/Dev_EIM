@@ -1,0 +1,1 @@
+select dataType as [value], dataType as label from dataTypesList

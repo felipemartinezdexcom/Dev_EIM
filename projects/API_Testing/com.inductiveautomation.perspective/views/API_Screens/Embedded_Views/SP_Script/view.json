@@ -1,0 +1,83 @@
+{
+  "custom": {},
+  "params": {
+    "sp_name": "value"
+  },
+  "propConfig": {
+    "params.sp_name": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 682,
+      "width": 1096
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "SubviewHeader"
+        },
+        "position": {
+          "basis": "46px",
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "icon": "material/subject",
+            "label": "Stored Procedure Script"
+          },
+          "path": "API_Screens/Templates/SubviewHeader"
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "Markdown"
+        },
+        "position": {
+          "basis": "200px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.source": {
+            "binding": {
+              "config": {
+                "parameters": {
+                  "sp_name": "{view.params.sp_name}"
+                },
+                "queryPath": "API/Configurations/Get_SP_Definition",
+                "returnFormat": "json"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn value[0][\"\"]",
+                  "type": "script"
+                }
+              ],
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "marginBottom": 10,
+            "marginLeft": 10,
+            "marginRight": 10
+          }
+        },
+        "type": "ia.display.markdown"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,525 @@
+{
+  "custom": {
+    "data": null
+  },
+  "params": {
+    "rowIndex": 0
+  },
+  "propConfig": {
+    "custom.data": {
+      "binding": {
+        "config": {
+          "struct": {
+            "data": "{session.custom.Records}",
+            "rowIndex": "{view.params.rowIndex}"
+          },
+          "waitOnAll": true
+        },
+        "transforms": [
+          {
+            "code": "\tindex\u003d value[\u0027rowIndex\u0027]\n\tdata\u003dvalue[\u0027data\u0027]\n\t\n\t\n\tPackageContent\u003ddata[index][\u0027PackageContents\u0027].keys()[0]\n\tContent\u003ddata[index][\u0027PackageContents\u0027][PackageContent]\n\tEquipemntId\u003ddata[index][\u0027EquipmentPackageID\u0027]\n\tRejectCode\u003ddata[index][\u0027RejectCode\u0027]\n\tQuality\u003d\u0027\u0027\n\tif RejectCode\u003d\u003dNone or RejectCode\u003d\u003d\"\":\n\t\tQuality\u003d1\n\telse:\n\t\tQuality\u003d2\n\t\t\n\tdataDict\u003d{\"EquipmentPackageId\":EquipemntId,\n\t\"PackageContent\":PackageContent,\n\t\"QualityDisposition\":Quality,\n\t\"RejectCode\":RejectCode,\n\t\"Content\":Content}\n\t\t\n\n\treturn dataDict\n\t\n\t\n\t\n\n\t\n",
+            "type": "script"
+          }
+        ],
+        "type": "expr-struct"
+      },
+      "persistent": true
+    },
+    "params.rowIndex": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 312
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "icon": "material/edit_road",
+            "label": "Edit Packaging Record"
+          },
+          "path": "FMC_Screens/Templates/Header_Docks",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "text": "Equipment Package Id:",
+                  "textStyle": {
+                    "textAlign": "left"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "TextField"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.data.EquipmentPackageId"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "type": "ia.input.text-field"
+              }
+            ],
+            "meta": {
+              "name": "Equipment Package Id"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "text": "Package Content:",
+                  "textStyle": {
+                    "textAlign": "left"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "RadioGroup"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.value": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.data.PackageContent"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "align": "start",
+                  "orientation": "column",
+                  "radios": [
+                    {
+                      "selected": true,
+                      "text": "G7_Wearable_TXID",
+                      "value": "G7_Wearable_TXID"
+                    },
+                    {
+                      "selected": false,
+                      "text": "G7_Carton_OnePack",
+                      "value": "G7_Carton_OnePack"
+                    },
+                    {
+                      "selected": false,
+                      "text": "G7_Carton_TwoPack",
+                      "value": "G7_Carton_TwoPack"
+                    }
+                  ]
+                },
+                "type": "ia.input.radio-group"
+              }
+            ],
+            "meta": {
+              "name": "Package Content"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "text": "Quality Disposition:",
+                  "textStyle": {
+                    "textAlign": "left"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "RadioGroup"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.value": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.data.QualityDisposition"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "index": 1,
+                  "radios": [
+                    {
+                      "selected": false,
+                      "text": "Good",
+                      "value": 1
+                    },
+                    {
+                      "selected": true,
+                      "text": "Reject",
+                      "value": 2
+                    }
+                  ]
+                },
+                "type": "ia.input.radio-group"
+              }
+            ],
+            "meta": {
+              "name": "Quality Disposition"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "text": "Reject Codes:",
+                  "textStyle": {
+                    "textAlign": "left"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Dropdown"
+                },
+                "position": {
+                  "basis": "36px"
+                },
+                "propConfig": {
+                  "props.value": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.data.RejectCode"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "options": [
+                    {
+                      "label": "3--FC_ApplicatorNotFilled",
+                      "value": 3
+                    },
+                    {
+                      "label": "4--FC_InsertTrayNotFilled",
+                      "value": 4
+                    },
+                    {
+                      "label": "5--FC_IFUNotFilled",
+                      "value": 5
+                    },
+                    {
+                      "label": "204--FC_CaseNotLabeled",
+                      "value": 204
+                    }
+                  ]
+                },
+                "type": "ia.input.dropdown"
+              }
+            ],
+            "meta": {
+              "name": "Reject Codes"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "propConfig": {
+              "position.display": {
+                "binding": {
+                  "config": {
+                    "path": "../Quality Disposition/RadioGroup.props.value"
+                  },
+                  "transforms": [
+                    {
+                      "fallback": false,
+                      "inputType": "scalar",
+                      "mappings": [
+                        {
+                          "input": 2,
+                          "output": true
+                        }
+                      ],
+                      "outputType": "scalar",
+                      "type": "map"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "text": "Content:",
+                  "textStyle": {
+                    "textAlign": "left"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "TextArea"
+                },
+                "position": {
+                  "basis": "400px"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.data.Content"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\tstrData\u003d\"\"\n\t\n\tlenTransactions\u003dlen(value)\n\tcounter\u003d0\n\tfor transaction in value:\n\t\tif counter!\u003d(lenTransactions-1)  and ((counter+1)%3!\u003d0) :\n\t\t\tstrData+\u003dtransaction+\"\\n\"\n\t\telif counter!\u003d(lenTransactions-1)  and ((counter+1)%3\u003d\u003d0) :\n\t\t\tstrData+\u003dtransaction+\"\\n\"\n\t\telif counter\u003d\u003d(lenTransactions-1):\n\t\t\tstrData+\u003dtransaction\n\t\tcounter+\u003d1\n\t\t\n\t\t\n\treturn strData\n\t\n\t",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "property"
+                    }
+                  }
+                },
+                "type": "ia.input.text-area"
+              }
+            ],
+            "meta": {
+              "name": "Content"
+            },
+            "position": {
+              "basis": "200px",
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\t\t\n\tEquipmentPackageId\u003dself.parent.parent.getChild(\"Equipment Package Id\").getChild(\"TextField\").props.text\n\tPackageContent\u003dself.parent.parent.getChild(\"Package Content\").getChild(\"RadioGroup\").props.value\n\tQuality\u003dself.parent.parent.getChild(\"Quality Disposition\").getChild(\"RadioGroup\").props.value\n\tRejectCode\u003dself.parent.parent.getChild(\"Reject Codes\").getChild(\"Dropdown\").props.value\n\tContent\u003dself.parent.parent.getChild(\"Content\").getChild(\"TextArea\").props.text\n\tselectedRow\u003dself.view.params.rowIndex\n\n\t\n\t##Split all comma separated Transactions\n\t#cleanedContent\u003dContent.replace(\"\\n\",\"\")\n\t#TXidsSplit\u003dcleanedContent.split(\u0027,\u0027)\n\t##Split all comma separated Transactions\n\t\n\tTXidsSplit\u003dContent.split(\u0027\\n\u0027)\n\t\n\t\n\t##Build Content Dictionary\n\tdatadict\u003d{\"PackageContents\":{PackageContent:TXidsSplit},\"RejectCode\":RejectCode,\"Result\":1,\"EquipmentPackageID\":EquipmentPackageId}\n\t\n\t\n\n\t\n\tself.session.custom.Records[selectedRow]\u003ddatadict\n\t\n\t##refresh table\n\trefreshState\u003dself.session.custom.RefreshCommands.CreatePackagingRecordTable\n\tself.session.custom.RefreshCommands.CreatePackagingRecordTable\u003dnot refreshState\n\t\n\t##ClearData\n\t#self.parent.parent.getChild(\"Equipemnt\").getChild(\"TextField\").props.text\u003d\"\"\n\t#self.parent.parent.getChild(\"Quality Disposition\").getChild(\"RadioGroup\").props.value\u003d1\n\t#self.parent.parent.getChild(\"TXIDs\").getChild(\"TextArea\").props.text\u003d\"\"\n\t"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Edit Record"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Edit Record"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tsystem.perspective.closeDock(\"EditRecords\")\n\t"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Close Dock"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Close"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "Buttons"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "justify": "center",
+              "style": {
+                "gap": 20,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 20
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Wrapper"
+        },
+        "position": {
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "justify": "space-evenly"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Frames/Standard1 Margins/Box_Separation"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

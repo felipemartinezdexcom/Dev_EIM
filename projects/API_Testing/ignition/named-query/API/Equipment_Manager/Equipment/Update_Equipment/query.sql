@@ -1,0 +1,1 @@
+update [API].Equipment set equipment_name=:equipment_name, active=:active, last_date_modified=GETDATE() where equipment_id=:equipment_id

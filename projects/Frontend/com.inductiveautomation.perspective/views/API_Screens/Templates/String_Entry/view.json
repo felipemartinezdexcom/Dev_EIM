@@ -1,0 +1,201 @@
+{
+  "custom": {},
+  "params": {
+    "dataType": "",
+    "paramName": "",
+    "required": "YES"
+  },
+  "propConfig": {
+    "params.dataType": {
+      "binding": {
+        "config": {
+          "path": "/root/Dropdown.props.value"
+        },
+        "type": "property"
+      },
+      "paramDirection": "output",
+      "persistent": true
+    },
+    "params.paramName": {
+      "binding": {
+        "config": {
+          "path": "/root/param name.props.text"
+        },
+        "type": "property"
+      },
+      "paramDirection": "output",
+      "persistent": true
+    },
+    "params.required": {
+      "binding": {
+        "config": {
+          "path": "/root/Required.props.value"
+        },
+        "type": "property"
+      },
+      "paramDirection": "output",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 40,
+      "width": 1012
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "label1"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "Fonts_Sizes/Component_Label"
+          },
+          "text": "Parameter Name:",
+          "textStyle": {
+            "textAlign": "left"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "param name"
+        },
+        "position": {
+          "basis": "300px",
+          "grow": 1
+        },
+        "props": {
+          "style": {
+            "classes": "Effects/input_radious"
+          }
+        },
+        "type": "ia.input.text-field"
+      },
+      {
+        "meta": {
+          "name": "label2"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "Fonts_Sizes/Component_Label"
+          },
+          "text": "Data Type: ",
+          "textStyle": {
+            "textAlign": "left"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Dropdown"
+        },
+        "position": {
+          "basis": "110px",
+          "shrink": 0
+        },
+        "props": {
+          "options": [
+            {
+              "label": "INT",
+              "value": "INT"
+            },
+            {
+              "label": "VARCHAR",
+              "value": "VARCHAR"
+            },
+            {
+              "label": "BIT",
+              "value": "BIT"
+            },
+            {
+              "label": "FLOAT",
+              "value": "FLOAT"
+            }
+          ],
+          "style": {
+            "classes": "Effects/input_radious"
+          }
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "meta": {
+          "name": "label3"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "Fonts_Sizes/Component_Label"
+          },
+          "text": "Required: ",
+          "textStyle": {
+            "textAlign": "left"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Required"
+        },
+        "position": {
+          "basis": "100px",
+          "shrink": 0
+        },
+        "props": {
+          "options": [
+            {
+              "label": "YES",
+              "value": "YES"
+            },
+            {
+              "label": "NO",
+              "value": "NO"
+            }
+          ],
+          "style": {
+            "classes": "Effects/input_radious"
+          },
+          "value": "YES"
+        },
+        "type": "ia.input.dropdown"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "justify": "space-between",
+      "style": {
+        "gap": 10
+      }
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "editParam",
+          "pageScope": true,
+          "script": "\tself.getChild(\"param name\").props.text\u003dpayload[\u0027param_name\u0027]\n\tself.getChild(\"Dropdown\").props.value\u003dpayload[\u0027data_type\u0027]\n\tself.getChild(\"Required\").props.value\u003dpayload[\u0027required_param\u0027]",
+          "sessionScope": true,
+          "viewScope": true
+        }
+      ]
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "custom": {},
+  "params": {
+    "density": 5
+  },
+  "propConfig": {
+    "params.density": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 426,
+      "width": 821
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "basis": "320px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "path": "view.params.density"
+              },
+              "transforms": [
+                {
+                  "code": "\timport random\n\treturn [{\n  \"instanceStyle\": {\n    \"classes\": \"\",\n    \"width\": \"%s%s\" % (random.uniform(35,100),\"%\")\n  },\n  \"instancePosition\": {}\n} for v in range(value)]",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "elementStyle": {
+            "margin": "10px",
+            "overflow": "visible"
+          },
+          "path": "API_Screens/Templates/Skeleton Bar",
+          "style": {
+            "overflow": "visible"
+          },
+          "useDefaultViewHeight": false,
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "overflow": "hidden"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

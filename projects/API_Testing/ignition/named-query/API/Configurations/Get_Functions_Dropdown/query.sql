@@ -1,0 +1,1 @@
+SELECT function_id as [value], function_name as [label] FROM [API].FunctionsList

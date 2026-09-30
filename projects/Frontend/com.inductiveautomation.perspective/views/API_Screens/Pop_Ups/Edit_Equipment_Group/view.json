@@ -1,0 +1,1069 @@
+{
+  "custom": {},
+  "params": {
+    "data": {
+      "equipment_group_id": "",
+      "equipment_group_name": "value",
+      "equipment_group_status": "value"
+    }
+  },
+  "propConfig": {
+    "params.data": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 806,
+      "width": 937
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/edit",
+              "level": "popup",
+              "message": "value",
+              "title": "Edit Equipment Group"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "expression": "{parent.meta.name}+ \" :\""
+                      },
+                      "type": "expr"
+                    }
+                  }
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "textStyle": {
+                    "textAlign": "left"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "TextField"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "path": "view.params.data.equipment_group_name"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "type": "ia.input.text-field"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\tusername\u003dself.session.props.auth.user.userName\n\tnew_equipment_group_name\u003dself.getSibling(\"TextField\").props.text\n\tequipment_group_id\u003dself.view.params.data.equipment_group_id\n\tdata\u003dself.view.params.data\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\t\n\t##edit group name\n\tparams\u003d{\"equipment_group_name\":new_equipment_group_name,\n\t\t\t\"equipment_group_id\":equipment_group_id,\n\t\t\t\"database\":database}\n\tsystem.db.execUpdate(\"API/Equipment_Manager/Equipment_Group/Update_Group_Name\", params)\n\t\n\t##logEvent\n\tlogparams\u003d{\"username\":username,\n\t\t   \"event_type\":\"Edit\",\n\t\t   \"before_change\":str(data),\n\t\t   \"after_change\":str(params),\n\t\t   \"description\":\"Edit Equipment Group Name\"}\n\tAPI.Functions.log_activity(logparams)\n\t\t\t\n\t\n\t\n\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\n\n\t\t\t\n"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Add"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.enabled": {
+                        "binding": {
+                          "config": {
+                            "expression": "len({../TextField.props.text})\u003e5 \r\n"
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "data": [
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203293,
+                          "equipment_id": 14,
+                          "equipment_name": "EQ-00012312-0002",
+                          "last_date_modified": 1783025203293
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203307,
+                          "equipment_id": 15,
+                          "equipment_name": "EQ-00012312-0003",
+                          "last_date_modified": 1783025203307
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203310,
+                          "equipment_id": 16,
+                          "equipment_name": "EQ-00012312-0004",
+                          "last_date_modified": 1783025203310
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203317,
+                          "equipment_id": 17,
+                          "equipment_name": "EQ-00012312-0005",
+                          "last_date_modified": 1783025203317
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203320,
+                          "equipment_id": 18,
+                          "equipment_name": "EQ-00012312-0006",
+                          "last_date_modified": 1783025203320
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203323,
+                          "equipment_id": 19,
+                          "equipment_name": "EQ-00012312-0007",
+                          "last_date_modified": 1783025203323
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203330,
+                          "equipment_id": 20,
+                          "equipment_name": "EQ-00012312-0008",
+                          "last_date_modified": 1783025203330
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203333,
+                          "equipment_id": 21,
+                          "equipment_name": "EQ-00012312-0009",
+                          "last_date_modified": 1783025203333
+                        },
+                        {
+                          "active": true,
+                          "created_by": null,
+                          "date_created": 1783025203337,
+                          "equipment_id": 22,
+                          "equipment_name": "EQ-00012312-0010",
+                          "last_date_modified": 1783025203337
+                        }
+                      ],
+                      "style": {
+                        "classes": "Buttons/Classic"
+                      },
+                      "text": "Update Name"
+                    },
+                    "type": "ia.input.button"
+                  }
+                ],
+                "meta": {
+                  "name": "Entry"
+                },
+                "position": {
+                  "basis": "35px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Group Name"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "label2"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "classes": "Fonts_Sizes/Component_Label"
+                  },
+                  "text": "Status:",
+                  "textStyle": {
+                    "textAlign": "right"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Dropdown"
+                },
+                "position": {
+                  "basis": "300px",
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.value": {
+                    "binding": {
+                      "config": {
+                        "path": "view.params.data.equipment_group_status"
+                      },
+                      "transforms": [
+                        {
+                          "fallback": 0,
+                          "inputType": "scalar",
+                          "mappings": [
+                            {
+                              "input": true,
+                              "output": 1
+                            }
+                          ],
+                          "outputType": "scalar",
+                          "type": "map"
+                        }
+                      ],
+                      "type": "property"
+                    },
+                    "onChange": {
+                      "enabled": null,
+                      "script": "\timport time\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\ttime.sleep(.1)\n\t\n\tstatus_passed\u003dself.view.params.data.equipment_group_status\n\tif (status_passed\u003d\u003dTrue and currentValue.value!\u003d1) or (status_passed\u003d\u003dFalse and currentValue.value!\u003d0):\n\t\n\t\tusername\u003dself.session.props.auth.user.userName\n\t\tequipment_group_id\u003dself.view.params.data.equipment_group_id\n\t\tparams\u003d{\"equipment_group_id\":equipment_group_id,\n\t\t\t\t\"status\":currentValue.value,\n\t\t\t\t\"database\":database}\n\t\tsystem.db.execUpdate(\"API/Equipment_Manager/Equipment_Group/Edit_Status\", params)\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\t\n\t\n\t\tlogparams\u003d{\"username\":username,\n\t\t\"event_type\":\"Edit\",\n\t\t\"before_change\":str(previousValue.value),\n\t\t\"after_change\":str(currentValue.value),\n\t\t\"description\":\"Edit Equipment Group Status\"}\n\t\tAPI.Functions.log_activity(logparams)\n\t\t\t\n\n\t\n"
+                    }
+                  }
+                },
+                "props": {
+                  "options": [
+                    {
+                      "label": "Active",
+                      "value": 1
+                    },
+                    {
+                      "label": "Inactive",
+                      "value": 0
+                    }
+                  ]
+                },
+                "type": "ia.input.dropdown"
+              }
+            ],
+            "meta": {
+              "name": "Entry"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "gap": 10,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 10
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "35px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "expression": "{parent.meta.name}+ \" :\""
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Table"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.data": {
+                        "binding": {
+                          "config": {
+                            "mode": "direct",
+                            "parameters": {
+                              "database": "{session.custom.EIM_Config_DB}"
+                            },
+                            "queryPath": "API/Equipment_Manager/Equipment/Get",
+                            "returnFormat": "json"
+                          },
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "columns": [
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "equipment_id",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {},
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": 150
+                        },
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "equipment_name",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": 150
+                        }
+                      ],
+                      "filter": {
+                        "enabled": true
+                      },
+                      "headerStyle": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "pager": {
+                        "bottom": false
+                      },
+                      "rows": {
+                        "height": 50,
+                        "subview": {
+                          "viewPath": "API_Screens/Subviews/Function_Input_Params"
+                        },
+                        "subviewExpansionMode": "single"
+                      },
+                      "selection": {
+                        "mode": "multiple interval"
+                      }
+                    },
+                    "scripts": {
+                      "customMethods": [],
+                      "extensionFunctions": null,
+                      "messageHandlers": [
+                        {
+                          "messageType": "tablerefresh",
+                          "pageScope": true,
+                          "script": "\tself.refreshBinding(\u0027props.data\u0027)",
+                          "sessionScope": true,
+                          "viewScope": true
+                        }
+                      ]
+                    },
+                    "type": "ia.display.table"
+                  }
+                ],
+                "meta": {
+                  "name": "Unassigned Equipment List"
+                },
+                "position": {
+                  "basis": "50%"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10,
+                    "marginTop": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\timport time\n\tusername\u003dself.session.props.auth.user.userName\n\tdata_selection\u003dself.parent.parent.getChild(\"Unassigned Equipment List\").getChild(\"Table\").props.selection.data\n\tequipment_group_id\u003dself.view.params.data.equipment_group_id\n\tcurrent_equipment\u003dself.parent.parent.getChild(\"Group Equipment List\").getChild(\"Table\").props.data\n\tequipment_group_name\u003dself.parent.parent.parent.getChild(\"Group Name\").getChild(\"Entry\").getChild(\"TextField\").props.text\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\tadded\u003d[]\n\t\n\tif len(data_selection)!\u003d0:\n\t\t\n\t\tfor unassigned_equipment in data_selection:\n\t\t\tparams\u003d{\"equipment_group_id\":equipment_group_id,\n\t\t\t\t\t\"equipment_id\":unassigned_equipment[\u0027equipment_id\u0027],\n\t\t\t\t    \"database\":database}\n\t\t\tsystem.db.execUpdate(\"API/Equipment_Manager/Equipment_Group/Insert_Equipment_Relationship\", params)\n\t\t\tadded.append(params)\n\t\t\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\t\n\t\ttime.sleep(.1)\n\t\tupdated_equipment\u003dself.parent.parent.getChild(\"Group Equipment List\").getChild(\"Table\").props.data\n\t\t##logEvent\n\t\tlogparams\u003d{\"username\":username,\n\t\t\t   \"event_type\":\"Edit\",\n\t\t\t   \"before_change\":str(current_equipment)[16:],\n\t\t\t   \"after_change\":str(updated_equipment)[16:],\n\t\t\t   \"description\":\"Edit: Added more equipment to Equipmet Group {0}\".format(equipment_group_name)}\n\t\tAPI.Functions.log_activity(logparams)\n\t\t\t\n\t"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "add"
+                    },
+                    "position": {
+                      "basis": "60px"
+                    },
+                    "props": {
+                      "path": "material/arrow_right",
+                      "style": {
+                        "backgroundColor": "#C3C3C3",
+                        "borderStyle": "solid"
+                      }
+                    },
+                    "type": "ia.display.icon"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\timport time\n\tusername\u003dself.session.props.auth.user.userName\n\tdata_selection\u003dself.parent.parent.getChild(\"Group Equipment List\").getChild(\"Table\").props.selection.data\n\tequipment_group_id\u003dself.view.params.data.equipment_group_id\n\tcurrent_equipment\u003dself.parent.parent.getChild(\"Group Equipment List\").getChild(\"Table\").props.data\n\tequipment_group_name\u003dself.parent.parent.parent.getChild(\"Group Name\").getChild(\"Entry\").getChild(\"TextField\").props.text\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\t\n\t\n\tif len(data_selection)!\u003d0:\n\t\t\n\t\tfor assigned_equipment in data_selection:\n\t\t\tparams\u003d{\"equipment_group_id\":equipment_group_id,\n\t\t\t\t\t\"equipment_id\":assigned_equipment[\u0027equipment_id\u0027],\n\t\t\t\t \t\"database\":database}\n\t\t\tsystem.db.execUpdate(\"API/Equipment_Manager/Equipment_Group/Delete_Equipment_From_Equipment_Group\", params)\n\t\t\n\t\t\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\ttime.sleep(.1)\n\t\tupdated_equipment\u003dself.parent.parent.getChild(\"Group Equipment List\").getChild(\"Table\").props.data\n\t\t##logEvent\n\t\tlogparams\u003d{\"username\":username,\n\t\t\t   \"event_type\":\"Edit\",\n\t\t\t   \"before_change\":str(current_equipment)[16:],\n\t\t\t   \"after_change\":str(updated_equipment)[16:],\n\t\t\t   \"description\":\"Edit: Removed equipment from Equipmet Group {0}\".format(equipment_group_name)}\n\t\tAPI.Functions.log_activity(logparams)\n\t\t\t\n\t\t\t\n\t"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "remove"
+                    },
+                    "position": {
+                      "basis": "60px"
+                    },
+                    "props": {
+                      "path": "material/arrow_left",
+                      "style": {
+                        "backgroundColor": "#C3C3C3",
+                        "borderStyle": "solid"
+                      }
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "meta": {
+                  "name": "Controls"
+                },
+                "position": {
+                  "basis": "80px",
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "gap": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "35px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "expression": "{parent.meta.name}+ \" :\""
+                          },
+                          "type": "expr"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Table"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.data": {
+                        "binding": {
+                          "config": {
+                            "mode": "direct",
+                            "parameters": {
+                              "database": "{session.custom.EIM_Config_DB}",
+                              "equipment_group_id": "{view.params.data.equipment_group_id}"
+                            },
+                            "queryPath": "API/Equipment_Manager/Equipment_Group/Get_Related_Equipment",
+                            "returnFormat": "json"
+                          },
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "columns": [
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "equipment_id",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {},
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": 150
+                        },
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "equipment_name",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "justify": "auto",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": 150
+                        }
+                      ],
+                      "filter": {
+                        "enabled": true
+                      },
+                      "headerStyle": {
+                        "classes": "Fonts_Sizes/Component_Label"
+                      },
+                      "pager": {
+                        "bottom": false
+                      },
+                      "rows": {
+                        "height": 50,
+                        "subview": {
+                          "viewPath": "API_Screens/Subviews/Function_Input_Params"
+                        },
+                        "subviewExpansionMode": "single"
+                      },
+                      "selection": {
+                        "mode": "multiple interval"
+                      }
+                    },
+                    "scripts": {
+                      "customMethods": [],
+                      "extensionFunctions": null,
+                      "messageHandlers": [
+                        {
+                          "messageType": "tablerefresh",
+                          "pageScope": true,
+                          "script": "\tself.refreshBinding(\u0027props.data\u0027)",
+                          "sessionScope": true,
+                          "viewScope": true
+                        }
+                      ]
+                    },
+                    "type": "ia.display.table"
+                  }
+                ],
+                "meta": {
+                  "name": "Group Equipment List"
+                },
+                "position": {
+                  "basis": "50%"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10,
+                    "marginTop": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Details"
+            },
+            "position": {
+              "basis": "50%",
+              "grow": 1
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Close"
+                },
+                "position": {
+                  "basis": "100px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "Buttons/Classic"
+                  },
+                  "text": "Close"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "Buttons"
+            },
+            "position": {
+              "basis": "35px",
+              "shrink": 0
+            },
+            "props": {
+              "justify": "center",
+              "style": {
+                "gap": 20,
+                "marginBottom": 10,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 10
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Wrapper"
+        },
+        "position": {
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "justify": "space-between"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Frames/Standard1"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

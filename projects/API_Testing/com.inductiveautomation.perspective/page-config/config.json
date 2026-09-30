@@ -1,0 +1,35 @@
+{
+  "pages": {
+    "/": {
+      "title": "",
+      "viewPath": "API_Screens/Tab_Forms/Main"
+    },
+    "/new-page": {
+      "title": "",
+      "viewPath": "Bolt_Screens/Tab_Forms/First_Time_Config"
+    },
+    "/sim": {
+      "title": "",
+      "viewPath": "Bolt_Screens/Tab_Forms/Simulator"
+    }
+  },
+  "sharedDocks": {
+    "cornerPriority": "top-bottom",
+    "top": [
+      {
+        "anchor": "fixed",
+        "autoBreakpoint": 480,
+        "content": "push",
+        "handle": "hide",
+        "iconUrl": "",
+        "id": "",
+        "modal": false,
+        "resizable": false,
+        "show": "visible",
+        "size": 70,
+        "viewParams": {},
+        "viewPath": "API_Screens/Templates/Main_Header"
+      }
+    ]
+  }
+}

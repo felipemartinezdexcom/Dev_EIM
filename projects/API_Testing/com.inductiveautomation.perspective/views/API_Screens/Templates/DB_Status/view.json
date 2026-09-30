@@ -1,0 +1,97 @@
+{
+  "custom": {
+    "dbstatus": "Valid"
+  },
+  "params": {},
+  "propConfig": {
+    "custom.dbstatus": {
+      "binding": {
+        "config": {
+          "path": "session.custom.dbstatus"
+        },
+        "type": "property"
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 55,
+      "width": 184
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "50px",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.custom.dbstatus"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "marginRight": 5
+          },
+          "textStyle": {
+            "color": "#FFFFFF",
+            "fontWeight": "900",
+            "textAlign": "right"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "basis": "70px"
+        },
+        "propConfig": {
+          "props.color": {
+            "binding": {
+              "config": {
+                "path": "view.custom.dbstatus"
+              },
+              "transforms": [
+                {
+                  "fallback": "/system/images/icons/db10.svg",
+                  "inputType": "scalar",
+                  "mappings": [
+                    {
+                      "input": "Valid",
+                      "output": "/system/images/icons/db9.svg"
+                    }
+                  ],
+                  "outputType": "scalar",
+                  "type": "map"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "path": "material/view_agenda"
+        },
+        "type": "ia.display.icon"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "type": "ia.container.flex"
+  }
+}

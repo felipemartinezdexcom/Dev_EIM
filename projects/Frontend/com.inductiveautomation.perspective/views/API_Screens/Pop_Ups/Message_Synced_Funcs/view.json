@@ -1,0 +1,209 @@
+{
+  "custom": {},
+  "params": {
+    "addedFunctions": "value",
+    "notaddedFunctions": "value"
+  },
+  "propConfig": {
+    "params.addedFunctions": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.notaddedFunctions": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 755,
+      "width": 677
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Header"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.params.data.title": {
+            "binding": {
+              "config": {
+                "expression": "\"New Added Functions\""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/add_box",
+              "level": "info",
+              "message": "value"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "path": "view.params.addedFunctions"
+              },
+              "transforms": [
+                {
+                  "code": "\tdata\u003d[]\n\tcount\u003d1\n\tfor func in value:\n\t\tnewrow\u003d{\"num\":count,\"funcname\":func}\n\t\tdata.append(newrow)\n\t\tcount+\u003d1\n\treturn data",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "justify": "center",
+          "path": "API_Screens/Templates/Synced_Funcs",
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      },
+      {
+        "meta": {
+          "name": "Header_0"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.params.data.title": {
+            "binding": {
+              "config": {
+                "expression": "\"Not Added Functions- Already Exist\""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "data": {
+              "icon": "material/error_outline",
+              "level": "info",
+              "message": "value"
+            }
+          },
+          "path": "API_Screens/Templates/Pop_Up_Header",
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "meta": {
+          "name": "FlexRepeater_0"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "path": "view.params.notaddedFunctions"
+              },
+              "transforms": [
+                {
+                  "code": "\tdata\u003d[]\n\tcount\u003d1\n\tfor func in value:\n\t\tnewrow\u003d{\"num\":count,\"funcname\":func}\n\t\tdata.append(newrow)\n\t\tcount+\u003d1\n\treturn data",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "justify": "center",
+          "path": "API_Screens/Templates/Synced_Funcs",
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tsystem.perspective.closePopup(\"\")\n\t"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Close Dock"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "style": {
+                "classes": "Buttons/Classic"
+              },
+              "text": "Close"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "Buttons"
+        },
+        "position": {
+          "basis": "35px",
+          "shrink": 0
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "gap": 20,
+            "marginBottom": 20,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 20
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Edges/Boxes_Radious Effects/Fade-In Frames/Standard1"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

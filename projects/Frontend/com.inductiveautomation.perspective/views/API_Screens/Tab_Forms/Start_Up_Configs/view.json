@@ -1,0 +1,1448 @@
+{
+  "custom": {
+    "Count_SP_Synced": 41
+  },
+  "params": {},
+  "propConfig": {
+    "custom.Count_SP_Synced": {
+      "binding": {
+        "config": {
+          "parameters": {
+            "database": "{/root/DB_Selection/FlexContainer/Selections/APIConfigDB.props.value}"
+          },
+          "queryPath": "API/Configurations/Get_Count_SP_Synced",
+          "returnFormat": "json"
+        },
+        "type": "query"
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 957,
+      "width": 1180
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/Col_Headers"
+                      },
+                      "text": "Sync Dev DB:",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "DevDB"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.options": {
+                        "binding": {
+                          "config": {
+                            "path": "session.custom.dbs"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\tdata\u003d[]\n\t\n\tconfigdb\u003d\"EIM_Config_DB\"\n\n\tfor db in value:\n\t\tif db[\u0027label\u0027]!\u003dconfigdb:\n\t\t\tnewrow\u003d{\"label\":db[\u0027label\u0027],\n\t\t\t\t\t\"value\":db[\u0027value\u0027]}\n\t\t\tdata.append(newrow)\n\t\n\n\treturn data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Effects/input_radious"
+                      },
+                      "value": "Averna_mfgdb"
+                    },
+                    "type": "ia.input.dropdown"
+                  },
+                  {
+                    "meta": {
+                      "name": "Label_1"
+                    },
+                    "position": {
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/Col_Headers"
+                      },
+                      "text": "Sync Dev Schema:",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "DevDB_Schema"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.options": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "database": "{../DevDB.props.value}"
+                            },
+                            "queryPath": "API/Configurations/Get_DB_Schemas",
+                            "returnFormat": "json"
+                          },
+                          "overlayOptOut": true,
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Effects/input_radious"
+                      },
+                      "value": "LTDD"
+                    },
+                    "type": "ia.input.dropdown"
+                  },
+                  {
+                    "meta": {
+                      "name": "Label_0"
+                    },
+                    "position": {
+                      "display": false,
+                      "shrink": 0
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Tables/Col_Headers"
+                      },
+                      "text": "API Config DB:",
+                      "textStyle": {
+                        "textAlign": "left"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "APIConfigDB"
+                    },
+                    "position": {
+                      "basis": "200px",
+                      "display": false,
+                      "shrink": 0
+                    },
+                    "propConfig": {
+                      "props.options": {
+                        "binding": {
+                          "config": {
+                            "path": ""
+                          },
+                          "transforms": [
+                            {
+                              "code": "\tdata\u003d[\n\n  {\n    \"value\": \"EIM_Config_DB\",\n    \"label\": \"EIM_Config_DB\"\n  }\n]\n\treturn data",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Effects/input_radious"
+                      },
+                      "value": "EIM_Config_DB"
+                    },
+                    "type": "ia.input.dropdown"
+                  }
+                ],
+                "meta": {
+                  "name": "Selections"
+                },
+                "position": {
+                  "basis": "36px",
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "gap": 10,
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "grow": 1,
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column",
+              "justify": "center"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "DB_Selection"
+        },
+        "position": {
+          "basis": "70px",
+          "shrink": 0
+        },
+        "props": {
+          "style": {
+            "classes": "Edges/Boxes_Radious Effects/boxes_frame Effects/padding-boxes Headers/Subview_Headers_Background"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "32px"
+                    },
+                    "props": {
+                      "text": "Step",
+                      "textStyle": {
+                        "fontSize": 20,
+                        "fontWeight": "800",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Icon"
+                    },
+                    "position": {
+                      "basis": "100px"
+                    },
+                    "props": {
+                      "path": "material/filter_1"
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "meta": {
+                  "name": "Step"
+                },
+                "position": {
+                  "basis": "200px"
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "borderBottomStyle": "none",
+                    "borderLeftStyle": "none",
+                    "borderRightColor": "#DDDFE2",
+                    "borderRightStyle": "solid",
+                    "borderRightWidth": 2,
+                    "borderTopStyle": "none"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\timport time\n\tusername\u003dself.session.props.auth.user.userName\n\tAPI_config_db\u003dself.session.custom.EIM_Config_DB\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"\",\n\t\t\t  \"title\": \"Please Wait\",\n\t\t\t  \"level\": \"info\",\n\t\t\t  \"message\": \"Checking if tables exist. If not, tables will be added to the database. Please wait.\"\n\t\t\t  }\n\t\t\t  }\n\t\t\t\t\t\t  \n\tsystem.perspective.openPopup(\"loading\", \"API_Screens/Pop_Ups/Loading_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\n\tparams\u003d{\"database\":API_config_db,\"query_string\":API.Build_SQL.Steps.BUILD_TABLES_STRING}\n\tsystem.db.execUpdate(\"API/Configurations/Query_String_Update\", params)\n\n\n\n\ttime.sleep(5)\n\t\n\tsystem.perspective.closePopup(\"loading\")\n\t\n\tself.parent.parent.getChild(\"Table\").getChild(\"Table\").refreshBinding(\u0027props.data\u0027)"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Button_0"
+                    },
+                    "position": {
+                      "basis": "80px"
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Buttons/Classic"
+                      },
+                      "text": "Create Tables"
+                    },
+                    "type": "ia.input.button"
+                  }
+                ],
+                "meta": {
+                  "name": "Button"
+                },
+                "position": {
+                  "basis": "266px"
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Markdown"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "props": {
+                      "markdown": {
+                        "escapeHtml": false
+                      },
+                      "source": "\u003chtml\u003e  \u003ch3\u003eDescription:\u003c/h3\u003e \n \u003cp\u003eThis Action will generate a [API] schema and create the below tables in the selected API Configuration Database:\u003c/p\u003e\n \u003cul\u003e   \n\u003cli\u003eFunctionsList\u003c/li\u003e  \n \u003cli\u003eFunctionParameters\u003c/li\u003e   \n \u003cli\u003eTransactionsLog\u003c/li\u003e \n\u003c/ul\u003e \n\u003c/html\u003e\n\n",
+                      "style": {
+                        "padding": 10,
+                        "paddingBottom": 0,
+                        "paddingTop": 0
+                      }
+                    },
+                    "type": "ia.display.markdown"
+                  }
+                ],
+                "meta": {
+                  "name": "Markdown"
+                },
+                "position": {
+                  "basis": "316px"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "borderLeftColor": "#DDDFE2",
+                    "borderLeftStyle": "solid",
+                    "borderLeftWidth": 2
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Views_header"
+                    },
+                    "position": {
+                      "basis": "35px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "params": {
+                        "data": {
+                          "icon": "material/info",
+                          "level": "popup",
+                          "message": "value",
+                          "title": "Configured Tables"
+                        }
+                      },
+                      "path": "API_Screens/Templates/Views_header"
+                    },
+                    "type": "ia.display.view"
+                  },
+                  {
+                    "meta": {
+                      "name": "Table"
+                    },
+                    "position": {
+                      "basis": "400px"
+                    },
+                    "propConfig": {
+                      "props.data": {
+                        "binding": {
+                          "config": {
+                            "parameters": {
+                              "database": "{...../DB_Selection/FlexContainer/Selections/APIConfigDB.props.value}"
+                            },
+                            "queryPath": "API/Configurations/Get_TablesList_DB",
+                            "returnFormat": "json"
+                          },
+                          "type": "query"
+                        }
+                      }
+                    },
+                    "props": {
+                      "columns": [
+                        {
+                          "align": "center",
+                          "boolean": "checkbox",
+                          "dateFormat": "MM/DD/YYYY",
+                          "editable": false,
+                          "field": "TABLE_NAME",
+                          "filter": {
+                            "boolean": {
+                              "condition": ""
+                            },
+                            "date": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "enabled": false,
+                            "number": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "string": {
+                              "condition": "",
+                              "value": ""
+                            },
+                            "visible": "on-hover"
+                          },
+                          "footer": {
+                            "align": "center",
+                            "justify": "left",
+                            "style": {
+                              "classes": ""
+                            },
+                            "title": ""
+                          },
+                          "header": {
+                            "align": "center",
+                            "justify": "center",
+                            "style": {
+                              "classes": "Tables/Col_Headers"
+                            },
+                            "title": ""
+                          },
+                          "justify": "center",
+                          "nullFormat": {
+                            "includeNullStrings": false,
+                            "nullFormatValue": "",
+                            "strict": false
+                          },
+                          "number": "value",
+                          "numberFormat": "0,0.##",
+                          "progressBar": {
+                            "bar": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "max": 100,
+                            "min": 0,
+                            "track": {
+                              "color": "",
+                              "style": {
+                                "classes": ""
+                              }
+                            },
+                            "value": {
+                              "enabled": true,
+                              "format": "0,0.##",
+                              "justify": "center",
+                              "style": {
+                                "classes": ""
+                              }
+                            }
+                          },
+                          "render": "auto",
+                          "resizable": true,
+                          "sort": "none",
+                          "sortable": true,
+                          "strictWidth": false,
+                          "style": {
+                            "classes": ""
+                          },
+                          "toggleSwitch": {
+                            "color": {
+                              "selected": "",
+                              "unselected": ""
+                            }
+                          },
+                          "viewParams": {},
+                          "viewPath": "",
+                          "visible": true,
+                          "width": ""
+                        }
+                      ],
+                      "pager": {
+                        "bottom": false
+                      }
+                    },
+                    "type": "ia.display.table"
+                  }
+                ],
+                "meta": {
+                  "name": "Table"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "borderBottomLeftRadius": 10,
+                    "borderLeftColor": "#DDDFE2",
+                    "borderLeftStyle": "solid",
+                    "borderLeftWidth": 2,
+                    "borderTopLeftRadius": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Create_Tables"
+            },
+            "position": {
+              "basis": "273px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "Edges/Boxes_Radious Effects/boxes_frame Effects/padding-boxes",
+                "gap": "10px",
+                "marginTop": 0
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "32px"
+                    },
+                    "props": {
+                      "text": "Step",
+                      "textStyle": {
+                        "fontSize": 20,
+                        "fontWeight": "800",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Icon"
+                    },
+                    "position": {
+                      "basis": "100px"
+                    },
+                    "props": {
+                      "path": "material/filter_2"
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "meta": {
+                  "name": "Step"
+                },
+                "position": {
+                  "basis": "200px"
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "borderBottomStyle": "none",
+                    "borderLeftStyle": "none",
+                    "borderRightColor": "#DDDFE2",
+                    "borderRightStyle": "solid",
+                    "borderRightWidth": 2,
+                    "borderTopStyle": "none"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\tusername\u003dself.session.props.auth.user.userName\n\tSync_Dev_DB\u003dself.parent.parent.parent.parent.getChild(\"DB_Selection\").getChild(\"FlexContainer\").getChild(\"Selections\").getChild(\"DevDB\").props.value\n\tSync_Dev_Schema\u003dself.parent.parent.parent.parent.getChild(\"DB_Selection\").getChild(\"FlexContainer\").getChild(\"Selections\").getChild(\"DevDB_Schema\").props.value\n\tAPI_Config_DB\u003dself.session.custom.EIM_Config_DB\n\tConfig_DB_Status\u003dself.session.custom.dbstatus\n\t\n\tmessageboxparams\u003d{\"data\":{\"icon\": \"\",\n\t\t  \"title\": \"Please Wait\",\n\t\t  \"level\": \"info\",\n\t\t  \"message\": \"Getting All the Stored Procedures from the database. Please wait.\"\n\t\t  }\n\t\t  }\n\t\n\t\n\t\n\tif Config_DB_Status\u003d\u003d\"Valid\":\n\n\t\t\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"loading\", \"API_Screens/Pop_Ups/Loading_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\t\t\n\t\t\n\t\tcall\u003dAPI.Functions.sync_all_db_sp(\"Database\",Sync_Dev_DB,Sync_Dev_Schema,API_Config_DB)\n\t\tsystem.perspective.closePopup(\"loading\")\n\t\t#system.perspective.sendMessage(\"tablerefresh\")\n\t\t#messageboxparams[\"data\"][\"title\"]\u003d \"Sync-DB\"\n\t\t#messageboxparams[\"data\"][\"level\"]\u003d \"popup\"\n\t\t#messageboxparams[\"data\"][\"message\"]\u003d \"New added Functions: {0}. Already existing Functions: {1}.\".format(call[\"new_functions_added\"],call[\"already_existing_functions\"])\n\t\t\n\t\t\t##logEvent add assignet\n\t\tlogparams\u003d{\"username\":username,\n\t\t\t\"event_type\":\"Sync-DB\",\n\t\t\t\"before_change\":None,\n\t\t\t\"after_change\":str(call[\"new_functions_added\"]),\n\t\t\t\"description\":\"Sync to DB {0} Schema {1}.\".format(Sync_Dev_DB, Sync_Dev_Schema)}\n\t\tAPI.Functions.log_activity(logparams)\n\t\t\t\n\t\tmessageboxparams\u003d{\"addedFunctions\":call[\"new_functions_added\"],\n\t\t\t\t\t\t  \"notaddedFunctions\":call[\"already_existing_functions\"]}\n\t\t\n\t\tsystem.perspective.openPopup(\"UpdateREsults\", \"API_Screens/Pop_Ups/Message_Synced_Funcs\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\tself.view.refreshBinding(\u0027custom.Count_SP_Synced\u0027)\n\t\t\n\t\t\n\n\telse:\n\t\t\n\t\tmessageboxparams[\"data\"][\"title\"]\u003d \"Data-Base Connection Error\"\n\t\tmessageboxparams[\"data\"][\"level\"]\u003d \"error\"\n\t\tmessageboxparams[\"data\"][\"message\"]\u003d \"The database connection is not valid.\"\n\t\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"dbError\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Button_0"
+                    },
+                    "position": {
+                      "basis": "80px"
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Buttons/Classic"
+                      },
+                      "text": "SYNC DEV DB"
+                    },
+                    "type": "ia.input.button"
+                  }
+                ],
+                "meta": {
+                  "name": "Button"
+                },
+                "position": {
+                  "basis": "266px"
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Markdown"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "props": {
+                      "markdown": {
+                        "escapeHtml": false
+                      },
+                      "source": "\u003chtml\u003e  \u003ch3\u003eDescription:\u003c/h3\u003e \n \u003cp\u003eThis Action will get all the stored procedures within the selected schema from the selected  Dev DB and store them as functions within the Configurations DB.\u003c/p\u003e\n\n \u003cp\u003eOnce completed, review the Functions Configuration Tab.\u003c/p\u003e\n\n",
+                      "style": {
+                        "padding": 10,
+                        "paddingBottom": 0,
+                        "paddingTop": 0
+                      }
+                    },
+                    "type": "ia.display.markdown"
+                  }
+                ],
+                "meta": {
+                  "name": "Markdown"
+                },
+                "position": {
+                  "basis": "316px"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "borderLeftColor": "#DDDFE2",
+                    "borderLeftStyle": "solid",
+                    "borderLeftWidth": 2
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Views_header"
+                    },
+                    "position": {
+                      "basis": "35px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "params": {
+                        "data": {
+                          "icon": "material/info",
+                          "level": "popup",
+                          "message": "value",
+                          "title": "Count Synced Stored Procedures"
+                        }
+                      },
+                      "path": "API_Screens/Templates/Views_header"
+                    },
+                    "type": "ia.display.view"
+                  },
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "32px",
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "path": "view.custom.Count_SP_Synced"
+                          },
+                          "overlayOptOut": true,
+                          "transforms": [
+                            {
+                              "code": "\tif value\u003d\u003dNone:\n\t\treturn 0\n\telse:\t\n\t\treturn value",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "textStyle": {
+                        "fontSize": 90,
+                        "fontWeight": "500",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "Count"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "borderBottomLeftRadius": 10,
+                    "borderLeftColor": "#DDDFE2",
+                    "borderLeftStyle": "solid",
+                    "borderLeftWidth": 2,
+                    "borderTopLeftRadius": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Sync_Functions"
+            },
+            "position": {
+              "basis": "273px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "Edges/Boxes_Radious Effects/boxes_frame Effects/padding-boxes",
+                "gap": "10px",
+                "marginTop": 20
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "32px"
+                    },
+                    "props": {
+                      "text": "Step",
+                      "textStyle": {
+                        "fontSize": 20,
+                        "fontWeight": "800",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Icon"
+                    },
+                    "position": {
+                      "basis": "100px"
+                    },
+                    "props": {
+                      "path": "material/filter_3"
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "meta": {
+                  "name": "Step"
+                },
+                "position": {
+                  "basis": "200px"
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "borderBottomStyle": "none",
+                    "borderLeftStyle": "none",
+                    "borderRightColor": "#DDDFE2",
+                    "borderRightStyle": "solid",
+                    "borderRightWidth": 2,
+                    "borderTopStyle": "none"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\timport time\n\t\n\tEIM_Config_DB\u003dself.session.custom.EIM_Config_DB\n\tConfig_DB_Status\u003dself.session.custom.dbstatus\n\t\n\tpayload\u003d{\"db_connection_name\":EIM_Config_DB,\n\t\t\t\"schema\":\u0027API\u0027,\n\t\t\t\"table_names\":[\u0027FunctionParameters\u0027,\u0027FunctionsList\u0027,\u0027Equipment\u0027,\n\t\t\t\t\t\t\t\u0027EquipmentGroups\u0027,\u0027EquipmentGroupList\u0027,\u0027FunctionGroups\u0027,\n\t\t\t\t\t\t\t\u0027FunctionGroupList\u0027,\u0027EquipmentFunctionAssignments\u0027]}\n\n\n\t\n\tif Config_DB_Status\u003d\u003d\"Valid\":\n\t\tmessageboxparams\u003d{\"data\":{\"icon\": \"\",\n\t\t\t\t  \"title\": \"Please Wait\",\n\t\t\t\t  \"level\": \"info\",\n\t\t\t\t  \"message\": \"Getting All the data at each table to create a software version. Please wait.\"\n\t\t\t\t  }\n\t\t\t\t  }\n\t\t\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"loading\", \"API_Screens/Pop_Ups/Loading_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\tcreate_sw_call\u003dsystem.util.sendRequest(project\u003d\u0027Frontend\u0027, messageHandler\u003d\u0027Create_SW\u0027, payload\u003dpayload)\t\n\t\ttime.sleep(3)\n\t\t#call\u003dAPI.Functions.sync_all_db_sp(\"database\",LTDD_DevDB,APIConfigDB)\n\t\tsystem.project.requestScan()\n\t\tsystem.perspective.closePopup(\"loading\")\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\t#system.perspective.sendMessage(\"tablerefresh\")\n\t\tmessageboxparams[\"data\"][\"title\"]\u003d \"Sync-DB\"\n\t\tmessageboxparams[\"data\"][\"level\"]\u003d \"popup\"\n\t\tmessageboxparams[\"data\"][\"message\"]\u003d create_sw_call\n\t\t\n\t\tsystem.perspective.openPopup(\"UpdateREsults\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\n\n\telse:\n\t\t\n\t\tmessageboxparams[\"data\"][\"title\"]\u003d \"Data-Base Connection Error\"\n\t\tmessageboxparams[\"data\"][\"level\"]\u003d \"error\"\n\t\tmessageboxparams[\"data\"][\"message\"]\u003d \"The database connection is not valid.\"\n\t\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"dbError\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Button_0"
+                    },
+                    "position": {
+                      "basis": "80px"
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Buttons/Classic"
+                      },
+                      "text": "BUILD SOFTWARE VERSION"
+                    },
+                    "type": "ia.input.button"
+                  }
+                ],
+                "meta": {
+                  "name": "Button"
+                },
+                "position": {
+                  "basis": "266px"
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Markdown"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "props": {
+                      "markdown": {
+                        "escapeHtml": false
+                      },
+                      "source": "\u003chtml\u003e  \u003ch3\u003eDescription:\u003c/h3\u003e \n \u003cp\u003eThis Action will create a software version for all of the existing Configuration DB which will include: \u003c/p\u003e\n \u003cul\u003e   \n\u003cli\u003eDB Schema\u003c/li\u003e  \n \u003cli\u003eAll created tables\u003c/li\u003e   \n \u003cli\u003eAll the data for configured functions\u003c/li\u003e \n \u003cli\u003eIt will not include any data in the TransactionsLog Table\u003c/li\u003e \u003c/ul\u003e \n\u003cbr\u003e\n \u003cp\u003eThe software version will be appended to a project script which can later be used to restore the project.\u003c/p\u003e\n\n\u003c/html\u003e\n\n\n\n\n\n",
+                      "style": {
+                        "padding": 10,
+                        "paddingBottom": 0,
+                        "paddingTop": 0
+                      }
+                    },
+                    "type": "ia.display.markdown"
+                  }
+                ],
+                "meta": {
+                  "name": "Markdown"
+                },
+                "position": {
+                  "basis": "316px"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "borderLeftColor": "#DDDFE2",
+                    "borderLeftStyle": "solid",
+                    "borderLeftWidth": 2
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Views_header"
+                    },
+                    "position": {
+                      "basis": "35px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "params": {
+                        "data": {
+                          "icon": "material/info",
+                          "level": "popup",
+                          "message": "value",
+                          "title": "Software Versions"
+                        }
+                      },
+                      "path": "API_Screens/Templates/Views_header"
+                    },
+                    "type": "ia.display.view"
+                  },
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Table"
+                        },
+                        "position": {
+                          "grow": 1
+                        },
+                        "propConfig": {
+                          "props.data": {
+                            "binding": {
+                              "config": {
+                                "expression": "now(0)"
+                              },
+                              "transforms": [
+                                {
+                                  "code": "\tall_vars\u003ddir(API.Build_SQL.Software_Versions)\n\tsoftware_versions\u003d[]\n\t\n\tfor var in all_vars:\n\t\tif var.startswith(\"Software_Version\"):\n\t\t\trow\u003d{\"Software_Version\":var}\n\t\t\tsoftware_versions.append(row)\n\treturn software_versions\n\t",
+                                  "type": "script"
+                                }
+                              ],
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "columns": [
+                            {
+                              "align": "center",
+                              "boolean": "checkbox",
+                              "dateFormat": "MM/DD/YYYY",
+                              "editable": false,
+                              "field": "Software_Version",
+                              "filter": {
+                                "boolean": {
+                                  "condition": ""
+                                },
+                                "date": {
+                                  "condition": "",
+                                  "value": ""
+                                },
+                                "enabled": false,
+                                "number": {
+                                  "condition": "",
+                                  "value": ""
+                                },
+                                "string": {
+                                  "condition": "",
+                                  "value": ""
+                                },
+                                "visible": "on-hover"
+                              },
+                              "footer": {
+                                "align": "center",
+                                "justify": "left",
+                                "style": {
+                                  "classes": ""
+                                },
+                                "title": ""
+                              },
+                              "header": {
+                                "align": "center",
+                                "justify": "center",
+                                "style": {
+                                  "classes": "Tables/Col_Headers"
+                                },
+                                "title": ""
+                              },
+                              "justify": "center",
+                              "nullFormat": {
+                                "includeNullStrings": false,
+                                "nullFormatValue": "",
+                                "strict": false
+                              },
+                              "number": "value",
+                              "numberFormat": "0,0.##",
+                              "progressBar": {
+                                "bar": {
+                                  "color": "",
+                                  "style": {
+                                    "classes": ""
+                                  }
+                                },
+                                "max": 100,
+                                "min": 0,
+                                "track": {
+                                  "color": "",
+                                  "style": {
+                                    "classes": ""
+                                  }
+                                },
+                                "value": {
+                                  "enabled": true,
+                                  "format": "0,0.##",
+                                  "justify": "center",
+                                  "style": {
+                                    "classes": ""
+                                  }
+                                }
+                              },
+                              "render": "auto",
+                              "resizable": true,
+                              "sort": "none",
+                              "sortable": true,
+                              "strictWidth": false,
+                              "style": {
+                                "classes": ""
+                              },
+                              "toggleSwitch": {
+                                "color": {
+                                  "selected": "",
+                                  "unselected": ""
+                                }
+                              },
+                              "viewParams": {},
+                              "viewPath": "",
+                              "visible": true,
+                              "width": ""
+                            }
+                          ],
+                          "pager": {
+                            "bottom": false
+                          }
+                        },
+                        "scripts": {
+                          "customMethods": [],
+                          "extensionFunctions": null,
+                          "messageHandlers": [
+                            {
+                              "messageType": "tablerefresh",
+                              "pageScope": true,
+                              "script": "\tself.refreshBinding(\"props.data\")",
+                              "sessionScope": true,
+                              "viewScope": true
+                            }
+                          ]
+                        },
+                        "type": "ia.display.table"
+                      },
+                      {
+                        "children": [
+                          {
+                            "events": {
+                              "dom": {
+                                "onClick": {
+                                  "config": {
+                                    "script": "\tsystem.project.requestScan()\n\tsystem.perspective.sendMessage(\"tablerefresh\")"
+                                  },
+                                  "scope": "G",
+                                  "type": "script"
+                                }
+                              }
+                            },
+                            "meta": {
+                              "name": "Refresh",
+                              "tooltip": {
+                                "enabled": true,
+                                "text": "Refresh Table Data"
+                              }
+                            },
+                            "position": {
+                              "basis": "40px"
+                            },
+                            "props": {
+                              "path": "material/refresh"
+                            },
+                            "type": "ia.display.icon"
+                          }
+                        ],
+                        "meta": {
+                          "name": "Records Control"
+                        },
+                        "position": {
+                          "basis": "45px",
+                          "display": false,
+                          "shrink": 0
+                        },
+                        "props": {
+                          "direction": "column",
+                          "style": {
+                            "gap": 10
+                          }
+                        },
+                        "type": "ia.container.flex"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Table"
+                    },
+                    "position": {
+                      "basis": "400px"
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "Count"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "borderBottomLeftRadius": 10,
+                    "borderLeftColor": "#DDDFE2",
+                    "borderLeftStyle": "solid",
+                    "borderLeftWidth": 2,
+                    "borderTopLeftRadius": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Build_SW"
+            },
+            "position": {
+              "basis": "273px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "Edges/Boxes_Radious Effects/boxes_frame Effects/padding-boxes",
+                "gap": "10px",
+                "marginTop": 20
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "position": {
+                      "basis": "32px"
+                    },
+                    "props": {
+                      "text": "Step",
+                      "textStyle": {
+                        "fontSize": 20,
+                        "fontWeight": "800",
+                        "textAlign": "center"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "meta": {
+                      "name": "Icon"
+                    },
+                    "position": {
+                      "basis": "100px"
+                    },
+                    "props": {
+                      "path": "material/filter_4"
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "meta": {
+                  "name": "Step"
+                },
+                "position": {
+                  "basis": "200px"
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "borderBottomStyle": "none",
+                    "borderLeftStyle": "none",
+                    "borderRightColor": "#DDDFE2",
+                    "borderRightStyle": "solid",
+                    "borderRightWidth": 2,
+                    "borderTopStyle": "none"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\timport time\n\tusername\u003dself.session.props.auth.user.userName\n\tAPIConfigDB\u003dself.parent.parent.parent.parent.getChild(\"DB_Selection\").getChild(\"FlexContainer\").getChild(\"Selections\").getChild(\"APIConfigDB\").props.value\n\tselectedSoftware_version\u003dself.parent.parent.getChild(\"Count\").getChild(\"Table\").getChild(\"Dropdown\").props.value\n\tdbstatus\u003dself.session.custom.dbstatus\n\n\n\t\n\tif dbstatus\u003d\u003d\"Valid\":\n\t\tmessageboxparams\u003d{\"data\":{\"icon\": \"\",\n\t\t\t\t  \"title\": \"Please Wait\",\n\t\t\t\t  \"level\": \"info\",\n\t\t\t\t  \"message\": \"Rebuilding the Project from : {0}. Please wait.\".format(selectedSoftware_version)\n\t\t\t\t  }\n\t\t\t\t  }\n\t\t\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"loading\", \"API_Screens/Pop_Ups/Loading_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\trebuild_call\u003dAPI.Build_SQL.Functions.rebuild_from_Software_Version(APIConfigDB, getattr(API.Build_SQL.Software_Versions,selectedSoftware_version))\n\n\t\t#system.project.requestScan()\n\t\tsystem.perspective.closePopup(\"loading\")\n\t\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\n\t\tmessageboxparams[\"data\"][\"title\"]\u003d \"Rebuilt Completed\"\n\t\tmessageboxparams[\"data\"][\"level\"]\u003d \"popup\"\n\t\tmessageboxparams[\"data\"][\"message\"]\u003d rebuild_call\n\t\t\n\n\t\tscript_path \u003d \"API.Build_SQL.Software_Versions.\"+selectedSoftware_version\n\n\t\t\n\t\tversion_script \u003d eval(script_path)\n\t\n\t\n\t\n\t\t##logEvent add assignet\n\t\tlogparams\u003d{\"username\":username,\n\t\t\t\"event_type\":\"Software Ver. Rebuild\",\n\t\t\t\"before_change\":None,\n\t\t\t\"after_change\":version_script,\n\t\t\t\"description\":\"Rebuilt from Software Version {0} \".format(selectedSoftware_version)}\n\t\tAPI.Functions.log_activity(logparams)\n\t\t\t\n\t\tsystem.perspective.openPopup(\"UpdateREsults\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t\n\n\telse:\n\t\t\n\t\tmessageboxparams[\"data\"][\"title\"]\u003d \"Data-Base Connection Error\"\n\t\tmessageboxparams[\"data\"][\"level\"]\u003d \"error\"\n\t\tmessageboxparams[\"data\"][\"message\"]\u003d \"The database connection is not valid.\"\n\t\t\t\t\t\t  \n\t\tsystem.perspective.openPopup(\"dbError\", \"API_Screens/Pop_Ups/Message_Box\",messageboxparams, showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Button_0"
+                    },
+                    "position": {
+                      "basis": "80px"
+                    },
+                    "props": {
+                      "style": {
+                        "classes": "Buttons/Classic"
+                      },
+                      "text": "Rebuild From Software Version"
+                    },
+                    "type": "ia.input.button"
+                  }
+                ],
+                "meta": {
+                  "name": "Button"
+                },
+                "position": {
+                  "basis": "266px"
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "center",
+                  "style": {
+                    "marginLeft": 10,
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Markdown"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "props": {
+                      "markdown": {
+                        "escapeHtml": false
+                      },
+                      "source": "\u003chtml\u003e  \u003ch3\u003eDescription:\u003c/h3\u003e \n \u003cp\u003eOnce the project has at least one Software Version set, this action will complete the following steps in the Configuration DB: \u003c/p\u003e\n \u003cul\u003e   \n\u003cli\u003eDrop any existing tables\u003c/li\u003e  \n\u003cli\u003eAdd db Schema\u003c/li\u003e  \n \u003cli\u003eCreate Project tables\u003c/li\u003e   \n \u003cli\u003eInsert All the data for configured functions\u003c/li\u003e \n \u003cli\u003eIt will not include any data in the TransactionsLog Table\u003c/li\u003e \u003c/ul\u003e \n\n\u003c/html\u003e\n\n\n\n\n\n",
+                      "style": {
+                        "padding": 10,
+                        "paddingBottom": 0,
+                        "paddingTop": 0
+                      }
+                    },
+                    "type": "ia.display.markdown"
+                  }
+                ],
+                "meta": {
+                  "name": "Markdown"
+                },
+                "position": {
+                  "basis": "316px"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "borderLeftColor": "#DDDFE2",
+                    "borderLeftStyle": "solid",
+                    "borderLeftWidth": 2
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Views_header"
+                    },
+                    "position": {
+                      "basis": "35px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "params": {
+                        "data": {
+                          "icon": "material/info",
+                          "level": "popup",
+                          "message": "value",
+                          "title": "Software Versions"
+                        }
+                      },
+                      "path": "API_Screens/Templates/Views_header"
+                    },
+                    "type": "ia.display.view"
+                  },
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Dropdown"
+                        },
+                        "position": {
+                          "basis": "256px",
+                          "grow": 1
+                        },
+                        "propConfig": {
+                          "props.options": {
+                            "binding": {
+                              "config": {
+                                "expression": "now(0)"
+                              },
+                              "transforms": [
+                                {
+                                  "code": "\tall_vars\u003ddir(API.Build_SQL.Software_Versions)\n\tsoftware_versions\u003d[]\n\t\n\tfor var in all_vars:\n\t\tif var.startswith(\"Software_Version\"):\n\t\t\trow\u003d{\"label\":var,\"value\":var}\n\t\t\tsoftware_versions.append(row)\n\treturn software_versions\n\t",
+                                  "type": "script"
+                                }
+                              ],
+                              "type": "expr"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "classes": "Effects/input_radious",
+                            "marginLeft": 10,
+                            "marginRight": 10,
+                            "paddingBottom": 5,
+                            "paddingTop": 5
+                          }
+                        },
+                        "type": "ia.input.dropdown"
+                      }
+                    ],
+                    "meta": {
+                      "name": "Table"
+                    },
+                    "position": {
+                      "basis": "400px"
+                    },
+                    "props": {
+                      "alignItems": "center"
+                    },
+                    "type": "ia.container.flex"
+                  }
+                ],
+                "meta": {
+                  "name": "Count"
+                },
+                "position": {
+                  "basis": "200px",
+                  "grow": 1
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "borderBottomLeftRadius": 10,
+                    "borderLeftColor": "#DDDFE2",
+                    "borderLeftStyle": "solid",
+                    "borderLeftWidth": 2,
+                    "borderTopLeftRadius": 10
+                  }
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "Rebuild"
+            },
+            "position": {
+              "basis": "273px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "Edges/Boxes_Radious Effects/boxes_frame Effects/padding-boxes",
+                "gap": "10px",
+                "marginTop": 20
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Options"
+        },
+        "position": {
+          "basis": "273px",
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

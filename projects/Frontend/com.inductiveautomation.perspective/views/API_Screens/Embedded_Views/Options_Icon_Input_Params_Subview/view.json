@@ -1,0 +1,100 @@
+{
+  "custom": {},
+  "params": {
+    "rowData": "value"
+  },
+  "propConfig": {
+    "params.rowData": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 42,
+      "width": 119
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tusername\u003dself.session.props.auth.user.userName\n\tparam_id\u003dself.view.params.rowData[\u0027param_id\u0027]\n\trow\u003dself.view.params.rowData\n\tdatabase\u003dself.session.custom.EIM_Config_DB\n\t\n\tparams\u003d{\"param_id\":param_id,\n\t\t\t\"database\":database}\n\tsystem.db.execUpdate(\"API/Equipment_Manager/Functions/Delete_Param\", params)\n\tsystem.perspective.sendMessage(\"tablerefresh\")\n\t\n\t##logEvent\n\tfunction_name\u003drow[\u0027function_name\u0027]\n\tparams[\u0027function_name\u0027]\u003dfunction_name\n\tparam_name\u003drow[\u0027param_name\u0027]\n\t##logEvent\n\n\t\n\tnew_row\u003d{\"function_name\":row[\u0027function_name\u0027],\n\t\t\t\"param_name\":row[\u0027param_name\u0027],\n\t\t\t\"data_type\":row[\u0027data_type\u0027],\n\t\t\t\"required_param\":row[\u0027required_param\u0027],\n\t\t\t\"param_id\":row[\u0027param_id\u0027]\n\t\t\t}\n\n\t\n\tlogparams\u003d{\"username\":username,\n\t\t   \"event_type\":\"Delete\",\n\t\t   \"before_change\":str(new_row),\n\t\t   \"after_change\":None,\n\t\t   \"description\":\"Deleted function parameter {0} from function {1}\".format(param_name,function_name)}\n\tAPI.Functions.log_activity(logparams)\n\t\t\t\n\t\n\t\n\t\n\n\t\t\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Delete"
+        },
+        "position": {
+          "basis": "30px",
+          "grow": 1
+        },
+        "props": {
+          "path": "material/delete",
+          "style": {
+            "backgroundColor": "#EDF1FC",
+            "borderBottomLeftRadius": 20,
+            "borderBottomRightRadius": 20,
+            "borderColor": "#DDDFE2",
+            "borderStyle": "solid",
+            "borderTopLeftRadius": 20,
+            "borderTopRightRadius": 20
+          }
+        },
+        "type": "ia.display.icon"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\trowData\u003dself.view.params.rowData\n\t\n\tparams\u003d{\"rowData\":rowData}\n\tsystem.perspective.openPopup(\"edit\", \"API_Screens/Pop_Ups/Edit_single_SP_Params_Input\", params,showCloseIcon\u003dFalse, draggable\u003dFalse, resizable\u003dFalse, modal\u003dTrue, overlayDismiss\u003dTrue)\n\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Edit"
+        },
+        "position": {
+          "basis": "30px",
+          "grow": 1
+        },
+        "props": {
+          "path": "material/settings",
+          "style": {
+            "backgroundColor": "#EDF1FC",
+            "borderBottomLeftRadius": 20,
+            "borderBottomRightRadius": 20,
+            "borderColor": "#DDDFE2",
+            "borderStyle": "solid",
+            "borderTopLeftRadius": 20,
+            "borderTopRightRadius": 20
+          }
+        },
+        "type": "ia.display.icon"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "justify": "center",
+      "style": {
+        "gap": 5,
+        "max-height": 40,
+        "max-width": 120
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}
